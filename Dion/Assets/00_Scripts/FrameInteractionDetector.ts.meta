@@ -1,0 +1,47 @@
+- !<AssetImportMetadata/d3fa1898-d15b-45b5-acaa-112b716c0dd2>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 6b470a47-6e8c-4821-9383-3927d9fa8dfe
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 6b470a47-6e8c-4821-9383-3927d9fa8dfe
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 727c1b86-e461-4fdd-8e4e-7659bc054613
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/727c1b86-e461-4fdd-8e4e-7659bc054613>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: ada0909d-6d6f-4f83-95e3-e1f93f456652
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    frameObj: false
+    frameObzj: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - frameObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      frameObzj: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input SceneObject frameObj
+    - // @input AssignableType frameObzj

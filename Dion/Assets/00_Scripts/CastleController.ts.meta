@@ -1,0 +1,72 @@
+- !<AssetImportMetadata/10cf867a-1e8d-4386-8d9a-6187755813a0>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 0b60e9c8-ec81-49e7-8030-d6d86c98194c
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 0b60e9c8-ec81-49e7-8030-d6d86c98194c
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> efbc3ecc-a5a7-45ee-aaa0-0a5d6aaa7b7e
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/efbc3ecc-a5a7-45ee-aaa0-0a5d6aaa7b7e>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 7b429588-4b12-4200-b9af-420c087c53fa
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    alphaMid: false
+    animationPlayer: false
+    camera: false
+    castleParent: false
+    fadeInDuration: false
+    followDistance: false
+    followHeight: false
+    followSmooth: false
+    meshesMat: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      followDistance: !<float> 150.000000
+      followHeight: !<float> -20.000000
+      followSmooth: !<float> 5.000000
+      fadeInDuration: 1.500000
+      alphaMid: 0.200000
+      animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+      meshesMat: !<reference.RenderMeshVisual[]>
+        []
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Component.Camera camera
+    - // @input SceneObject castleParent
+    - '// @ui {"widget":"separator"}'
+    - // @input float followDistance = 150
+    - // @input float followHeight = -20
+    - // @input float followSmooth = 5
+    - '// @ui {"widget":"separator"}'
+    - // @input float fadeInDuration = 1.5
+    - // @input float alphaMid = 0.2
+    - // @input Component.AnimationPlayer animationPlayer
+    - '// @ui {"widget":"separator"}'
+    - "// @input Component.MeshVisual[] meshesMat"

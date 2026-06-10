@@ -1,0 +1,80 @@
+- !<AssetImportMetadata/8ca20241-b9f1-44f7-951d-9854e3e32b69>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> f04646f3-e911-4bc6-b34c-32763e30f08d
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> f04646f3-e911-4bc6-b34c-32763e30f08d
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 7ed5815b-1067-4ecb-9b03-ed3d188af519
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/7ed5815b-1067-4ecb-9b03-ed3d188af519>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 8ff94160-1785-4aa0-b108-8fdaf3c937de
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    animPlayerCastle: false
+    castleController: false
+    delayCastle: false
+    delayFirstImg: false
+    delayImg2: false
+    delayInitialCastle: false
+    durationFadeIn_firstImg: false
+    durationFadeIn_img2: false
+    easing_firstImg: false
+    easing_img2: false
+    img1Mat: false
+    img2Mat: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - castleController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      delayFirstImg: !<float> 10.000000
+      durationFadeIn_firstImg: !<float> 0.000000
+      easing_firstImg: 1
+      delayImg2: !<float> 0.000000
+      durationFadeIn_img2: !<float> 0.000000
+      easing_img2: 1
+      delayInitialCastle: !<float> 0.000000
+      delayCastle: !<float> 0.000000
+      animPlayerCastle: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType castleController
+    - // @input Asset.Material img1Mat
+    - // @input Asset.Material img2Mat
+    - '// @ui {"widget":"separator"}'
+    - // @input float delayFirstImg
+    - // @input float durationFadeIn_firstImg
+    - '// @input int easing_firstImg {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
+    - '// @ui {"widget":"separator"}'
+    - // @input float delayImg2
+    - // @input float durationFadeIn_img2
+    - '// @input int easing_img2 {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
+    - '// @ui {"widget":"separator"}'
+    - // @input float delayInitialCastle
+    - // @input float delayCastle
+    - // @input Component.AnimationPlayer animPlayerCastle
