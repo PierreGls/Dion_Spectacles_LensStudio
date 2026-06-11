@@ -1,5 +1,5 @@
 // ============================================================
-// Animation.ts — Objet Animation
+// Animation.ts — Object Animation
 // ============================================================
 
 import { Easing } from "./Easing";

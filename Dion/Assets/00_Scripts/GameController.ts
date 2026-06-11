@@ -1,3 +1,7 @@
+// ============================================================
+// GameController.ts - Manage the steps of the experience 
+// ============================================================
+
 import { Animation } from "./Animation";
 import { Easing } from "./Easing";    
 import { CastleController } from "./CastleController";
@@ -217,12 +221,6 @@ export class GameController extends BaseScriptComponent {
                 this.castleController.fadePart(2, 0.3, 1, 1);
             },
         });
-
-
-
-
-
-
 
         delayCastle.play();
     }

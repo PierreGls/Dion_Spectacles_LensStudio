@@ -1,3 +1,7 @@
+// ============================================================
+// FrameInteractionDetector.ts
+// ============================================================
+
 import { Interactable } from 'SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable';
 import { InteractorEvent } from 'SpectaclesInteractionKit.lspkg/Core/Interactor/InteractorEvent';
 import { SIK } from 'SpectaclesInteractionKit.lspkg/SIK';

@@ -12,6 +12,7 @@ export class CastleController extends BaseScriptComponent {
   @input castleParent: SceneObject;
 
   @ui.separator
+  @input('boolean') alwaysFollowing: boolean = true;
   @input('float') followDistance: number = 150;   
   @input('float') followHeight:   number = -20;  
   @input('float') followSmooth:   number = 5;     
@@ -46,7 +47,9 @@ export class CastleController extends BaseScriptComponent {
   }
 
   onUpdate(): void {
-    this.updateFollow();
+    if(this.alwaysFollowing){
+      this.updateFollow();
+    }
   }
 
   // ----------------------------------------------------------
@@ -137,6 +140,12 @@ export class CastleController extends BaseScriptComponent {
       return;
     }
     this.animationPlayer.playAll();
+
+    //if do not follow user, place it in front just once is played 
+    if(!this.alwaysFollowing){
+      this.followSmooth = 1000;
+      this.updateFollow();
+    }
   }
 
   stopAnimation(): void {

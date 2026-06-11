@@ -27,6 +27,7 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     alphaMid: false
+    alwaysFollowing: false
     animationPlayer: false
     camera: false
     castleParent: false
@@ -46,6 +47,7 @@
   DefaultScriptInputs:
     - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
       castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      alwaysFollowing: true
       followDistance: !<float> 150.000000
       followHeight: !<float> -20.000000
       followSmooth: !<float> 5.000000
@@ -61,6 +63,7 @@
     - // @input Component.Camera camera
     - // @input SceneObject castleParent
     - '// @ui {"widget":"separator"}'
+    - // @input boolean alwaysFollowing = true
     - // @input float followDistance = 150
     - // @input float followHeight = -20
     - // @input float followSmooth = 5

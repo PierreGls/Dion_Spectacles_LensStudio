@@ -2655,6 +2655,7 @@
     "":
       camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
       castleParent: !<reference.SceneObject> 00f29870-dccb-4282-a379-8b1417360f37
+      alwaysFollowing: false
       followDistance: !<float> -150.000000
       followHeight: !<float> -50.000000
       followSmooth: !<float> 5.000000

@@ -35,8 +35,6 @@ export class AnimationManager extends BaseScriptComponent {
   }
 
   onUpdate(): void {
-    ///print(this.activeAnimations.length)
-    //if (this.activeAnimations.length === 0) return;
     if (this.pendingAnimations.length > 0) {
       this.activeAnimations.push(...this.pendingAnimations);
       this.pendingAnimations = [];
@@ -46,7 +44,7 @@ export class AnimationManager extends BaseScriptComponent {
 
     const deltaTime = getDeltaTime();
 
-    // On filtre les animations terminées en même temps qu'on les tick
+    // Update and remove animations done
     this.activeAnimations = this.activeAnimations.filter(
       (anim) => !anim.tick(deltaTime)
     );
