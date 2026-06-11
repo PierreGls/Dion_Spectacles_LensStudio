@@ -1,6 +1,7 @@
 import { Animation } from "./Animation";
 import { Easing } from "./Easing";    
 import { CastleController } from "./CastleController";
+import { FrameInteractionDetector } from "./FrameInteractionDetector";
     
 let state : number = 0;
  
@@ -8,6 +9,9 @@ let state : number = 0;
 export class GameController extends BaseScriptComponent {
     @input 
     castleController: CastleController
+
+    @input 
+    frameController: FrameInteractionDetector
 
     @input()
     img1Mat: Material;
@@ -168,6 +172,7 @@ export class GameController extends BaseScriptComponent {
                 this.img2Mat.mainPass.baseColor = new vec4(1,1,1, 1 - progress);
             },
             onComplete: () => {
+                this.frameController.onHideFrame();
                 this.castleController.playAnimation();
                 this.onShowPartCastle();
             },

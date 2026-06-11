@@ -263,7 +263,7 @@
   Children:
     - !<own> c0950fcd-6ad0-424a-a6c6-f274f5902daf
   Components:
-    - !<own> cc5cb7b1-8c2b-4e6a-bcbe-04f81c163198
+    - !<own> e45f7137-2ca4-40a6-8711-33f6ab2baef3
     - !<own> af0d14bc-fd57-4713-9e66-c29582ab2be4
 - !<SceneObject/0b013baf-f0a6-44f3-b2c7-d7b964c5347d>
   PrefabRemaps:
@@ -1553,7 +1553,9 @@
     {}
   ScriptInputs:
     "":
+      gameController: !<MappingBased.AssignableType> f8ad0caa-90d7-47b6-b772-64a872868ad3
       frameObj: !<reference.SceneObject> 0730c4c7-3845-4b84-b96f-6cecf5f61d9f
+      frame: !<MappingBased.AssignableType_1> e45f7137-2ca4-40a6-8711-33f6ab2baef3
   ScriptTypes:
     "":
       {}
@@ -3267,68 +3269,6 @@
     - !<own> 2fa6895d-6663-4624-9e74-6b038b982135
   Components:
     []
-- !<ScriptComponent/cc5cb7b1-8c2b-4e6a-bcbe-04f81c163198>
-  PrefabRemaps:
-    []
-  Name: ContainerFrame
-  Enabled: true
-  ScriptAsset: !<reference> 94ea82ba-1d42-4617-b71f-c92262f5960b
-  ScriptInputsDefault:
-    autoShowHide: true
-    innerSize: true
-    border: true
-    constantPadding: true
-    allowScaling: true
-    autoScaleContent: true
-    relativeZ: true
-    allowTranslation: true
-    cutOut: true
-    minimumSize: true
-    maximumSize: true
-    useBillboarding: true
-    xOnTranslate: true
-    xAlways: true
-    yOnTranslate: true
-    yAlways: true
-    useSnapping: true
-    itemSnapping: true
-    worldSnapping: true
-    _targetingVisual: true
-    isSynced: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      autoShowHide: true
-      innerSize: !<Vec2> {x: 32.000000, y: 32.000000}
-      border: !<float> 4.000000
-      constantPadding: !<Vec2> {x: 0.000000, y: 0.000000}
-      allowScaling: true
-      autoScaleContent: true
-      relativeZ: false
-      isContentInteractable: true
-      allowTranslation: true
-      cutOut: false
-      minimumSize: !<Vec2> {x: 10.000000, y: 10.000000}
-      maximumSize: !<Vec2> {x: 300.000000, y: 300.000000}
-      useBillboarding: false
-      xOnTranslate: false
-      xAlways: false
-      yOnTranslate: false
-      yAlways: false
-      useSnapping: false
-      itemSnapping: false
-      worldSnapping: false
-      showFollowButton: true
-      useFOVFollow: true
-      isFollowing: true
-      showCloseButton: false
-      _enableInteractionPlane: true
-      _targetingVisual: !<float> 1.000000
-      isSynced: false
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/cc851f59-7d95-4dbe-a9c0-c336f5593682>
   PrefabRemaps:
     []
@@ -3689,6 +3629,77 @@
     - !<own> 5a2ca1a2-f292-4079-aebb-f491bb9f5bf5
   Components:
     []
+- !<ScriptComponent/e45f7137-2ca4-40a6-8711-33f6ab2baef3>
+  PrefabRemaps:
+    []
+  Name: Frame
+  Enabled: true
+  ScriptAsset: !<reference> 3b46d829-f6db-432a-914c-3551904d3994
+  ScriptInputsDefault:
+    autoShowHide: true
+    _padding: true
+    _allowScaling: true
+    allowNonUniformScaling: true
+    autoScaleContent: true
+    relativeZ: true
+    _onlyInteractOnBorder: true
+    allowTranslation: true
+    _cutOutCenter: true
+    _minimumSize: true
+    _maximumSize: true
+    useBillboarding: true
+    xOnTranslate: true
+    xAlways: true
+    xBufferDegrees: true
+    yOnTranslate: true
+    yAlways: true
+    yBufferDegrees: true
+    useSnapping: true
+    itemSnapping: true
+    worldSnapping: true
+    _showCloseButton: true
+    _enableInteractionPlane: true
+    _interactionPlaneOffset: true
+    _interactionPlanePadding: true
+    _targetingVisual: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      autoShowHide: true
+      _appearance: Small
+      _innerSize: !<Vec2> {x: 20.000000, y: 15.000000}
+      _padding: !<Vec2> {x: 0.000000, y: 0.000000}
+      _allowScaling: true
+      allowNonUniformScaling: false
+      autoScaleContent: true
+      relativeZ: true
+      _onlyInteractOnBorder: false
+      allowTranslation: true
+      _cutOutCenter: false
+      _minimumSize: !<Vec2> {x: 10.000000, y: 10.000000}
+      _maximumSize: !<Vec2> {x: 150.000000, y: 150.000000}
+      useBillboarding: true
+      xOnTranslate: true
+      xAlways: false
+      xBufferDegrees: !<float> 0.000000
+      yOnTranslate: true
+      yAlways: false
+      yBufferDegrees: !<float> 0.000000
+      useSnapping: false
+      itemSnapping: false
+      worldSnapping: false
+      _showFollowButton: true
+      useFollowBehavior: true
+      _following: true
+      _showCloseButton: false
+      _enableInteractionPlane: true
+      _interactionPlaneOffset: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      _interactionPlanePadding: !<Vec2> {x: 0.000000, y: 0.000000}
+      _targetingVisual: !<float> 1.000000
+  ScriptTypes:
+    "":
+      {}
 - !<DeviceTracking/e5553c8a-0b7e-4ef4-92d9-3e1318fb82c1>
   PrefabRemaps:
     []
@@ -4002,6 +4013,7 @@
   ScriptInputs:
     "":
       castleController: !<MappingBased.AssignableType> ae8caa87-4684-4afe-a9c3-de9454806dd9
+      frameController: !<MappingBased.AssignableType_1> 5ae6f9eb-85e2-411f-a6d6-9eb3d78a2bee
       img1Mat: !<reference.Material> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
       img2Mat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
       delayFirstImg: 0.500000

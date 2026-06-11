@@ -36,6 +36,7 @@
     durationFadeIn_img2: false
     easing_firstImg: false
     easing_img2: false
+    frameController: false
     img1Mat: false
     img2Mat: false
   ScriptTypesHidden:
@@ -48,6 +49,7 @@
     []
   DefaultScriptInputs:
     - castleController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      frameController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       delayFirstImg: !<float> 10.000000
@@ -64,6 +66,7 @@
       {}
   InputLines:
     - // @input AssignableType castleController
+    - // @input AssignableType_1 frameController
     - // @input Asset.Material img1Mat
     - // @input Asset.Material img2Mat
     - '// @ui {"widget":"separator"}'

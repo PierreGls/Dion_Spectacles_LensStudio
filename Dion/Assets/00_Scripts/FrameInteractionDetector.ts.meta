@@ -26,8 +26,9 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    frame: false
     frameObj: false
-    frameObzj: false
+    gameController: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -37,11 +38,13 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - frameObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      frameObzj: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+    - gameController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      frameObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      frame: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
+    - // @input AssignableType gameController
     - // @input SceneObject frameObj
-    - // @input AssignableType frameObzj
+    - // @input AssignableType_1 frame
