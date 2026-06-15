@@ -6,10 +6,10 @@ import { Animation } from "./Animation";
 import { Easing } from "./Easing";
 
 @component
-export class CastleController extends BaseScriptComponent {
+export class HotelController extends BaseScriptComponent {
 
   @input camera: Camera;
-  @input castleParent: SceneObject;
+  @input hotelParent: SceneObject;
 
   @ui.separator
   @input('boolean') alwaysFollowing: boolean = true;
@@ -19,15 +19,16 @@ export class CastleController extends BaseScriptComponent {
 
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
-  @input('float') alphaMid: number = 0.2;
-  @input animationPlayer: AnimationPlayer;       
+  @input('float') fadeOutDuration: number = 1.0;
+  @input('float') alphaMid: number = 0.2;     
+  @input('float') alphaMax: number = 0.95;     
 
   @ui.separator
-  @input('Component.MeshVisual[]') meshesMat: Material[];
+  @input('Asset.Material[]') meshesMat: Material[];
 
   // --- Private ---
 
-  private castleParentTransform: Transform;
+  private hotelParentTransform: Transform;
   private cameraTransform: Transform;
   private targetPosition: vec3;
 
@@ -35,15 +36,14 @@ export class CastleController extends BaseScriptComponent {
     let eventUpdate = this.createEvent('UpdateEvent');
     eventUpdate.bind(this.onUpdate.bind(this));
 
-    this.castleParentTransform = this.castleParent.getTransform();
+    this.hotelParentTransform = this.hotelParent.getTransform();
     this.cameraTransform = this.camera.getTransform();
-
     this.targetPosition = this.getTargetPosition();
 
-    this.castleParentTransform.setWorldPosition(this.targetPosition);
+    this.hotelParentTransform.setWorldPosition(this.targetPosition);
 
-    // castle visibles on start
-    //this.setMeshesAlpha(1);
+    // hotel not visible on start
+    this.setMeshesAlpha(0); //TO CHANGE
   }
 
   onUpdate(): void {
@@ -59,12 +59,12 @@ export class CastleController extends BaseScriptComponent {
   private updateFollow(): void {
     this.targetPosition = this.getTargetPosition();
 
-    const current = this.castleParentTransform.getWorldPosition();
+    const current = this.hotelParentTransform.getWorldPosition();
     const deltaTime = getDeltaTime();
     const lerpFactor = Math.min(this.followSmooth * deltaTime, 1);
 
     const smoothed = vec3.lerp(current, this.targetPosition, lerpFactor);
-    this.castleParentTransform.setWorldPosition(smoothed);
+    this.hotelParentTransform.setWorldPosition(smoothed);
   }
 
   private getTargetPosition(): vec3 {
@@ -90,10 +90,9 @@ export class CastleController extends BaseScriptComponent {
         duration: this.fadeInDuration,
         easing: Easing.easeInOutQuad,
         onUpdate: (progress) => {
-          mat.mainPass.baseColor = new vec4(1, 1, 1, progress);
+          mat.mainPass.baseColor = new vec4(1, 1, 1, progress * this.alphaMax);
         },
         onComplete: () => {
-          
         },
       }).play();
     });
@@ -109,7 +108,7 @@ export class CastleController extends BaseScriptComponent {
         duration: this.fadeInDuration,
         easing: Easing.easeInOutQuad,
         onUpdate: (progress) => {
-          mat.mainPass.baseColor = new vec4(1, 1, 1, 1 - progress);
+          mat.mainPass.baseColor = new vec4(1, 1, 1, (1 - progress) * this.alphaMax);
         },
         onComplete: () => {
           completedCount++;
@@ -126,7 +125,6 @@ export class CastleController extends BaseScriptComponent {
         if(i != idExclude){
             this.fadePart(i, from, this.alphaMid, this.fadeInDuration);
         }
-        
     }
   }
 
@@ -135,21 +133,24 @@ export class CastleController extends BaseScriptComponent {
   // ----------------------------------------------------------
 
   playAnimation(): void {
-    if (!this.animationPlayer) {
-      print("[CastleController] Aucun AnimationPlayer assigné !");
-      return;
-    }
-    this.animationPlayer.playAll();
-
     //if do not follow user, place it in front just once is played 
     if(!this.alwaysFollowing){
       this.followSmooth = 1000;
       this.updateFollow();
     }
+
+    //Fade In Everything
+    this.fadeInMeshes();
   }
 
-  stopAnimation(): void {
-    this.animationPlayer?.stopAll();
+  playAnimationSecondPart(): void {
+    this.fadeMidMeshes(this.alphaMax, 1.0);
+  }
+
+  playAnimationThirdPart(): void {
+    //fade out all parts
+    this.fadePart(0, this.alphaMid, 0.0, this.fadeOutDuration);
+    this.fadePart(1, this.alphaMax, 0.0, this.fadeOutDuration);
   }
 
   // ----------------------------------------------------------

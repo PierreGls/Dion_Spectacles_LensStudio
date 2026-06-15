@@ -1,0 +1,78 @@
+- !<AssetImportMetadata/9107be0b-6379-4eb0-9863-565ffc4ca56a>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> c28066c5-a476-4f93-b8c6-d40df97fafb9
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> c28066c5-a476-4f93-b8c6-d40df97fafb9
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 857824a9-fd56-432a-8577-0d6478f177fb
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/857824a9-fd56-432a-8577-0d6478f177fb>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 7b429588-4b12-4200-b9af-420c087c53fa
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    alphaMax: false
+    alphaMid: false
+    alwaysFollowing: false
+    camera: false
+    fadeInDuration: false
+    fadeOutDuration: false
+    followDistance: false
+    followHeight: false
+    followSmooth: false
+    hotelParent: false
+    meshesMat: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      hotelParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      alwaysFollowing: true
+      followDistance: !<float> 150.000000
+      followHeight: !<float> -20.000000
+      followSmooth: !<float> 5.000000
+      fadeInDuration: 1.500000
+      fadeOutDuration: !<float> 1.000000
+      alphaMid: 0.200000
+      alphaMax: 0.950000
+      meshesMat: !<reference.Material[]>
+        []
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Component.Camera camera
+    - // @input SceneObject hotelParent
+    - '// @ui {"widget":"separator"}'
+    - // @input boolean alwaysFollowing = true
+    - // @input float followDistance = 150
+    - // @input float followHeight = -20
+    - // @input float followSmooth = 5
+    - '// @ui {"widget":"separator"}'
+    - // @input float fadeInDuration = 1.5
+    - // @input float fadeOutDuration = 1
+    - // @input float alphaMid = 0.2
+    - // @input float alphaMax = 0.95
+    - '// @ui {"widget":"separator"}'
+    - "// @input Asset.Material[] meshesMat"

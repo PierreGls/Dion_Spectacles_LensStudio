@@ -68,4 +68,27 @@ export class Animation {
   }
 }
 
+export class Delay{
+  private animation: Animation;
+  constructor(config: {
+    duration: number;
+    onComplete?: () => void;
+  }) {
+    this.animation = new Animation({
+        duration : config.duration,
+        easing: Easing.linear,
+        onUpdate: (progress) => {},
+        onComplete: config.onComplete
+      });
+  }
+
+  play(): void {
+    this.animation.play();
+  }
+
+  stop(): void {
+    this.animation.stop();
+  }
+}
+
 import { AnimationManager } from "./AnimationManager";

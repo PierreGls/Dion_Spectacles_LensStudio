@@ -3,7 +3,9 @@
 // ============================================================
 
 import { Animation } from "./Animation";
+import { Delay } from "./Animation";
 import { Easing } from "./Easing";    
+import { HotelController } from "./HotelController";
 import { CastleController } from "./CastleController";
 import { FrameInteractionDetector } from "./FrameInteractionDetector";
     
@@ -11,17 +13,24 @@ let state : number = 0;
  
 @component
 export class GameController extends BaseScriptComponent {
+
+    @input 
+    debug_state: number;
+
+    @ui.separator
+
+    @input 
+    hotelController: HotelController
+
     @input 
     castleController: CastleController
 
     @input 
     frameController: FrameInteractionDetector
 
-    @input()
-    img1Mat: Material;
-
-    @input()
-    img2Mat: Material;
+    @input() img1Mat: Material;
+    @input() img2Mat: Material;
+    @input() img3Mat: Material;
 
     @ui.separator
 
@@ -60,9 +69,32 @@ export class GameController extends BaseScriptComponent {
             new ComboBoxItem('easeInOutCubic', 6)])
     )
     easing_img2: number = 0;
-    
 
     @ui.separator
+    
+    @input delayHotel: number;
+    @input delayHotel2: number;
+    @input delayHotel3: number;
+
+    @ui.separator
+
+    @input delayImg3: number;
+    @input durationFadeIn_img3: number;
+    @input('int')
+    @widget(
+        new ComboBoxWidget([
+            new ComboBoxItem('linear', 0), 
+            new ComboBoxItem('easeInQuad', 1), 
+            new ComboBoxItem('easeOutQuad', 2), 
+            new ComboBoxItem('easeInOutQuad', 3), 
+            new ComboBoxItem('easeInCubic', 4), 
+            new ComboBoxItem('easeOutCubic', 5), 
+            new ComboBoxItem('easeInOutCubic', 6)])
+    )
+    easing_img3: number = 0;
+
+    @ui.separator
+
     @input 
     delayInitialCastle: number;
     @input 
@@ -80,6 +112,7 @@ export class GameController extends BaseScriptComponent {
         //Init 
         this.img1Mat.mainPass.baseColor = new vec4(1,1,1,0);
         this.img2Mat.mainPass.baseColor = new vec4(1,1,1,0);
+        this.img3Mat.mainPass.baseColor = new vec4(1,1,1,0);
     }
 
   // ----------------------------------------------------------
@@ -87,8 +120,19 @@ export class GameController extends BaseScriptComponent {
   // ----------------------------------------------------------
 
     onUpdate(eventData: UpdateEvent) {
+        //TO DELETE
+        if(this.debug_state > 0){
+            this.onSetState(this.debug_state);
+            if(this.debug_state === 3){
+                this.onShowHotel();
+            }
+
+            this.debug_state = -1;
+            return;
+        }
+
+
         if(state == 0 && getTime() > this.delayFirstImg){
-            state = 1;
             this.onShowImg1();
         }
     }
@@ -99,6 +143,14 @@ export class GameController extends BaseScriptComponent {
 
     onClickOnFrame(){
         print("OnClickOnFrame");
+    }
+
+    // ----------------------------------------------------------
+    // State
+    // ----------------------------------------------------------
+    onSetState(newState : number){
+        state = newState;
+        print("New State : " + state);
     }
 
   // ----------------------------------------------------------
@@ -113,24 +165,16 @@ export class GameController extends BaseScriptComponent {
                 this.img1Mat.mainPass.baseColor = new vec4(1,1,1,progress);
             },
             onComplete: () => {
-                this.onShowImg2();
+                delayVisibleImg1.play();
             },
         });
 
-        animFadeIn.play();
-    }
-
-    onShowImg2(){
-        const delayVisibleImg1 = new Animation({
+        const delayVisibleImg1 = new Delay({
             duration: this.delayFirstImg,
-            easing: Easing.linear,
-            onUpdate: (progress) => {
-                //delay
-            },
             onComplete: () => {
                 animFadeOutImg1.play();
-            },
-        });
+            }
+        }); 
 
         const animFadeOutImg1 = new Animation({
             duration: this.durationFadeIn_firstImg,
@@ -139,10 +183,15 @@ export class GameController extends BaseScriptComponent {
                 this.img1Mat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
             },
             onComplete: () => {
-                animFadeInImg2.play();
+                this.onShowImg2();
             },
         });
 
+        this.onSetState(1);
+        animFadeIn.play();
+    }
+
+    onShowImg2(){
         const animFadeInImg2 = new Animation({
             duration: this.durationFadeIn_img2,
             easing: Easing.getEasing(this.easing_img2),
@@ -150,12 +199,105 @@ export class GameController extends BaseScriptComponent {
                 this.img2Mat.mainPass.baseColor = new vec4(1,1,1, progress);
             },
             onComplete: () => {
-                this.onShowCastle();
+                delayImg2.play();
             },
         });
 
-        delayVisibleImg1.play();
+        const delayImg2 = new Delay({
+            duration: this.delayImg2,
+            onComplete: () => {
+                animFadeOutImg2.play();
+            }
+        }); 
+
+        const animFadeOutImg2 = new Animation({
+            duration: this.durationFadeIn_img2,
+            easing: Easing.getEasing(this.easing_img2),
+            onUpdate: (progress) => {
+                this.img2Mat.mainPass.baseColor = new vec4(1,1,1, 1 - progress);
+            },
+            onComplete: () => {
+                this.onShowHotel();
+            },
+        });
+
+        this.onSetState(2);
+        animFadeInImg2.play();
     }
+
+    onShowHotel(){
+        const delayHotel = new Delay({
+            duration: this.delayHotel,
+            onComplete: () => {
+                this.hotelController.playAnimationSecondPart();
+                delayHotel2.play();
+            }
+        }); 
+
+        const delayHotel2 = new Delay({
+            duration: this.delayHotel2,
+            onComplete: () => {
+                this.hotelController.playAnimationThirdPart();
+                delayHotel3.play();
+            },
+        });
+
+        const delayHotel3 = new Delay({
+            duration: this.delayHotel3,
+            onComplete: () => {
+                this.onShowImg3();
+            },
+        });
+
+        this.onSetState(3);
+        this.hotelController.playAnimation();
+
+        delayHotel.play();
+    }
+
+
+    onShowImg3(){
+        const animFadeIn = new Animation({
+            duration: this.durationFadeIn_img3,
+            easing: Easing.getEasing(this.easing_img3),
+            onUpdate: (progress) => {
+                this.img3Mat.mainPass.baseColor = new vec4(1,1,1,progress);
+            },
+            onComplete: () => {
+                delayVisible.play();
+            },
+        });
+
+        const delayVisible = new Delay({
+            duration: this.delayImg3,
+            onComplete: () => {
+                animFadeOut.play();
+            }
+        }); 
+
+        const animFadeOut = new Animation({
+            duration: this.durationFadeIn_img3,
+            easing: Easing.getEasing(this.easing_img3),
+            onUpdate: (progress) => {
+                this.img3Mat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
+            },
+            onComplete: () => {
+                print("Waiting for sticker")
+            },
+        });
+
+        this.onSetState(4);
+        animFadeIn.play();
+    }
+
+
+
+
+
+
+
+
+
 
     onShowCastle(){
         const delayCastle = new Animation({
