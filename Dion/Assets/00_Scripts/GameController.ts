@@ -102,9 +102,9 @@ export class GameController extends BaseScriptComponent {
     @input
     animPlayerCastle: AnimationPlayer;
     
-  // ----------------------------------------------------------
-  // Init
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // Init
+    // ----------------------------------------------------------
     onAwake() {
         let eventUpdate = this.createEvent('UpdateEvent');
         eventUpdate.bind(this.onUpdate.bind(this));
@@ -115,9 +115,9 @@ export class GameController extends BaseScriptComponent {
         this.img3Mat.mainPass.baseColor = new vec4(1,1,1,0);
     }
 
-  // ----------------------------------------------------------
-  // Update
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // Update
+    // ----------------------------------------------------------
 
     onUpdate(eventData: UpdateEvent) {
         //TO DELETE
@@ -137,12 +137,32 @@ export class GameController extends BaseScriptComponent {
         }
     }
 
-  // ----------------------------------------------------------
-  // Clicks
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // Clicks
+    // ----------------------------------------------------------
 
     onClickOnFrame(){
         print("OnClickOnFrame");
+
+        //DEBUG: TO DELETE
+        if(state === 4){
+            this.onMarkerFound();
+        }
+    }
+
+    // ----------------------------------------------------------
+    // Marker
+    // ----------------------------------------------------------
+
+    onMarkerFound() {
+        print("onMarkerFound");
+        if(state === 4){
+            this.onShowCastle()
+        }
+    }
+
+    onMarkerLost() {
+        print("onMarkerLost");
     }
 
     // ----------------------------------------------------------
@@ -153,9 +173,9 @@ export class GameController extends BaseScriptComponent {
         print("New State : " + state);
     }
 
-  // ----------------------------------------------------------
-  // Anims
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // Anims
+    // ----------------------------------------------------------
 
     onShowImg1(){
         const animFadeIn = new Animation({
@@ -291,73 +311,39 @@ export class GameController extends BaseScriptComponent {
     }
 
 
-
-
-
-
-
-
-
-
     onShowCastle(){
-        const delayCastle = new Animation({
+        const delayCastle = new Delay({
             duration: this.delayCastle,
-            easing: Easing.linear,
-            onUpdate: (progress) => {
-                //delay
-            },
-            onComplete: () => {
-                animFadeOutImg2.play();
-            },
-        });
-
-        const animFadeOutImg2 = new Animation({
-            duration: this.durationFadeIn_img2,
-            easing: Easing.getEasing(this.easing_img2),
-            onUpdate: (progress) => {
-                this.img2Mat.mainPass.baseColor = new vec4(1,1,1, 1 - progress);
-            },
             onComplete: () => {
                 this.frameController.onHideFrame();
                 this.castleController.playAnimation();
                 this.onShowPartCastle();
-            },
+            }
         });
 
+        this.onSetState(5);
         delayCastle.play();
     }
 
     onShowPartCastle(){
-        const delayCastle = new Animation({
+        const delayCastle = new Delay({
             duration: this.delayInitialCastle,
-            easing: Easing.linear,
-            onUpdate: (progress) => {
-                //delay
-            },
             onComplete: () => {
                 this.castleController.fadeMidMeshes(1, 0);
                 delayCastle2.play()
             },
         });
 
-        const delayCastle2 = new Animation({
+        const delayCastle2 = new Delay({
             duration: this.delayCastle,
-            easing: Easing.linear,
-            onUpdate: (progress) => {
-                //delay
-            },
             onComplete: () => {
                 this.castleController.fadePart(0, 1, 0.3, 1);
                 this.castleController.fadePart(1, 0.3, 1, 1);
                 delayCastle3.play()
             },
         });
-        const delayCastle3 = new Animation({
+        const delayCastle3 = new Delay({
             duration: this.delayCastle,
-            easing: Easing.linear,
-            onUpdate: (progress) => {
-                //delay
-            },
             onComplete: () => {
                 this.castleController.fadePart(1, 1, 0.3, 1);
                 this.castleController.fadePart(2, 0.3, 1, 1);
