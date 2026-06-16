@@ -14,19 +14,14 @@ let state : number = 0;
 @component
 export class GameController extends BaseScriptComponent {
 
-    @input 
-    debug_state: number;
+    @input debug_state: number;
+    @input debug_trakingText: Text;
 
     @ui.separator
 
-    @input 
-    hotelController: HotelController
-
-    @input 
-    castleController: CastleController
-
-    @input 
-    frameController: FrameInteractionDetector
+    @input hotelController: HotelController
+    @input castleController: CastleController
+    @input frameController: FrameInteractionDetector
 
     @input() img1Mat: Material;
     @input() img2Mat: Material;
@@ -34,10 +29,8 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input 
-    delayFirstImg: number;
-    @input 
-    durationFadeIn_firstImg: number;
+    @input delayFirstImg: number;
+    @input durationFadeIn_firstImg: number;
     @input('int')
     @widget(
         new ComboBoxWidget([
@@ -53,10 +46,8 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input 
-    delayImg2: number;
-    @input 
-    durationFadeIn_img2: number;
+    @input delayImg2: number;
+    @input durationFadeIn_img2: number;
     @input('int')
     @widget(
         new ComboBoxWidget([
@@ -95,12 +86,9 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input 
-    delayInitialCastle: number;
-    @input 
-    delayCastle: number;
-    @input
-    animPlayerCastle: AnimationPlayer;
+    @input delayInitialCastle: number;
+    @input delayCastle: number;
+    @input animPlayerCastle: AnimationPlayer;
     
     // ----------------------------------------------------------
     // Init
@@ -155,6 +143,8 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
 
     onMarkerFound() {
+        this.debug_trakingText.text = "Marker Status : found";
+
         print("onMarkerFound");
         if(state === 4){
             this.onShowCastle()
@@ -163,6 +153,8 @@ export class GameController extends BaseScriptComponent {
 
     onMarkerLost() {
         print("onMarkerLost");
+        this.debug_trakingText.text = "Marker Status : lost";
+
     }
 
     // ----------------------------------------------------------
@@ -303,6 +295,7 @@ export class GameController extends BaseScriptComponent {
             },
             onComplete: () => {
                 print("Waiting for sticker")
+                this.debug_trakingText.text = "Marker Status : waiting for the sticker";
             },
         });
 

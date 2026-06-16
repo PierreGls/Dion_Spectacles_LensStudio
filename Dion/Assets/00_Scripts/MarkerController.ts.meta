@@ -26,10 +26,10 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    animationImage: false
-    enableLogging: false
-    enableLoggingLifecycle: false
+    followSmooth: false
     gameController: false
+    objectAttached: false
+    parentToFollow: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -40,20 +40,16 @@
     []
   DefaultScriptInputs:
     - gameController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
-      animationImage: !<reference.Image> 00000000-0000-0000-0000-000000000000
-      enableLogging: false
-      enableLoggingLifecycle: false
+      objectAttached: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      parentToFollow: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      followSmooth: !<float> 0.000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input AssignableType gameController
     - '// @ui {"widget":"separator"}'
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Animation Image</span>"}'
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #94A3B8; font-size: 11px;\">Image component with animated texture to play when marker is found</span>"}'
-    - // @input Component.Image animationImage
-    - '// @ui {"widget":"separator"}'
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Logging Configuration</span>"}'
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #94A3B8; font-size: 11px;\">Control logging output for this script instance</span>"}'
-    - '// @input bool enableLogging {"hint":"Enable general logging (animation cycles, events, etc.)"}'
-    - '// @input bool enableLoggingLifecycle {"hint":"Enable lifecycle logging (onAwake, onStart, onUpdate, onDestroy, etc.)"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Attached object</span>"}'
+    - // @input SceneObject objectAttached
+    - // @input SceneObject parentToFollow
+    - // @input float followSmooth

@@ -29,6 +29,7 @@
     animPlayerCastle: false
     castleController: false
     debug_state: false
+    debug_trakingText: false
     delayCastle: false
     delayFirstImg: false
     delayHotel: false
@@ -58,6 +59,7 @@
     []
   DefaultScriptInputs:
     - debug_state: !<float> 0.000000
+      debug_trakingText: !<reference.Text> 00000000-0000-0000-0000-000000000000
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
@@ -84,6 +86,7 @@
       {}
   InputLines:
     - // @input float debug_state
+    - // @input Component.Text debug_trakingText
     - '// @ui {"widget":"separator"}'
     - // @input AssignableType hotelController
     - // @input AssignableType_1 castleController

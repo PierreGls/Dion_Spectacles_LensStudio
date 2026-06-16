@@ -9,61 +9,53 @@ import { GameController } from "./GameController";
 
 @component
 export class MarkerController extends BaseScriptComponent {
-  @input gameController: GameController
+  @input gameController: GameController;
 
   @ui.separator
-  @ui.label('<span style="color: #60A5FA;">Animation Image</span>')
-  @ui.label('<span style="color: #94A3B8; font-size: 11px;">Image component with animated texture to play when marker is found</span>')
+  @ui.label('<span style="color: #60A5FA;">Attached object</span>')
 
-  @input
-  animationImage: Image;
+  @input objectAttached: SceneObject;
+  @input parentToFollow: SceneObject;
 
-  @ui.separator
-  @ui.label('<span style="color: #60A5FA;">Logging Configuration</span>')
-  @ui.label('<span style="color: #94A3B8; font-size: 11px;">Control logging output for this script instance</span>')
+  @input followSmooth:number;
 
-  @input
-  @hint("Enable general logging (animation cycles, events, etc.)")
-  enableLogging: boolean = false;
+  private objectAttachedTr: Transform;
+  private parentToFollowTr: Transform;
 
-  @input
-  @hint("Enable lifecycle logging (onAwake, onStart, onUpdate, onDestroy, etc.)")
-  enableLoggingLifecycle: boolean = false;
+  private targetPosition: vec3;
+  private hasMarkerBeenFound = false;
 
-  // Logger instance
-  private logger: Logger;
-
-  private loop = 1;
-  private offset = 0.0;
-
-  /**
-   * Called when component is initialized
-   */
   onAwake(): void {
-    // Initialize logger
-    this.logger = new Logger("MarkerCallbacks", this.enableLogging || this.enableLoggingLifecycle, true);
+    this.parentToFollow.enabled = false;
 
-    if (this.enableLoggingLifecycle) {
-      this.logger.debug("LIFECYCLE: onAwake() - Component initializing");
-    }
+    this.objectAttachedTr = this.objectAttached.getTransform();
+    this.parentToFollowTr = this.parentToFollow.getTransform();
+
+    //let eventUpdate = this.createEvent('UpdateEvent');
+    //eventUpdate.bind(this.onUpdate.bind(this));
+  }
+
+  onUpdate(): void {
+    
+  }
+
+  onUpdatePosition(){
+    this.targetPosition = this.objectAttachedTr.getWorldPosition();
+    const current = this.parentToFollowTr.getWorldPosition();
+    const lerpFactor = Math.min(this.followSmooth * getDeltaTime(), 1);
+
+    const smoothed = vec3.lerp(current, this.targetPosition, lerpFactor);
+    this.parentToFollowTr.setWorldPosition(smoothed);
   }
 
   onMarkerFound() {
-    this.logger.debug("Marker found");
-
-    /* Play the animation when the marker is found */
-    const textureProvider = this.animationImage.getMaterial(0).getPass(0)
-      .baseTex.control as AnimatedTextureFileProvider;
-    textureProvider.play(this.loop, this.offset);
-
+    this.parentToFollow.enabled = true;
     this.gameController.onMarkerFound();
+    ///this.onUpdatePosition();
   }
 
   onMarkerLost() {
-    this.logger.debug("Marker Lost");
-
-    /* Add custom logic here for when the marker is lost */
-
+    //this.parentToFollow.enabled = false;
     this.gameController.onMarkerLost();
   }
 }
