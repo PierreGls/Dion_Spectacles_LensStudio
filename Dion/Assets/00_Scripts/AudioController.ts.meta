@@ -26,7 +26,7 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    {}
+    audios: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -36,10 +36,10 @@
   Attachments:
     []
   DefaultScriptInputs:
-    -
-      {}
+    - audios: !<reference.AudioComponent[]>
+        []
   ScriptTypes:
     -
       {}
   InputLines:
-    []
+    - "// @input Component.AudioComponent[] audios"

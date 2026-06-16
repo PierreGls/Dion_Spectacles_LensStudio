@@ -27,6 +27,7 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     animPlayerCastle: false
+    audioController: false
     castleController: false
     debug_state: false
     debug_trakingText: false
@@ -63,6 +64,7 @@
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      audioController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img3Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
@@ -91,6 +93,7 @@
     - // @input AssignableType hotelController
     - // @input AssignableType_1 castleController
     - // @input AssignableType_2 frameController
+    - // @input AssignableType_3 audioController
     - // @input Asset.Material img1Mat
     - // @input Asset.Material img2Mat
     - // @input Asset.Material img3Mat

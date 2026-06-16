@@ -8,6 +8,7 @@ import { Easing } from "./Easing";
 import { HotelController } from "./HotelController";
 import { CastleController } from "./CastleController";
 import { FrameInteractionDetector } from "./FrameInteractionDetector";
+import { AudioController } from "./AudioController";
     
 let state : number = 0;
  
@@ -22,6 +23,7 @@ export class GameController extends BaseScriptComponent {
     @input hotelController: HotelController
     @input castleController: CastleController
     @input frameController: FrameInteractionDetector
+    @input audioController: AudioController
 
     @input() img1Mat: Material;
     @input() img2Mat: Material;
@@ -120,7 +122,7 @@ export class GameController extends BaseScriptComponent {
         }
 
 
-        if(state == 0 && getTime() > this.delayFirstImg){
+        if(state == 0 && getTime() > 1.0){
             this.onShowImg1();
         }
     }
@@ -199,6 +201,7 @@ export class GameController extends BaseScriptComponent {
             },
         });
 
+        //this.audioController.playAudio(0);
         this.onSetState(1);
         animFadeIn.play();
     }
@@ -314,6 +317,7 @@ export class GameController extends BaseScriptComponent {
             }
         });
 
+        //this.audioController.playAudio(1);
         this.onSetState(5);
         delayCastle.play();
     }

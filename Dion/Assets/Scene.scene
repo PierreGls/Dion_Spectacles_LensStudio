@@ -1804,6 +1804,21 @@
     - !<own> f7f95fff-c512-4bf3-b03e-47c3440bf5df
   Components:
     []
+- !<SceneObject/4427fe4a-a793-4022-af8b-2627200bc084>
+  PrefabRemaps:
+    []
+  Name: DublinCastle
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 9b7c7ecc-e0d6-46cb-b819-3231a98850bc
 - !<SceneObject/4473aa57-0678-4f56-b30d-8e0916f68f3d>
   PrefabRemaps:
     []
@@ -2802,6 +2817,21 @@
     []
   Components:
     - !<own> abb800d4-f694-429b-8efa-08819f6175d5
+- !<SceneObject/6a2543cf-511d-4161-bcf8-b52bd94ba567>
+  PrefabRemaps:
+    []
+  Name: AudioController
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> dd6b5142-55de-464f-826a-b6e5afc01bee
 - !<Animation/6a94c021-4bfe-43a1-8006-3f9dd70065c6>
   PrefabRemaps:
     []
@@ -3495,7 +3525,8 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
-    []
+    - !<own> e8f0a031-0b43-4090-9994-1faa6caff152
+    - !<own> 4427fe4a-a793-4022-af8b-2627200bc084
   Components:
     []
 - !<SceneObject/876856b0-0b08-4488-9e57-976a4ddd348f>
@@ -3878,6 +3909,23 @@
   BlendNormals: false
   BlendShapes:
     {}
+- !<AudioComponent/9b7c7ecc-e0d6-46cb-b819-3231a98850bc>
+  PrefabRemaps:
+    []
+  Name: Audio
+  Enabled: true
+  AudioTrack: !<reference> f71c8864-e444-40ff-9f76-61c2fd5a8e92
+  EnableAutoplayLoop: false
+  Volume: 1.000000
+  EnableMixToSnap: false
+  RecordVolume: 1.000000
+  EnableSpatialAudio: false
+  EnableDistanceEffect: false
+  CurveType: Logarithm
+  MinDistance: 0.000000
+  MaxDistance: 100.000000
+  EnableDirectivityEffect: false
+  EnablePositionEffect: false
 - !<SceneObject/9b8da751-599e-41c3-bebf-7b11dadee25a>
   PrefabRemaps:
     []
@@ -5274,6 +5322,7 @@
     - !<own> 66b8042d-c5c0-4f71-a10f-56af2b314ccb
     - !<own> ad28623e-edfd-46be-9009-2b1b3d48b4c1
     - !<own> 75c87f26-7b52-45b5-80f0-37a834691300
+    - !<own> 6a2543cf-511d-4161-bcf8-b52bd94ba567
   Components:
     []
 - !<SceneObject/cdad0528-f32c-4b6a-a907-eb241c5f72f6>
@@ -5393,6 +5442,23 @@
     - !<own> 73b7e3d8-b7f3-4c24-9f65-4ecfc6871b0d
   Components:
     []
+- !<AudioComponent/d4d2604c-e087-4ae6-878c-b501668cbb48>
+  PrefabRemaps:
+    []
+  Name: Audio
+  Enabled: true
+  AudioTrack: !<reference> ae53e7be-57d9-4442-ae0f-9201c058f0b2
+  EnableAutoplayLoop: false
+  Volume: 1.000000
+  EnableMixToSnap: false
+  RecordVolume: 1.000000
+  EnableSpatialAudio: false
+  EnableDistanceEffect: false
+  CurveType: Logarithm
+  MinDistance: 0.000000
+  MaxDistance: 100.000000
+  EnableDirectivityEffect: false
+  EnablePositionEffect: false
 - !<Animation/d5189352-0609-4d45-9e98-b788a2d9ef7d>
   PrefabRemaps:
     []
@@ -5694,6 +5760,24 @@
     - !<own> 279d3a30-e301-4a3b-8eb4-2693b53e35e4
   Components:
     []
+- !<ScriptComponent/dd6b5142-55de-464f-826a-b6e5afc01bee>
+  PrefabRemaps:
+    []
+  Name: AudioController
+  Enabled: true
+  ScriptAsset: !<reference> a4d0caf5-e9f2-4ded-a892-dcfb2c335a52
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      audios: !<reference.AudioComponent[]>
+        - !<reference> d4d2604c-e087-4ae6-878c-b501668cbb48
+        - !<reference> 9b7c7ecc-e0d6-46cb-b819-3231a98850bc
+  ScriptTypes:
+    "":
+      {}
 - !<Animation/df7673fe-c733-4b11-9dae-24cb66dc889a>
   PrefabRemaps:
     []
@@ -5983,6 +6067,21 @@
     []
   Components:
     - !<own> 827df408-a138-4671-8195-d101d71a651a
+- !<SceneObject/e8f0a031-0b43-4090-9994-1faa6caff152>
+  PrefabRemaps:
+    []
+  Name: Intro
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> d4d2604c-e087-4ae6-878c-b501668cbb48
 - !<Animation/e9da4198-6012-4348-8f85-056bdf385c61>
   PrefabRemaps:
     []
@@ -6403,17 +6502,18 @@
       hotelController: !<MappingBased.AssignableType> b4ff26df-bf2f-43dc-ac8b-9939db5920eb
       castleController: !<MappingBased.AssignableType_1> ae8caa87-4684-4afe-a9c3-de9454806dd9
       frameController: !<MappingBased.AssignableType_2> 5ae6f9eb-85e2-411f-a6d6-9eb3d78a2bee
+      audioController: !<MappingBased.AssignableType_3> dd6b5142-55de-464f-826a-b6e5afc01bee
       img1Mat: !<reference.Material> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
       img2Mat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
       img3Mat: !<reference.Material> d51c6ef3-5c5a-4bb9-a4f0-19702da25ff0
-      delayFirstImg: 0.500000
+      delayFirstImg: !<float> 1.000000
       durationFadeIn_firstImg: !<float> 1.000000
       easing_firstImg: 3
-      delayImg2: !<float> 2.000000
+      delayImg2: !<float> 1.000000
       durationFadeIn_img2: !<float> 1.000000
       easing_img2: 3
-      delayHotel: !<float> 3.000000
-      delayHotel2: !<float> 2.000000
+      delayHotel: !<float> 1.000000
+      delayHotel2: !<float> 1.000000
       delayHotel3: !<float> 1.000000
       delayImg3: !<float> 1.000000
       durationFadeIn_img3: !<float> 1.000000
