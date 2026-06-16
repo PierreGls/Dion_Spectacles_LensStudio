@@ -1,0 +1,65 @@
+- !<AssetImportMetadata/2c0152a8-d8d9-4e27-9ec8-fe4193dc3e1f>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> a1f9d7ed-8c44-4016-bb52-6c25215b0255
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> a1f9d7ed-8c44-4016-bb52-6c25215b0255
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> db1d4186-3360-484a-a887-1e20c4b0a09c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/db1d4186-3360-484a-a887-1e20c4b0a09c>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 9f450347-bb28-4cc2-b3eb-aca18cfdb34e
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    arrowMat: false
+    arrowObject: false
+    camera: false
+    durationFade: false
+    easingFade: false
+    iconMat: false
+    rotationSmooth: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      arrowObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      iconMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      arrowMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      rotationSmooth: !<float> 8.000000
+      durationFade: !<float> 0.000000
+      easingFade: 0
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Component.Camera camera
+    - '// @ui {"widget":"separator"}'
+    - // @input SceneObject arrowObject
+    - '// @ui {"widget":"separator"}'
+    - // @input Asset.Material iconMat
+    - // @input Asset.Material arrowMat
+    - '// @ui {"widget":"separator"}'
+    - // @input float rotationSmooth = 8
+    - // @input float durationFade
+    - '// @input int easingFade {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'

@@ -9,6 +9,7 @@ import { HotelController } from "./HotelController";
 import { CastleController } from "./CastleController";
 import { FrameInteractionDetector } from "./FrameInteractionDetector";
 import { AudioController } from "./AudioController";
+import { CompassController } from "./CompassController";
     
 let state : number = 0;
  
@@ -23,11 +24,15 @@ export class GameController extends BaseScriptComponent {
     @input hotelController: HotelController
     @input castleController: CastleController
     @input frameController: FrameInteractionDetector
-    @input audioController: AudioController
+    @input compassController: CompassController
 
     @input() img1Mat: Material;
     @input() img2Mat: Material;
     @input() img3Mat: Material;
+
+    @ui.separator
+
+    @input castleReference: SceneObject;
 
     @ui.separator
 
@@ -116,6 +121,9 @@ export class GameController extends BaseScriptComponent {
             if(this.debug_state === 3){
                 this.onShowHotel();
             }
+            if(this.debug_state === 5){
+                this.onShowCastle();
+            }
 
             this.debug_state = -1;
             return;
@@ -131,7 +139,7 @@ export class GameController extends BaseScriptComponent {
     // Clicks
     // ----------------------------------------------------------
 
-    onClickOnFrame(){
+    public onClickOnFrame(){
         print("OnClickOnFrame");
 
         //DEBUG: TO DELETE
@@ -144,16 +152,16 @@ export class GameController extends BaseScriptComponent {
     // Marker
     // ----------------------------------------------------------
 
-    onMarkerFound() {
+    public onMarkerFound() {
         this.debug_trakingText.text = "Marker Status : found";
 
         print("onMarkerFound");
-        if(state === 4){
+        if(state === 5){
             this.onShowCastle()
         }
     }
 
-    onMarkerLost() {
+    public onMarkerLost() {
         print("onMarkerLost");
         this.debug_trakingText.text = "Marker Status : lost";
 
@@ -162,7 +170,7 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
     // State
     // ----------------------------------------------------------
-    onSetState(newState : number){
+    private onSetState(newState : number){
         state = newState;
         print("New State : " + state);
     }
@@ -171,7 +179,7 @@ export class GameController extends BaseScriptComponent {
     // Anims
     // ----------------------------------------------------------
 
-    onShowImg1(){
+    private onShowImg1(){
         const animFadeIn = new Animation({
             duration: this.durationFadeIn_firstImg,
             easing: Easing.getEasing(this.easing_firstImg),
@@ -206,7 +214,7 @@ export class GameController extends BaseScriptComponent {
         animFadeIn.play();
     }
 
-    onShowImg2(){
+    private onShowImg2(){
         const animFadeInImg2 = new Animation({
             duration: this.durationFadeIn_img2,
             easing: Easing.getEasing(this.easing_img2),
@@ -240,7 +248,7 @@ export class GameController extends BaseScriptComponent {
         animFadeInImg2.play();
     }
 
-    onShowHotel(){
+    private onShowHotel(){
         const delayHotel = new Delay({
             duration: this.delayHotel,
             onComplete: () => {
@@ -271,7 +279,7 @@ export class GameController extends BaseScriptComponent {
     }
 
 
-    onShowImg3(){
+    private onShowImg3(){
         const animFadeIn = new Animation({
             duration: this.durationFadeIn_img3,
             easing: Easing.getEasing(this.easing_img3),
@@ -299,6 +307,9 @@ export class GameController extends BaseScriptComponent {
             onComplete: () => {
                 print("Waiting for sticker")
                 this.debug_trakingText.text = "Marker Status : waiting for the sticker";
+
+                this.onSetState(5);
+                this.compassController.onStart(this.castleReference.getTransform());
             },
         });
 
@@ -307,7 +318,7 @@ export class GameController extends BaseScriptComponent {
     }
 
 
-    onShowCastle(){
+    private onShowCastle(){
         const delayCastle = new Delay({
             duration: this.delayCastle,
             onComplete: () => {
@@ -318,11 +329,13 @@ export class GameController extends BaseScriptComponent {
         });
 
         //this.audioController.playAudio(1);
-        this.onSetState(5);
+        this.onSetState(6);
+        this.compassController.onStop();
         delayCastle.play();
     }
 
-    onShowPartCastle(){
+    private onShowPartCastle(){
+        const alphaMid = 0.6;
         const delayCastle = new Delay({
             duration: this.delayInitialCastle,
             onComplete: () => {
@@ -334,16 +347,16 @@ export class GameController extends BaseScriptComponent {
         const delayCastle2 = new Delay({
             duration: this.delayCastle,
             onComplete: () => {
-                this.castleController.fadePart(0, 1, 0.3, 1);
-                this.castleController.fadePart(1, 0.3, 1, 1);
+                this.castleController.fadePart(0, 1, alphaMid, 1);
+                this.castleController.fadePart(1, alphaMid, 1, 1);
                 delayCastle3.play()
             },
         });
         const delayCastle3 = new Delay({
             duration: this.delayCastle,
             onComplete: () => {
-                this.castleController.fadePart(1, 1, 0.3, 1);
-                this.castleController.fadePart(2, 0.3, 1, 1);
+                this.castleController.fadePart(1, 1, alphaMid, 1);
+                this.castleController.fadePart(2, alphaMid, 1, 1);
             },
         });
 

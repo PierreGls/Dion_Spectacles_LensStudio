@@ -9,7 +9,7 @@ export class AudioController extends BaseScriptComponent {
         });
     }
 
-    playAudio(id:number){
+    public playAudio(id:number){
         if(id >= this.audios.length || id < 0){
             print("Wrong id : " + id)
             return;

@@ -1,10 +1,3 @@
-/**
- * Specs Inc. 2026
- * Marker tracking callback handler that responds to marker found/lost events. Demonstrates
- * animation control based on marker tracking state for augmented reality experiences.
- */
-import { Logger } from "Utilities.lspkg/Scripts/Utils/Logger";
-import { bindStartEvent, bindUpdateEvent, bindLateUpdateEvent, bindDestroyEvent } from "SnapDecorators.lspkg/decorators";
 import { GameController } from "./GameController";
 
 @component
@@ -23,7 +16,6 @@ export class MarkerController extends BaseScriptComponent {
   private parentToFollowTr: Transform;
 
   private targetPosition: vec3;
-  private hasMarkerBeenFound = false;
 
   onAwake(): void {
     this.parentToFollow.enabled = false;
@@ -31,15 +23,16 @@ export class MarkerController extends BaseScriptComponent {
     this.objectAttachedTr = this.objectAttached.getTransform();
     this.parentToFollowTr = this.parentToFollow.getTransform();
 
+    //To activate if we want to have the 3D assets in front of the marker
     //let eventUpdate = this.createEvent('UpdateEvent');
     //eventUpdate.bind(this.onUpdate.bind(this));
   }
 
-  onUpdate(): void {
+  private onUpdate(): void {
     
   }
 
-  onUpdatePosition(){
+  private onUpdatePosition(){
     this.targetPosition = this.objectAttachedTr.getWorldPosition();
     const current = this.parentToFollowTr.getWorldPosition();
     const lerpFactor = Math.min(this.followSmooth * getDeltaTime(), 1);
@@ -48,14 +41,39 @@ export class MarkerController extends BaseScriptComponent {
     this.parentToFollowTr.setWorldPosition(smoothed);
   }
 
-  onMarkerFound() {
+  // ----------------------------------------------------------
+  // DEBUG
+  // ----------------------------------------------------------
+  public onMarkerFound_DEBUG() {
     this.parentToFollow.enabled = true;
     this.gameController.onMarkerFound();
-    ///this.onUpdatePosition();
   }
 
-  onMarkerLost() {
-    //this.parentToFollow.enabled = false;
+  public onMarkerLost_DEBUG() {
+    this.gameController.onMarkerLost();
+  }
+
+  // ----------------------------------------------------------
+  // Intro
+  // ----------------------------------------------------------
+  public onMarkerFound_Intro() {
+    this.parentToFollow.enabled = true;
+    this.gameController.onMarkerFound();
+  }
+
+  public onMarkerLost_Intro() {
+    this.gameController.onMarkerLost();
+  }
+
+  // ----------------------------------------------------------
+  // Dublin Castle
+  // ----------------------------------------------------------
+  public onMarkerFound_DublinCastle() {
+    this.parentToFollow.enabled = true;
+    this.gameController.onMarkerFound();
+  }
+
+  public onMarkerLost_DublinCastle() {
     this.gameController.onMarkerLost();
   }
 }

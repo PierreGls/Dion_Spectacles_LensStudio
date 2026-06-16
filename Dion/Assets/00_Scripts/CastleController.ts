@@ -82,7 +82,7 @@ export class CastleController extends BaseScriptComponent {
   // Fade all meshs
   // ----------------------------------------------------------
 
-  fadeInMeshes(): void {
+  public fadeInMeshes(): void {
     this.meshesMat.forEach((mat) => {
       if (!mat) return;
 
@@ -99,7 +99,7 @@ export class CastleController extends BaseScriptComponent {
     });
   }
 
-  fadeOutMeshes(onComplete?: () => void): void {
+  public fadeOutMeshes(onComplete?: () => void): void {
     let completedCount = 0;
 
     this.meshesMat.forEach((mat) => {
@@ -121,7 +121,7 @@ export class CastleController extends BaseScriptComponent {
     });
   }
 
-  fadeMidMeshes(from : number, idExclude?: number): void {
+  public fadeMidMeshes(from : number, idExclude?: number): void {
     for(let i = 0; i < this.meshesMat.length; i++){
         if(i != idExclude){
             this.fadePart(i, from, this.alphaMid, this.fadeInDuration);
@@ -134,7 +134,7 @@ export class CastleController extends BaseScriptComponent {
   // Animation FBX 
   // ----------------------------------------------------------
 
-  playAnimation(): void {
+  public playAnimation(): void {
     if (!this.animationPlayer) {
       print("[CastleController] Aucun AnimationPlayer assigné !");
       return;
@@ -148,7 +148,7 @@ export class CastleController extends BaseScriptComponent {
     }
   }
 
-  stopAnimation(): void {
+  public stopAnimation(): void {
     this.animationPlayer?.stopAll();
   }
 
@@ -156,7 +156,7 @@ export class CastleController extends BaseScriptComponent {
   // Fade — single part
   // ----------------------------------------------------------
 
-  fadePart(
+  public fadePart(
     id: number,
     from: number,
     to: number,
@@ -190,7 +190,7 @@ export class CastleController extends BaseScriptComponent {
   // Utils
   // ----------------------------------------------------------
 
-  setMeshesAlpha(alpha: number): void {
+  private setMeshesAlpha(alpha: number): void {
     this.meshesMat.forEach((mat) => {
       if (mat) {
         mat.mainPass.baseColor = new vec4(1, 1, 1, alpha);
@@ -198,7 +198,7 @@ export class CastleController extends BaseScriptComponent {
     });
   }
 
-  setMeshAlpha(alpha: number, id: number): void {
+  private setMeshAlpha(alpha: number, id: number): void {
     if(this.meshesMat.length <= id){return;}
     this.meshesMat[id].mainPass.baseColor = new vec4(1, 1, 1, alpha);
   }

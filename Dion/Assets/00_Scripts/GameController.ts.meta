@@ -27,8 +27,9 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     animPlayerCastle: false
-    audioController: false
     castleController: false
+    castleReference: false
+    compassController: false
     debug_state: false
     debug_trakingText: false
     delayCastle: false
@@ -64,10 +65,11 @@
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
-      audioController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      compassController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img3Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      castleReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       delayFirstImg: !<float> 10.000000
       durationFadeIn_firstImg: !<float> 0.000000
       easing_firstImg: 1
@@ -93,10 +95,12 @@
     - // @input AssignableType hotelController
     - // @input AssignableType_1 castleController
     - // @input AssignableType_2 frameController
-    - // @input AssignableType_3 audioController
+    - // @input AssignableType_3 compassController
     - // @input Asset.Material img1Mat
     - // @input Asset.Material img2Mat
     - // @input Asset.Material img3Mat
+    - '// @ui {"widget":"separator"}'
+    - // @input SceneObject castleReference
     - '// @ui {"widget":"separator"}'
     - // @input float delayFirstImg
     - // @input float durationFadeIn_firstImg
