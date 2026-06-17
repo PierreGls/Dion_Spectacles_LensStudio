@@ -10,14 +10,14 @@ import { CastleController } from "./CastleController";
 import { FrameInteractionDetector } from "./FrameInteractionDetector";
 import { AudioController } from "./AudioController";
 import { CompassController } from "./CompassController";
-    
-let state : number = 0;
  
 @component
 export class GameController extends BaseScriptComponent {
 
     @input debug_state: number;
     @input debug_trakingText: Text;
+    @input activateSkipMarkerDebug: boolean;
+    @input debug_skipMarkerButton: SceneObject;
 
     @ui.separator
 
@@ -93,9 +93,10 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input delayInitialCastle: number;
-    @input delayCastle: number;
-    @input animPlayerCastle: AnimationPlayer;
+    @input delayCastle1: number;
+    @input delayCastle2: number;
+
+    private state : number = 0;
     
     // ----------------------------------------------------------
     // Init
@@ -108,6 +109,8 @@ export class GameController extends BaseScriptComponent {
         this.img1Mat.mainPass.baseColor = new vec4(1,1,1,0);
         this.img2Mat.mainPass.baseColor = new vec4(1,1,1,0);
         this.img3Mat.mainPass.baseColor = new vec4(1,1,1,0);
+
+        this.debug_skipMarkerButton.enabled = false;
     }
 
     // ----------------------------------------------------------
@@ -130,7 +133,7 @@ export class GameController extends BaseScriptComponent {
         }
 
 
-        if(state == 0 && getTime() > 1.0){
+        if(this.state == 0 && getTime() > 1.0){
             this.onShowImg1();
         }
     }
@@ -141,11 +144,6 @@ export class GameController extends BaseScriptComponent {
 
     public onClickOnFrame(){
         print("OnClickOnFrame");
-
-        //DEBUG: TO DELETE
-        if(state === 4){
-            this.onMarkerFound();
-        }
     }
 
     // ----------------------------------------------------------
@@ -156,7 +154,7 @@ export class GameController extends BaseScriptComponent {
         this.debug_trakingText.text = "Marker Status : found";
 
         print("onMarkerFound");
-        if(state === 5){
+        if(this.state === 5){
             this.onShowCastle()
         }
     }
@@ -171,8 +169,8 @@ export class GameController extends BaseScriptComponent {
     // State
     // ----------------------------------------------------------
     private onSetState(newState : number){
-        state = newState;
-        print("New State : " + state);
+        this.state = newState;
+        print("New State : " + this.state);
     }
 
     // ----------------------------------------------------------
@@ -307,6 +305,9 @@ export class GameController extends BaseScriptComponent {
             onComplete: () => {
                 print("Waiting for sticker")
                 this.debug_trakingText.text = "Marker Status : waiting for the sticker";
+                if(this.activateSkipMarkerDebug){
+                    this.debug_skipMarkerButton.enabled = true;
+                }
 
                 this.onSetState(5);
                 this.compassController.onStart(this.castleReference.getTransform());
@@ -320,10 +321,9 @@ export class GameController extends BaseScriptComponent {
 
     private onShowCastle(){
         const delayCastle = new Delay({
-            duration: this.delayCastle,
+            duration: this.delayCastle2,
             onComplete: () => {
                 this.frameController.onHideFrame();
-                this.castleController.playAnimation();
                 this.onShowPartCastle();
             }
         });
@@ -331,32 +331,29 @@ export class GameController extends BaseScriptComponent {
         //this.audioController.playAudio(1);
         this.onSetState(6);
         this.compassController.onStop();
+        //this.castleController.playAnimation();
+        this.castleController.fadeInMeshes();
         delayCastle.play();
+
+        this.debug_skipMarkerButton.enabled = false;
     }
 
     private onShowPartCastle(){
         const alphaMid = 0.6;
         const delayCastle = new Delay({
-            duration: this.delayInitialCastle,
+            duration: this.delayCastle1,
             onComplete: () => {
-                this.castleController.fadeMidMeshes(1, 0);
+                this.castleController.fadeMidMeshes(1, 1);
                 delayCastle2.play()
             },
         });
 
         const delayCastle2 = new Delay({
-            duration: this.delayCastle,
+            duration: this.delayCastle2,
             onComplete: () => {
-                this.castleController.fadePart(0, 1, alphaMid, 1);
-                this.castleController.fadePart(1, alphaMid, 1, 1);
-                delayCastle3.play()
-            },
-        });
-        const delayCastle3 = new Delay({
-            duration: this.delayCastle,
-            onComplete: () => {
-                this.castleController.fadePart(1, 1, alphaMid, 1);
-                this.castleController.fadePart(2, alphaMid, 1, 1);
+                this.castleController.fadePart(1, 1, 0, 1);
+                this.castleController.fadePart(0, alphaMid, 0, 1);
+                this.castleController.fadeMedievalCastle(0,1,1);
             },
         });
 

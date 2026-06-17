@@ -20,10 +20,16 @@ export class CastleController extends BaseScriptComponent {
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
   @input('float') alphaMid: number = 0.2;
-  @input animationPlayer: AnimationPlayer;       
+  //@input animationPlayer: AnimationPlayer;   
+  @input animationMixer: AnimationMixer;
 
   @ui.separator
   @input('Component.MeshVisual[]') meshesMat: Material[];
+  //0 : castle modern
+  //1 : castle modern tower
+
+  //castle medieval
+  @input('Component.MeshVisual') meshMatMedievalCastle: Material;
 
   // --- Private ---
 
@@ -43,7 +49,8 @@ export class CastleController extends BaseScriptComponent {
     this.castleParentTransform.setWorldPosition(this.targetPosition);
 
     // castle visibles on start
-    //this.setMeshesAlpha(1);
+    this.setMeshesAlpha(0);
+    this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0);
   }
 
   onUpdate(): void {
@@ -135,11 +142,13 @@ export class CastleController extends BaseScriptComponent {
   // ----------------------------------------------------------
 
   public playAnimation(): void {
-    if (!this.animationPlayer) {
+    //if (!this.animationPlayer) {
+    if (!this.animationMixer) {
       print("[CastleController] Aucun AnimationPlayer assigné !");
       return;
     }
-    this.animationPlayer.playAll();
+    //this.animationPlayer.playAll();
+    this.animationMixer.start("BaseLayer", 0, 1);
 
     //if do not follow user, place it in front just once is played 
     if(!this.alwaysFollowing){
@@ -149,7 +158,8 @@ export class CastleController extends BaseScriptComponent {
   }
 
   public stopAnimation(): void {
-    this.animationPlayer?.stopAll();
+    //this.animationPlayer?.stopAll();
+    this.animationMixer.stop("BaseLayer");
   }
 
   // ----------------------------------------------------------
@@ -181,6 +191,26 @@ export class CastleController extends BaseScriptComponent {
       onUpdate: (progress) => {
         const alpha = from + (to - from) * progress;
         mat.mainPass.baseColor = new vec4(1, 1, 1, alpha);
+      },
+      onComplete,
+    }).play();
+  }
+
+  public fadeMedievalCastle(
+    from: number,
+    to: number,
+    duration: number,
+    onComplete?: () => void
+  ){
+    // Set starting alpha immediately
+    this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, from);
+
+    new Animation({
+      duration,
+      easing: Easing.easeInOutQuad,
+      onUpdate: (progress) => {
+        const alpha = from + (to - from) * progress;
+        this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, alpha);
       },
       onComplete,
     }).play();

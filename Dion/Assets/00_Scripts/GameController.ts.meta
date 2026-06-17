@@ -26,20 +26,21 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    animPlayerCastle: false
+    activateSkipMarkerDebug: false
     castleController: false
     castleReference: false
     compassController: false
+    debug_skipMarkerButton: false
     debug_state: false
     debug_trakingText: false
-    delayCastle: false
+    delayCastle1: false
+    delayCastle2: false
     delayFirstImg: false
     delayHotel: false
     delayHotel2: false
     delayHotel3: false
     delayImg2: false
     delayImg3: false
-    delayInitialCastle: false
     durationFadeIn_firstImg: false
     durationFadeIn_img2: false
     durationFadeIn_img3: false
@@ -62,6 +63,8 @@
   DefaultScriptInputs:
     - debug_state: !<float> 0.000000
       debug_trakingText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      activateSkipMarkerDebug: false
+      debug_skipMarkerButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
@@ -82,15 +85,16 @@
       delayImg3: !<float> 0.000000
       durationFadeIn_img3: !<float> 0.000000
       easing_img3: 0
-      delayInitialCastle: !<float> 0.000000
-      delayCastle: !<float> 0.000000
-      animPlayerCastle: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+      delayCastle1: !<float> 0.000000
+      delayCastle2: !<float> 0.000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input float debug_state
     - // @input Component.Text debug_trakingText
+    - // @input bool activateSkipMarkerDebug
+    - // @input SceneObject debug_skipMarkerButton
     - '// @ui {"widget":"separator"}'
     - // @input AssignableType hotelController
     - // @input AssignableType_1 castleController
@@ -118,6 +122,5 @@
     - // @input float durationFadeIn_img3
     - '// @input int easing_img3 {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
     - '// @ui {"widget":"separator"}'
-    - // @input float delayInitialCastle
-    - // @input float delayCastle
-    - // @input Component.AnimationPlayer animPlayerCastle
+    - // @input float delayCastle1
+    - // @input float delayCastle2

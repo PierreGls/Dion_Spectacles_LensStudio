@@ -28,13 +28,14 @@
   ScriptInputsHidden:
     alphaMid: false
     alwaysFollowing: false
-    animationPlayer: false
+    animationMixer: false
     camera: false
     castleParent: false
     fadeInDuration: false
     followDistance: false
     followHeight: false
     followSmooth: false
+    meshMatMedievalCastle: false
     meshesMat: false
   ScriptTypesHidden:
     {}
@@ -53,9 +54,10 @@
       followSmooth: !<float> 5.000000
       fadeInDuration: 1.500000
       alphaMid: 0.200000
-      animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+      animationMixer: !<reference.AnimationMixer> 00000000-0000-0000-0000-000000000000
       meshesMat: !<reference.RenderMeshVisual[]>
         []
+      meshMatMedievalCastle: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -70,6 +72,7 @@
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float alphaMid = 0.2
-    - // @input Component.AnimationPlayer animationPlayer
+    - // @input Component.AnimationMixer animationMixer
     - '// @ui {"widget":"separator"}'
     - "// @input Component.MeshVisual[] meshesMat"
+    - // @input Component.MeshVisual meshMatMedievalCastle
