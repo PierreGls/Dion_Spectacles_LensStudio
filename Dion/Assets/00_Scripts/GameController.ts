@@ -132,7 +132,8 @@ export class GameController extends BaseScriptComponent {
         this.img2Mat.mainPass.baseColor = new vec4(1,1,1,0);
         this.img3Mat.mainPass.baseColor = new vec4(1,1,1,0);
 
-        this.debug_skipMarkerButton.enabled = false;
+        //Debug
+        this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
     }
 
     // ----------------------------------------------------------
@@ -223,6 +224,7 @@ export class GameController extends BaseScriptComponent {
             },
         });
 
+        this.debug_skipMarkerButton.enabled = false;
         animFade.play();
     }
 
