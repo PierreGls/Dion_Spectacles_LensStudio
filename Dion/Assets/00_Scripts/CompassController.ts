@@ -40,7 +40,7 @@ export class CompassController extends BaseScriptComponent {
 
   private arrowTransform: Transform;
   private cameraTransform: Transform;
-  private targetTransform: Transform;
+  private targetPos: vec3;
 
   onAwake(): void {
     let eventUpdate = this.createEvent('UpdateEvent');
@@ -61,12 +61,11 @@ export class CompassController extends BaseScriptComponent {
   // ----------------------------------------------------------
   // Rotate the arrow around Y axis to point toward the target
   // ----------------------------------------------------------
-
   private updateArrowRotation(): void {
-    if(this.targetTransform == null){return;}
+    if (this.targetPos == null) return;
 
     const arrowPos  = this.arrowTransform.getWorldPosition();
-    const targetPos = this.targetTransform.getWorldPosition();
+    const targetPos = this.targetPos;
 
     // Flat direction on XZ plane (ignore Y)
     const direction = new vec3(
@@ -77,24 +76,25 @@ export class CompassController extends BaseScriptComponent {
 
     if (direction.length < 0.001) return; // Avoid NaN if overlapping
 
-    // Compute target angle around Y axis
-    const targetAngle = Math.atan2(direction.x, direction.z);
+    // Absolute angle toward target (world space)
+    const targetAngleWorld = Math.atan2(direction.x, direction.z);
 
-    // Get current Y rotation
-    //const currentRot   = this.arrowTransform.getLocalRotation();
-    const currentRot   = this.arrowTransform.getWorldRotation();
-    const currentAngle = this.getYAngle(currentRot);
+    // Camera Y angle (world space) — subtract it to get a camera-relative angle
+    const cameraAngleWorld = this.getYAngle(this.cameraTransform.getWorldRotation());
+    const targetAngleLocal = targetAngleWorld - cameraAngleWorld;
+
+    // Get current local Y angle
+    const currentAngleLocal = this.getYAngle(this.arrowTransform.getLocalRotation());
 
     // Smooth the angle (handles wrap-around)
     const smoothedAngle = this.lerpAngle(
-      currentAngle,
-      targetAngle,
+      currentAngleLocal,
+      targetAngleLocal,
       Math.min(this.rotationSmooth * getDeltaTime(), 1)
     );
 
-    // Apply rotation around Y only
-    //this.arrowTransform.setLocalRotation(
-    this.arrowTransform.setWorldRotation(
+    // Apply as local rotation around Y only
+    this.arrowTransform.setLocalRotation(
       quat.fromEulerAngles(0, smoothedAngle, 0)
     );
   }
@@ -102,21 +102,19 @@ export class CompassController extends BaseScriptComponent {
   // ----------------------------------------------------------
   // Target
   // ----------------------------------------------------------
-  public setTarget(newTarget: Transform){
-    this.targetTransform = newTarget;
+  public setTarget(newTarget: vec3){
+    this.targetPos = newTarget;
   }
 
   public removeTarget(){
-    this.targetTransform = null;
+    this.targetPos = null;
   }
 
   // ----------------------------------------------------------
   // Animations
   // ----------------------------------------------------------
-  public onStart(newTarget:Transform){
-    this.setTarget(newTarget);
-
-    //+ fade in
+  public onStart(){
+    //fade in
     const animFadeIn = new Animation({
         duration: this.durationFade,
         easing: Easing.getEasing(this.easingFade),

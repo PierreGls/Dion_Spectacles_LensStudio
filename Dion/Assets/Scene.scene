@@ -750,9 +750,9 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -0.682692, z: -2.478197}
+    Position: {x: 0.000000, y: -0.642700, z: -2.478197}
     Rotation: {x: 90.000000, y: -0.000000, z: 0.000000}
-    Scale: {x: 0.300000, y: 0.300000, z: 0.300000}
+    Scale: {x: 0.250000, y: 0.250000, z: 0.250000}
     HasSegmentScaleCompensation: false
   Children:
     - !<own> 267fb2ea-b56a-4073-8d7b-10cda930368d
@@ -830,10 +830,25 @@
     []
   Components:
     []
+- !<SceneObject/1b1f47e7-0a75-444c-ba94-c76e8d85b5cc>
+  PrefabRemaps:
+    []
+  Name: Box
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 10.000000, y: 10.000000, z: 10.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> ee8a5797-f908-41fd-93dd-2bffb99941c7
 - !<SceneObject/1b983318-3c9b-417f-bb82-4997a677b071>
   PrefabRemaps:
     []
-  Name: AttachedEmpty
+  Name: AttachedEmpty - debug
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -842,6 +857,7 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
+    - !<own> c80fb62f-482f-42f7-9719-26ebd31f7254
     - !<own> 2c7692ce-eaa2-47c4-9936-50c3007bde8c
   Components:
     []
@@ -1245,8 +1261,14 @@
   ScriptInputs:
     "":
       gameController: !<MappingBased.AssignableType> f8ad0caa-90d7-47b6-b772-64a872868ad3
-      objectAttached: !<reference.SceneObject> dcc7a080-ba09-441b-b31d-5fd8e7170892
+      objectAttached: !<reference.SceneObject> 1b983318-3c9b-417f-bb82-4997a677b071
       parentToFollow: !<reference.SceneObject> f1d2fee6-0aa1-48d0-a048-14048ef3ad3b
+      markerObjs: !<reference.SceneObject[]>
+        - !<reference> 1b983318-3c9b-417f-bb82-4997a677b071
+        - !<reference> dcc7a080-ba09-441b-b31d-5fd8e7170892
+        - !<reference> ffb76bf9-ffd8-4dc5-a296-73fdf2641f0a
+      placementRelativeMarkerDebug: !<reference.SceneObject> c80fb62f-482f-42f7-9719-26ebd31f7254
+      placementRelativeMarker2: !<reference.SceneObject> 3d8023c1-f3e0-482b-8143-39dec1ea1e75
       followSmooth: !<float> 100.000000
   ScriptTypes:
     "":
@@ -1337,6 +1359,87 @@
     - !<own> 2bea4673-7f91-4fc5-beb1-e82a05150ca9
   Components:
     []
+- !<Text/300a2e7f-3c37-4f56-882f-4f90643b6ec1>
+  PrefabRemaps:
+    []
+  Name: Text
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Text: Looking for
+  Editable: false
+  ShowEditingPreview: true
+  TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
+  SizeToFit: false
+  FontSize: 70
+  Font: !<reference> 00000000-0000-0000-0000-000000000000
+  LayoutRect:
+    left: -7.500000
+    bottom: -2.250000
+    right: 7.500000
+    top: 2.250000
+  OverflowVertical: Overflow
+  OverflowHorizontal: Overflow
+  Fill: !<TextFill>
+    Mode: Solid
+    Color: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    Texture: !<reference> 00000000-0000-0000-0000-000000000000
+    ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    TileCount: 5.000000
+    TileZone: Rect
+    TextureStretch: FitWidth
+  BlendMode: PremultipliedAlpha
+  Outline: !<OutlineSettings>
+    Enabled: true
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Size: 0.250000
+  Dropshadow: !<DropshadowSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    OffsetX: 0.250000
+    OffsetY: 0.250000
+  Background: !<BackgroundSettings>
+    Enabled: false
+    Fill: !<TextFill>
+      Mode: Solid
+      Color: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      Texture: !<reference> 00000000-0000-0000-0000-000000000000
+      ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      TileCount: 5.000000
+      TileZone: Rect
+      TextureStretch: FitWidth
+    Margins:
+      left: 0.000000
+      bottom: 0.000000
+      right: 0.000000
+      top: 0.000000
+    CornerRadius: 0.000000
+  AdvancedLayout: !<TextAdvancedLayout>
+    ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
+    LetterSpacing: 0.000000
+    LineSpacing: 1.000000
+    CapitalizationOverride: None
+  DepthTest: false
+  TwoSided: false
 - !<SceneObject/307b5f4c-6ae2-430c-a6ca-979a01c6b029>
   PrefabRemaps:
     []
@@ -1697,6 +1800,21 @@
     - !<own> 4a8fba8e-5e79-4c17-9b90-eecc02c7b7dc
   Components:
     []
+- !<SceneObject/3d8023c1-f3e0-482b-8143-39dec1ea1e75>
+  PrefabRemaps:
+    []
+  Name: PlacementNextMarker - 2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 200.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
 - !<SceneObject/3edde0ea-8cd6-43be-9a1e-265dcd328ee6>
   PrefabRemaps:
     []
@@ -2048,7 +2166,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -8.594500, z: 0.422234}
+    Position: {x: 0.000000, y: -8.500000, z: 0.422234}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
@@ -2110,7 +2228,7 @@
     - e61cd19e-c565-4c02-a302-9827cb157a0d: 0303c2ae-b75a-46e8-69a2-3354848b5a53
     - f4041980-7450-4d2d-8027-62868b4e931d: 861bd6e2-9d12-4ab6-7228-becb6ca4097d
     - fa030c3c-5094-47ff-86c6-53998efb33dd: 942efb3d-6f80-418e-737a-2eb78d92de4f
-  Name: Resizable Marker Tracking with Callbacks
+  Name: Resizable Marker Tracking with Callbacks 1
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -2253,7 +2371,7 @@
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
   Materials:
-    - !<reference> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
+    - !<reference> 612b3895-aa8b-409a-9026-1944570be847
   Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
   Skin: !<reference> 00000000-0000-0000-0000-000000000000
   BlendShapesEnabled: true
@@ -2643,6 +2761,21 @@
     []
   Components:
     - !<own> 6b7eee9e-ca51-459f-a906-68c803838f0a
+- !<SceneObject/5c99b5be-5a17-45b2-b6bd-0ea3bce2db9e>
+  PrefabRemaps:
+    []
+  Name: Img 0 - LookFor intro
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 8.000000, y: 8.000000, z: 8.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 6b5ebf10-d44b-49b8-9cbf-3b12d8ecc7f6
 - !<SceneObject/5d0fd01d-a7f6-432e-b50e-d0c6a689b942>
   PrefabRemaps:
     []
@@ -2797,6 +2930,26 @@
   Enabled: true
   AnimationLayers:
     BaseLayer: !<reference> 226d8877-8596-4322-8974-f81b2ace4bfe
+- !<RenderMeshVisual/6b5ebf10-d44b-49b8-9cbf-3b12d8ecc7f6>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<Animation/6b7eee9e-ca51-459f-a906-68c803838f0a>
   PrefabRemaps:
     []
@@ -3388,7 +3541,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: -0.268412}
+    Position: {x: 0.000000, y: 0.000000, z: -0.338400}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
@@ -3493,7 +3646,7 @@
     - e79e26f7-2d71-4ecf-bdde-d523521bd777: 861bd6e2-9d12-4ab6-7228-becb6ca4097d
     - f13f9b4b-3ba1-43de-8897-427fba95a5e5: 4c25e32b-18e9-47c2-62a8-5b9c7af860ab
     - fef7d787-d88b-4051-b490-36f55ee77a12: ed795c92-8c57-409f-9083-51b3a7b7b7ee
-  Name: Resizable Marker Tracking with Callbacks 1
+  Name: Resizable Marker Tracking with Callbacks 2
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -3990,7 +4143,7 @@
   Enabled: true
   ScriptAsset: !<reference> 0b60e9c8-ec81-49e7-8030-d6d86c98194c
   ScriptInputsDefault:
-    alwaysFollowing: true
+    placementHeight: true
     followSmooth: true
     fadeInDuration: true
   ScriptTypesDefault:
@@ -3999,10 +4152,12 @@
     "":
       camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
       castleParent: !<reference.SceneObject> 00f29870-dccb-4282-a379-8b1417360f37
-      alwaysFollowing: true
+      placementHeight: !<float> -20.000000
+      alwaysFollowing: false
       followDistance: !<float> -150.000000
-      followHeight: !<float> -50.000000
       followSmooth: !<float> 5.000000
+      isPlacementRelativeMarker: true
+      distMarker: !<float> -50.000000
       fadeInDuration: 1.500000
       alphaMid: 0.600000
       animationMixer: !<reference.AnimationMixer> e19e5853-bce6-4880-82ba-daade9d4a769
@@ -4407,6 +4562,21 @@
     []
   Components:
     - !<own> 707f9cac-7e11-4767-a4d4-136f3eef6953
+- !<SceneObject/ba87fe00-f81c-46bd-9801-52d643644118>
+  PrefabRemaps:
+    []
+  Name: Txt0 - Look for intro
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 6.665078, z: -0.577766}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 300a2e7f-3c37-4f56-882f-4f90643b6ec1
 - !<Animation/bc3051d9-830f-49b8-b78a-a73902c53639>
   PrefabRemaps:
     []
@@ -4498,6 +4668,8 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
+    - !<own> ba87fe00-f81c-46bd-9801-52d643644118
+    - !<own> 5c99b5be-5a17-45b2-b6bd-0ea3bce2db9e
     - !<own> c1fab79a-f356-4663-b915-23e405623ac8
     - !<own> 4473aa57-0678-4f56-b30d-8e0916f68f3d
     - !<own> bceae40f-17d8-4e21-944d-4f6a70fed599
@@ -4832,6 +5004,21 @@
   Enabled: true
   AnimationLayers:
     BaseLayer: !<reference> 3795fa02-0c23-482f-87a4-661f2b632ab6
+- !<SceneObject/c80fb62f-482f-42f7-9719-26ebd31f7254>
+  PrefabRemaps:
+    []
+  Name: PlacementNextMarker - 1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 200.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 1b1f47e7-0a75-444c-ba94-c76e8d85b5cc
+  Components:
+    []
 - !<SceneObject/c89d7e48-75a6-414e-a253-874f80bfe792>
   PrefabRemaps:
     []
@@ -5392,7 +5579,7 @@
 - !<SceneObject/dcc7a080-ba09-441b-b31d-5fd8e7170892>
   PrefabRemaps:
     []
-  Name: AttachedEmpty
+  Name: AttachedEmpty - Intro
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -5402,6 +5589,7 @@
     HasSegmentScaleCompensation: false
   Children:
     - !<own> 279d3a30-e301-4a3b-8eb4-2693b53e35e4
+    - !<own> 3d8023c1-f3e0-482b-8143-39dec1ea1e75
   Components:
     []
 - !<ScriptComponent/dd6b5142-55de-464f-826a-b6e5afc01bee>
@@ -5779,6 +5967,26 @@
     - !<own> 80613e75-e919-4a7a-aab7-96b9fdd0568f
   Components:
     []
+- !<RenderMeshVisual/ee8a5797-f908-41fd-93dd-2bffb99941c7>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ca9e6618-c7c2-4534-b69f-a18a9ed7da38
+  Mesh: !<reference> e542623c-1432-4bfa-881d-a28905bd9e57
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/eeefed81-5683-4d40-9498-fd8984e6e8f6>
   PrefabRemaps:
     []
@@ -6036,10 +6244,17 @@
       castleController: !<MappingBased.AssignableType_1> ae8caa87-4684-4afe-a9c3-de9454806dd9
       frameController: !<MappingBased.AssignableType_2> 5ae6f9eb-85e2-411f-a6d6-9eb3d78a2bee
       compassController: !<MappingBased.AssignableType_3> e8fa8aaf-d900-4549-a797-4f3f0a5dff01
-      img1Mat: !<reference.Material> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
+      markerController: !<MappingBased.AssignableType_4> 2aa2a967-9b53-4f9e-b8fd-c1204f44b6d1
+      audioController: !<MappingBased.AssignableType_5> dd6b5142-55de-464f-826a-b6e5afc01bee
+      textIntro: !<reference.Text> 300a2e7f-3c37-4f56-882f-4f90643b6ec1
+      imgIntroMat: !<reference.Material> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
+      img1Mat: !<reference.Material> 612b3895-aa8b-409a-9026-1944570be847
       img2Mat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
       img3Mat: !<reference.Material> d51c6ef3-5c5a-4bb9-a4f0-19702da25ff0
       castleReference: !<reference.SceneObject> 168dcd61-abbc-46d0-8fda-8e129a6aff9a
+      delayIntro: !<float> 1.000000
+      durationFadeIntro: !<float> 1.000000
+      easing_intro: 3
       delayFirstImg: !<float> 1.000000
       durationFadeIn_firstImg: !<float> 1.000000
       easing_firstImg: 3
@@ -6172,7 +6387,7 @@
 - !<SceneObject/ffb76bf9-ffd8-4dc5-a296-73fdf2641f0a>
   PrefabRemaps:
     []
-  Name: AttachedEmpty
+  Name: AttachedEmpty - Dublin castle
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>

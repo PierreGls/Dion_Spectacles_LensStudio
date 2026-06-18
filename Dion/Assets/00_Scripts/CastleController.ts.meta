@@ -31,12 +31,14 @@
     animationMixer: false
     camera: false
     castleParent: false
+    distMarker: false
     fadeInDuration: false
     followDistance: false
-    followHeight: false
     followSmooth: false
+    isPlacementRelativeMarker: false
     meshMatMedievalCastle: false
     meshesMat: false
+    placementHeight: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -48,10 +50,12 @@
   DefaultScriptInputs:
     - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
       castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      placementHeight: !<float> -20.000000
       alwaysFollowing: true
       followDistance: !<float> 150.000000
-      followHeight: !<float> -20.000000
       followSmooth: !<float> 5.000000
+      isPlacementRelativeMarker: false
+      distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
       alphaMid: 0.200000
       animationMixer: !<reference.AnimationMixer> 00000000-0000-0000-0000-000000000000
@@ -65,10 +69,16 @@
     - // @input Component.Camera camera
     - // @input SceneObject castleParent
     - '// @ui {"widget":"separator"}'
-    - // @input boolean alwaysFollowing = true
-    - // @input float followDistance = 150
-    - // @input float followHeight = -20
-    - // @input float followSmooth = 5
+    - '// @ui {"widget":"group_start", "label":"Placement"}'
+    - // @input float placementHeight = -20
+    - '// @ui {"widget":"separator"}'
+    - // @input boolean alwaysFollowing
+    - '// @input float followDistance = 150 {"showIf":"alwaysFollowing"}'
+    - '// @input float followSmooth = 5 {"showIf":"alwaysFollowing"}'
+    - '// @ui {"widget":"separator"}'
+    - // @input boolean isPlacementRelativeMarker
+    - '// @input float distMarker = 150 {"showIf":"isPlacementRelativeMarker"}'
+    - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float alphaMid = 0.2

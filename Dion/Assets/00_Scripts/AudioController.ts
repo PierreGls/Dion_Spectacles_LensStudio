@@ -15,6 +15,13 @@ export class AudioController extends BaseScriptComponent {
             return;
         }
 
+        //stop playing audios
+        this.audios.forEach((audio) => {
+            if(audio.isPlaying){
+                audio.stop(true);
+            }
+        });
+
         this.audios[id].play(1);
     }
 }

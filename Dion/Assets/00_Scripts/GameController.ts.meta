@@ -27,6 +27,7 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     activateSkipMarkerDebug: false
+    audioController: false
     castleController: false
     castleReference: false
     compassController: false
@@ -41,17 +42,23 @@
     delayHotel3: false
     delayImg2: false
     delayImg3: false
+    delayIntro: false
     durationFadeIn_firstImg: false
     durationFadeIn_img2: false
     durationFadeIn_img3: false
+    durationFadeIntro: false
     easing_firstImg: false
     easing_img2: false
     easing_img3: false
+    easing_intro: false
     frameController: false
     hotelController: false
     img1Mat: false
     img2Mat: false
     img3Mat: false
+    imgIntroMat: false
+    markerController: false
+    textIntro: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -69,10 +76,17 @@
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
       compassController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      markerController: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
+      audioController: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
+      textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img3Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       castleReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      delayIntro: !<float> 0.000000
+      durationFadeIntro: !<float> 0.000000
+      easing_intro: 0
       delayFirstImg: !<float> 10.000000
       durationFadeIn_firstImg: !<float> 0.000000
       easing_firstImg: 1
@@ -100,11 +114,19 @@
     - // @input AssignableType_1 castleController
     - // @input AssignableType_2 frameController
     - // @input AssignableType_3 compassController
+    - // @input AssignableType_4 markerController
+    - // @input AssignableType_5 audioController
+    - // @input Component.Text textIntro
+    - // @input Asset.Material imgIntroMat
     - // @input Asset.Material img1Mat
     - // @input Asset.Material img2Mat
     - // @input Asset.Material img3Mat
     - '// @ui {"widget":"separator"}'
     - // @input SceneObject castleReference
+    - '// @ui {"widget":"separator"}'
+    - // @input float delayIntro
+    - // @input float durationFadeIntro
+    - '// @input int easing_intro {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
     - '// @ui {"widget":"separator"}'
     - // @input float delayFirstImg
     - // @input float durationFadeIn_firstImg

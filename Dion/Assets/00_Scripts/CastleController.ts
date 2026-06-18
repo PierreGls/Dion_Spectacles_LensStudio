@@ -12,10 +12,20 @@ export class CastleController extends BaseScriptComponent {
   @input castleParent: SceneObject;
 
   @ui.separator
-  @input('boolean') alwaysFollowing: boolean = true;
-  @input('float') followDistance: number = 150;   
-  @input('float') followHeight:   number = -20;  
-  @input('float') followSmooth:   number = 5;     
+  @ui.group_start("Placement")
+  @input('float') placementHeight:   number = -20;  
+
+  @ui.separator
+  @input('boolean') alwaysFollowing: boolean = false;
+  @input('float') @showIf("alwaysFollowing") followDistance: number = 150;   
+  @input('float') @showIf("alwaysFollowing") followSmooth:   number = 5;    
+
+  @ui.separator
+
+  @input('boolean') isPlacementRelativeMarker: boolean = false;
+  @input('float') @showIf("isPlacementRelativeMarker") distMarker: number = 150;   
+  @ui.group_end 
+  
 
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
@@ -46,8 +56,6 @@ export class CastleController extends BaseScriptComponent {
 
     this.targetPosition = this.getTargetPosition();
 
-    this.castleParentTransform.setWorldPosition(this.targetPosition);
-
     // castle visibles on start
     this.setMeshesAlpha(0);
     this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0);
@@ -60,7 +68,7 @@ export class CastleController extends BaseScriptComponent {
   }
 
   // ----------------------------------------------------------
-  // Follow camera
+  // Placement
   // ----------------------------------------------------------
 
   private updateFollow(): void {
@@ -80,8 +88,45 @@ export class CastleController extends BaseScriptComponent {
 
     return new vec3(
       camPos.x + camForward.x * this.followDistance,
-      this.followHeight,
+      this.placementHeight,
       camPos.z + camForward.z * this.followDistance
+    );
+  }
+
+  public updatePositionMarker(markerPos:vec3) : void{
+    const camPos = this.cameraTransform.getWorldPosition();
+    const direction = new vec3(
+      markerPos.x - camPos.x,
+      0,
+      markerPos.z - camPos.z
+    ).normalize();
+    
+    const targetPos = new vec3(
+      markerPos.x + direction.x * this.distMarker,
+      this.placementHeight,
+      markerPos.z + direction.z * this.distMarker
+    );
+
+    this.castleParentTransform.setWorldPosition(targetPos);
+
+    this.updateRotationMarker(targetPos);
+  }
+
+  private updateRotationMarker(castlePos): void {
+    const camPos    = this.cameraTransform.getWorldPosition();
+
+    // Direction from castle toward camera (flat)
+    const dir = new vec3(
+      camPos.x - castlePos.x,
+      0,
+      camPos.z - castlePos.z
+    ).normalize();
+
+    // Compute Y angle toward camera
+    const angle = Math.atan2(dir.x, dir.z);
+
+    this.castleParentTransform.setWorldRotation(
+      quat.fromEulerAngles(0, angle, 0)
     );
   }
 
@@ -130,10 +175,9 @@ export class CastleController extends BaseScriptComponent {
 
   public fadeMidMeshes(from : number, idExclude?: number): void {
     for(let i = 0; i < this.meshesMat.length; i++){
-        if(i != idExclude){
-            this.fadePart(i, from, this.alphaMid, this.fadeInDuration);
-        }
-        
+      if(i != idExclude){
+          this.fadePart(i, from, this.alphaMid, this.fadeInDuration);
+      }
     }
   }
 
@@ -166,14 +210,7 @@ export class CastleController extends BaseScriptComponent {
   // Fade — single part
   // ----------------------------------------------------------
 
-  public fadePart(
-    id: number,
-    from: number,
-    to: number,
-    duration: number,
-    onComplete?: () => void
-  ): void {
-
+  public fadePart(id: number,from: number,to: number,duration: number,onComplete?: () => void): void {
     if(this.meshesMat.length <= id){
         print("Wrong id :" + id);
         return;
@@ -196,12 +233,7 @@ export class CastleController extends BaseScriptComponent {
     }).play();
   }
 
-  public fadeMedievalCastle(
-    from: number,
-    to: number,
-    duration: number,
-    onComplete?: () => void
-  ){
+  public fadeMedievalCastle(from: number,to: number,duration: number,onComplete?: () => void){
     // Set starting alpha immediately
     this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, from);
 
