@@ -38,7 +38,6 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input delayIntro: number;
     @input durationFadeIntro: number;
     @input('int')
     @widget(
@@ -55,8 +54,8 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
-    @input delayFirstImg: number;
-    @input durationFadeIn_firstImg: number;
+    @input delayImg1: number;
+    @input durationFadeImg1: number;
     @input('int')
     @widget(
         new ComboBoxWidget([
@@ -88,12 +87,6 @@ export class GameController extends BaseScriptComponent {
     easing_img2: number = 0;
 
     @ui.separator
-    
-    @input delayHotel: number;
-    @input delayHotel2: number;
-    @input delayHotel3: number;
-
-    @ui.separator
 
     @input delayImg3: number;
     @input durationFadeIn_img3: number;
@@ -109,6 +102,12 @@ export class GameController extends BaseScriptComponent {
             new ComboBoxItem('easeInOutCubic', 6)])
     )
     easing_img3: number = 0;
+
+    @ui.separator
+    
+    @input delayHotel: number;
+    @input delayHotel2: number;
+    @input delayHotel3: number;
 
     @ui.separator
 
@@ -142,19 +141,21 @@ export class GameController extends BaseScriptComponent {
         if(this.debug_state > 0){
             this.onSetState(this.debug_state);
             if(this.debug_state === 3){
-                this.onShowHotel();
-            }
-            else if(this.debug_state === 4){
-                this.onSetState(5);
+                this.onSetState(4);
                 this.compassController.onStart();
             }
-            else if(this.debug_state === 5){
+            else if(this.debug_state === 4){
+                this.onShowHotel();
+            }
+            else if(this.debug_state === 6){
                 this.onShowCastle();
             }
 
             this.debug_state = -1;
             return;
         }
+
+        this.debug_trakingText.text = "" + Math.ceil(getTime());
     }
 
     // ----------------------------------------------------------
@@ -234,7 +235,7 @@ export class GameController extends BaseScriptComponent {
         
 
         const animFadeIn = new Animation({
-            duration: this.durationFadeIn_firstImg,
+            duration: this.durationFadeImg1,
             easing: Easing.getEasing(this.easing_firstImg),
             onUpdate: (progress) => {
                 this.img1Mat.mainPass.baseColor = new vec4(1,1,1,progress);
@@ -245,14 +246,14 @@ export class GameController extends BaseScriptComponent {
         });
 
         const delayVisibleImg1 = new Delay({
-            duration: this.delayFirstImg,
+            duration: this.delayImg1,
             onComplete: () => {
                 animFadeOutImg1.play();
             }
         }); 
 
         const animFadeOutImg1 = new Animation({
-            duration: this.durationFadeIn_firstImg,
+            duration: this.durationFadeImg1,
             easing: Easing.getEasing(this.easing_firstImg),
             onUpdate: (progress) => {
                 this.img1Mat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
@@ -290,42 +291,12 @@ export class GameController extends BaseScriptComponent {
                 this.img2Mat.mainPass.baseColor = new vec4(1,1,1, 1 - progress);
             },
             onComplete: () => {
-                this.onShowHotel();
+                this.onShowImg3();
             },
         });
 
         this.onSetState(2);
         animFadeInImg2.play();
-    }
-
-    private onShowHotel(){
-        const delayHotel = new Delay({
-            duration: this.delayHotel,
-            onComplete: () => {
-                this.hotelController.playAnimationSecondPart();
-                delayHotel2.play();
-            }
-        }); 
-
-        const delayHotel2 = new Delay({
-            duration: this.delayHotel2,
-            onComplete: () => {
-                this.hotelController.playAnimationThirdPart();
-                delayHotel3.play();
-            },
-        });
-
-        const delayHotel3 = new Delay({
-            duration: this.delayHotel3,
-            onComplete: () => {
-                this.onShowImg3();
-            },
-        });
-
-        this.onSetState(3);
-        this.hotelController.playAnimation();
-
-        delayHotel.play();
     }
 
     private onShowImg3(){
@@ -360,14 +331,51 @@ export class GameController extends BaseScriptComponent {
                     this.debug_skipMarkerButton.enabled = true;
                 }
 
+                this.onShowHotel();
+            },
+        });
+
+        this.onSetState(3);
+        animFadeIn.play();
+    }
+
+    // ----------------------------------------------------------
+    // Anims Hotel
+    // ----------------------------------------------------------
+    private onShowHotel(){
+        const delayHotel = new Delay({
+            duration: this.delayHotel,
+            onComplete: () => {
+                this.hotelController.playAnimationSecondPart();
+                delayHotel2.play();
+            }
+        }); 
+
+        const delayHotel2 = new Delay({
+            duration: this.delayHotel2,
+            onComplete: () => {
+                this.hotelController.playAnimationThirdPart();
+                delayHotel3.play();
+            },
+        });
+
+        const delayHotel3 = new Delay({
+            duration: this.delayHotel3,
+            onComplete: () => {
                 this.onSetState(5);
                 this.compassController.onStart();
             },
         });
 
         this.onSetState(4);
-        animFadeIn.play();
+        this.hotelController.playAnimation();
+
+        delayHotel.play();
     }
+
+    // ----------------------------------------------------------
+    // Anims Castle
+    // ----------------------------------------------------------
 
     private onShowCastle(){
         //set state
@@ -382,43 +390,41 @@ export class GameController extends BaseScriptComponent {
         //hide compass
         this.compassController.onStop();
 
+        //Hide frame
+        this.frameController.onHideFrame();
+
         //place castle
         const markerTr = this.markerController.targetTr;
         this.castleController.updatePositionMarker(markerTr.getWorldPosition());
 
-        //fade in
-        this.castleController.fadeInMeshes();
+        //fade in castle
+        this.castleController.fadeModernCastle(0,1,1,() => {})
 
-        //animation
-        const delayCastle = new Delay({
-            duration: this.delayCastle2,
-            onComplete: () => {
-                this.frameController.onHideFrame();
-                this.onShowPartCastle();
-            }
-        });
-        delayCastle.play();
-    }
+        //Play animation
+        this.castleController.playAnimation();
 
-    private onShowPartCastle(){
+        //Highlight tower
         const alphaMid = 0.6;
         const delayCastle = new Delay({
             duration: this.delayCastle1,
             onComplete: () => {
-                this.castleController.fadeMidMeshes(1, 1);
-                delayCastle2.play()
-            },
+                //hide partly castle modern
+                this.castleController.fadePart(0, 1, alphaMid, 1);
+                //+ show information
+                delayCastle2.play();
+            }
         });
-
+        //Show medieval castle
         const delayCastle2 = new Delay({
             duration: this.delayCastle2,
             onComplete: () => {
+                //hide castle modern
                 this.castleController.fadePart(1, 1, 0, 1);
                 this.castleController.fadePart(0, alphaMid, 0, 1);
+                //show medieval castle
                 this.castleController.fadeMedievalCastle(0,1,1);
             },
         });
-
         delayCastle.play();
     }
 }

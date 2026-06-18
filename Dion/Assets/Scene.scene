@@ -194,7 +194,7 @@
   PrefabRemaps:
     []
   Name: CastleParent
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -603,6 +603,7 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
+    - !<own> cdad0528-f32c-4b6a-a907-eb241c5f72f6
     - !<own> fe8c6ecd-638d-436e-a5e3-07b0508cd5d9
     - !<own> 36918c37-7c33-4e00-83f6-56d270bc2563
     - !<own> ce3c3a86-0705-46c4-9b93-ce93afcbe0bd
@@ -651,7 +652,6 @@
     - !<own> fdb84766-6b15-449f-ae99-05ed304d94f7
     - !<own> fe2d6b11-86c7-4a4e-9438-80f1fa31c86b
     - !<own> f294fd22-8e3b-494b-89cc-7ed611497014
-    - !<own> cdad0528-f32c-4b6a-a907-eb241c5f72f6
     - !<own> f454f644-e988-4e1e-8594-f93e1713f8ff
     - !<own> f5f46e5e-a429-4a69-bf46-851affb8d6c5
     - !<own> e45703a4-2be6-4a17-a3f0-14be0dcc4dc3
@@ -3403,7 +3403,7 @@
     - fc530e67-51dc-4b55-8306-a92acdd025f6: 43126ca5-16da-40f9-7d48-38576d9f9c44
     - fe66bb72-6c90-42c5-bc72-2915d91b4804: fa0dcbdf-ddc9-4890-6f1d-27e06da01dc6
   Name: SpectaclesInteractionKit
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -5387,7 +5387,7 @@
   PrefabRemaps:
     []
   Name: HotelParent
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -5845,10 +5845,11 @@
       fadeInDuration: 1.500000
       alphaMid: 0.600000
       animationMixer: !<reference.AnimationMixer> e19e5853-bce6-4880-82ba-daade9d4a769
-      meshesMat: !<reference.RenderMeshVisual[]>
-        - !<reference> d3963e3a-eec0-4a66-879a-20ee9d957791
-        - !<reference> 15905fad-3812-406d-8155-9f5836b38565
-      meshMatMedievalCastle: !<reference.RenderMeshVisual> c16f8e58-8e50-4e9f-999d-fe35a57d2890
+      baseColor: !<Vec3> {x: 0.874510, y: 0.839216, z: 0.823529}
+      meshesMat: !<reference.Material[]>
+        - !<reference> b84f791a-ff5a-422d-a98d-3a8060ea031c
+        - !<reference> 650bf402-86b6-4c1f-ad67-80c82243d30e
+      meshMatMedievalCastle: !<reference.Material> 6056f419-bf2c-4b2f-9ef0-6d90a5073844
   ScriptTypes:
     "":
       {}
@@ -6305,7 +6306,7 @@
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 10.000000, y: 15.000000, z: 15.000000}
+    Scale: {x: 12.000000, y: 18.000000, z: 18.000000}
     HasSegmentScaleCompensation: false
   Children:
     []
@@ -7430,7 +7431,7 @@
   OverflowHorizontal: Overflow
   Fill: !<TextFill>
     Mode: Solid
-    Color: {x: 1.000000, y: 1.000000, z: 1.000000, w: 0.000000}
+    Color: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     Texture: !<reference> 00000000-0000-0000-0000-000000000000
     ColorTint: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
     TileCount: 5.000000
@@ -8538,7 +8539,7 @@
     {}
   ScriptInputs:
     "":
-      debug_state: !<float> 3.000000
+      debug_state: !<float> 5.000000
       debug_trakingText: !<reference.Text> d9af125c-eba3-4288-bb56-8b14113c1f30
       activateSkipMarkerDebug: true
       debug_skipMarkerButton: !<reference.SceneObject> 847ee943-442e-4293-907f-6045016a4612
@@ -8553,21 +8554,20 @@
       img1Mat: !<reference.Material> 612b3895-aa8b-409a-9026-1944570be847
       img2Mat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
       img3Mat: !<reference.Material> d51c6ef3-5c5a-4bb9-a4f0-19702da25ff0
-      delayIntro: !<float> 1.000000
       durationFadeIntro: !<float> 1.000000
       easing_intro: 3
-      delayFirstImg: !<float> 1.000000
-      durationFadeIn_firstImg: !<float> 1.000000
+      delayImg1: !<float> 5.000000
+      durationFadeImg1: !<float> 1.000000
       easing_firstImg: 3
-      delayImg2: !<float> 1.000000
+      delayImg2: !<float> 55.000000
       durationFadeIn_img2: !<float> 1.000000
       easing_img2: 3
-      delayHotel: !<float> 15.000000
-      delayHotel2: !<float> 5.000000
-      delayHotel3: !<float> 15.000000
-      delayImg3: !<float> 1.000000
+      delayImg3: !<float> 42.000000
       durationFadeIn_img3: !<float> 1.000000
       easing_img3: 3
+      delayHotel: !<float> 67.000000
+      delayHotel2: !<float> 5.000000
+      delayHotel3: !<float> 15.000000
       delayCastle1: !<float> 5.000000
       delayCastle2: !<float> 3.000000
   ScriptTypes:

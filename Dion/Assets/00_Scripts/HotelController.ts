@@ -171,10 +171,8 @@ export class HotelController extends BaseScriptComponent {
   }
 
   playAnimationThirdPart(): void {
-
-    //fade out all parts
-    //this.fadePart(0, this.alphaMid, 0.0, this.fadeOutDuration);
-    //this.fadePart(1, this.alphaMax, 0.0, this.fadeOutDuration);
+    //fade in again for the hide animation
+    this.fadePart(0, this.alphaMid, this.alphaMax, this.fadeOutDuration);
 
     //Play animation Hide
     print('Hide')

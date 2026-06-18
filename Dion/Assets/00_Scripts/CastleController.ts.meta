@@ -29,6 +29,7 @@
     alphaMid: false
     alwaysFollowing: false
     animationMixer: false
+    baseColor: false
     camera: false
     castleParent: false
     distMarker: false
@@ -59,9 +60,10 @@
       fadeInDuration: 1.500000
       alphaMid: 0.200000
       animationMixer: !<reference.AnimationMixer> 00000000-0000-0000-0000-000000000000
-      meshesMat: !<reference.RenderMeshVisual[]>
+      baseColor: !<Vec3> {x: 1.000000, y: 0.000000, z: 0.000000}
+      meshesMat: !<reference.Material[]>
         []
-      meshMatMedievalCastle: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
+      meshMatMedievalCastle: !<reference.Material> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -84,5 +86,6 @@
     - // @input float alphaMid = 0.2
     - // @input Component.AnimationMixer animationMixer
     - '// @ui {"widget":"separator"}'
-    - "// @input Component.MeshVisual[] meshesMat"
-    - // @input Component.MeshVisual meshMatMedievalCastle
+    - '// @input vec3 baseColor = "{1,1,1}" {"widget":"color"}'
+    - "// @input Asset.Material[] meshesMat"
+    - // @input Asset.Material meshMatMedievalCastle
