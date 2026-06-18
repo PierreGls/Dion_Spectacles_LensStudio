@@ -35,6 +35,9 @@
     debug_trakingText: false
     delayCastle1: false
     delayCastle2: false
+    delayCastle3: false
+    delayCastle4: false
+    delayCastle5: false
     delayHotel: false
     delayHotel2: false
     delayHotel3: false
@@ -97,6 +100,9 @@
       delayHotel3: !<float> 0.000000
       delayCastle1: !<float> 0.000000
       delayCastle2: !<float> 0.000000
+      delayCastle3: !<float> 0.000000
+      delayCastle4: !<float> 0.000000
+      delayCastle5: !<float> 0.000000
   ScriptTypes:
     -
       {}
@@ -112,6 +118,7 @@
     - // @input AssignableType_3 compassController
     - // @input AssignableType_4 markerController
     - // @input AssignableType_5 audioController
+    - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
     - // @input Asset.Material imgIntroMat
     - // @input Asset.Material img1Mat
@@ -139,3 +146,6 @@
     - '// @ui {"widget":"separator"}'
     - // @input float delayCastle1
     - // @input float delayCastle2
+    - // @input float delayCastle3
+    - // @input float delayCastle4
+    - // @input float delayCastle5

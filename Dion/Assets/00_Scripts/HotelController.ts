@@ -46,7 +46,7 @@ export class HotelController extends BaseScriptComponent {
   private cameraTransform: Transform;
   private targetPosition: vec3;
 
-  private clip
+  private clip : AnimationClip;
 
   onAwake(): void {
     let eventUpdate = this.createEvent('UpdateEvent');

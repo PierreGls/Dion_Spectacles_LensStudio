@@ -29,6 +29,8 @@ export class GameController extends BaseScriptComponent {
     @input markerController: MarkerController
     @input audioController: AudioController
 
+    @ui.separator
+
     @input() textIntro: Text;
     @input() imgIntroMat: Material;
     @input() img1Mat: Material;
@@ -113,6 +115,9 @@ export class GameController extends BaseScriptComponent {
 
     @input delayCastle1: number;
     @input delayCastle2: number;
+    @input delayCastle3: number;
+    @input delayCastle4: number;
+    @input delayCastle5: number;
 
     private state : number = 0;
     
@@ -149,6 +154,9 @@ export class GameController extends BaseScriptComponent {
             }
             else if(this.debug_state === 6){
                 this.onShowCastle();
+            }
+            else if(this.debug_state === 7){
+                this.castleController.playAnimationHide();
             }
 
             this.debug_state = -1;
@@ -396,35 +404,54 @@ export class GameController extends BaseScriptComponent {
         //place castle
         const markerTr = this.markerController.targetTr;
         this.castleController.updatePositionMarker(markerTr.getWorldPosition());
-
-        //fade in castle
-        this.castleController.fadeModernCastle(0,1,1,() => {})
-
-        //Play animation
-        this.castleController.playAnimation();
-
-        //Highlight tower
-        const alphaMid = 0.6;
-        const delayCastle = new Delay({
+        
+        //Show medieval Castle
+        const delayCastle1 = new Delay({
             duration: this.delayCastle1,
             onComplete: () => {
-                //hide partly castle modern
-                this.castleController.fadePart(0, 1, alphaMid, 1);
-                //+ show information
+                this.castleController.fadeMedievalCastle(0,1,1);
                 delayCastle2.play();
-            }
+            },
         });
-        //Show medieval castle
+
+        //Hide medieval Castle
         const delayCastle2 = new Delay({
             duration: this.delayCastle2,
             onComplete: () => {
-                //hide castle modern
-                this.castleController.fadePart(1, 1, 0, 1);
-                this.castleController.fadePart(0, alphaMid, 0, 1);
-                //show medieval castle
-                this.castleController.fadeMedievalCastle(0,1,1);
+                this.castleController.fadeMedievalCastle(1,0,1);
+                delayCastle3.play();
             },
         });
-        delayCastle.play();
+
+        //Show Modern Castle
+        const delayCastle3 = new Delay({
+            duration: this.delayCastle3,
+            onComplete: () => {
+                this.castleController.playAnimationShow();
+                delayCastle4.play();
+            },
+        });
+
+        const delayCastle4 = new Delay({
+            duration: this.delayCastle4,
+            onComplete: () => {
+                //hide partly castle modern
+                const alphaMid = 0.6;
+                //this.castleController.fadePart(0, 1, alphaMid, 1);
+                //+ show information
+                delayCastle5.play();
+            }
+        });
+
+        //hide modern castle
+        const delayCastle5 = new Delay({
+            duration: this.delayCastle5,
+            onComplete: () => {
+                //hide castle modern
+                this.castleController.playAnimationHide();
+            },
+        });
+
+        delayCastle1.play();
     }
 }

@@ -3,6 +3,7 @@
 // ============================================================
 
 import { Animation } from "./Animation";
+import { Delay } from "./Animation";
 import { Easing } from "./Easing";
 
 @component
@@ -30,8 +31,7 @@ export class CastleController extends BaseScriptComponent {
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
   @input('float') alphaMid: number = 0.2;
-  //@input animationPlayer: AnimationPlayer;   
-  @input animationMixer: AnimationMixer;
+  @input animationPlayer: AnimationPlayer;   
 
   @ui.separator
   @input('vec3', '{1,1,1}') 
@@ -51,6 +51,8 @@ export class CastleController extends BaseScriptComponent {
   private cameraTransform: Transform;
   private targetPosition: vec3;
 
+  private clip : AnimationClip;
+
   onAwake(): void {
     let eventUpdate = this.createEvent('UpdateEvent');
     eventUpdate.bind(this.onUpdate.bind(this));
@@ -59,6 +61,8 @@ export class CastleController extends BaseScriptComponent {
     this.cameraTransform = this.camera.getTransform();
 
     this.targetPosition = this.getTargetPosition();
+
+    this.clip = this.animationPlayer.getClip("BaseLayer");
 
     // castle visibles on start
     this.setMeshesAlpha(0);
@@ -138,14 +142,17 @@ export class CastleController extends BaseScriptComponent {
   // Animation FBX 
   // ----------------------------------------------------------
 
-  public playAnimation(): void {
-    //if (!this.animationPlayer) {
-    if (!this.animationMixer) {
+  public playAnimationShow(): void {
+    if (!this.animationPlayer) {
       print("[CastleController] Aucun AnimationPlayer assigné !");
       return;
     }
-    //this.animationPlayer.playAll();
-    //this.animationMixer.start("BaseLayer", 0, 1); //TO ACTIVATE
+
+    //fade in castle
+    this.fadeModernCastle(0,1,1,() => {})
+
+    //play anim
+    this.animationPlayer.playClip("BaseLayer");
 
     //if do not follow user, place it in front just once is played 
     if(!this.alwaysFollowing){
@@ -154,9 +161,31 @@ export class CastleController extends BaseScriptComponent {
     }
   }
 
+  public playAnimationHide(): void {
+    print("HIDE");
+    if (!this.animationPlayer) {
+      print("[CastleController] Aucun AnimationPlayer assigné !");
+      return;
+    }
+
+    const durationClip = this.clip.end - this.clip.begin;
+
+    this.clip.playbackSpeed = -1;
+    this.animationPlayer.playClipAt("BaseLayer", durationClip);
+
+    //fade out according to the hide animation
+    const delayFadeOut = new Delay({
+        duration: durationClip - 1,
+        onComplete: () => {
+            this.fadePart(1, 1, 0, 1);
+            this.fadePart(0, this.alphaMid, 0, 1);
+        }
+    });
+    delayFadeOut.play();
+  }
+
   public stopAnimation(): void {
-    //this.animationPlayer?.stopAll();
-    this.animationMixer.stop("BaseLayer");
+    this.animationPlayer?.stopAll();
   }
 
   // ----------------------------------------------------------

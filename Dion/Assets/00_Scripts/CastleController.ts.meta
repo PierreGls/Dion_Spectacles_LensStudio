@@ -28,7 +28,7 @@
   ScriptInputsHidden:
     alphaMid: false
     alwaysFollowing: false
-    animationMixer: false
+    animationPlayer: false
     baseColor: false
     camera: false
     castleParent: false
@@ -59,7 +59,7 @@
       distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
       alphaMid: 0.200000
-      animationMixer: !<reference.AnimationMixer> 00000000-0000-0000-0000-000000000000
+      animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
       baseColor: !<Vec3> {x: 1.000000, y: 0.000000, z: 0.000000}
       meshesMat: !<reference.Material[]>
         []
@@ -84,7 +84,7 @@
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float alphaMid = 0.2
-    - // @input Component.AnimationMixer animationMixer
+    - // @input Component.AnimationPlayer animationPlayer
     - '// @ui {"widget":"separator"}'
     - '// @input vec3 baseColor = "{1,1,1}" {"widget":"color"}'
     - "// @input Asset.Material[] meshesMat"
