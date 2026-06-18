@@ -29,7 +29,6 @@
     activateSkipMarkerDebug: false
     audioController: false
     castleController: false
-    castleReference: false
     compassController: false
     debug_skipMarkerButton: false
     debug_state: false
@@ -83,7 +82,6 @@
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img3Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
-      castleReference: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       delayIntro: !<float> 0.000000
       durationFadeIntro: !<float> 0.000000
       easing_intro: 0
@@ -121,8 +119,6 @@
     - // @input Asset.Material img1Mat
     - // @input Asset.Material img2Mat
     - // @input Asset.Material img3Mat
-    - '// @ui {"widget":"separator"}'
-    - // @input SceneObject castleReference
     - '// @ui {"widget":"separator"}'
     - // @input float delayIntro
     - // @input float durationFadeIntro

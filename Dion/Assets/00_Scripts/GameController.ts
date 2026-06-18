@@ -35,9 +35,6 @@ export class GameController extends BaseScriptComponent {
     @input() img2Mat: Material;
     @input() img3Mat: Material;
 
-    @ui.separator
-
-    @input castleReference: SceneObject;
 
     @ui.separator
 
@@ -141,7 +138,7 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
 
     onUpdate(eventData: UpdateEvent) {
-        //TO DELETE
+        //DEBUG
         if(this.debug_state > 0){
             this.onSetState(this.debug_state);
             if(this.debug_state === 3){

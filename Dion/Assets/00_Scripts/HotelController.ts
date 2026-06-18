@@ -3,6 +3,7 @@
 // ============================================================
 
 import { Animation } from "./Animation";
+import { Delay } from "./Animation";
 import { Easing } from "./Easing";
 
 @component
@@ -10,18 +11,31 @@ export class HotelController extends BaseScriptComponent {
 
   @input camera: Camera;
   @input hotelParent: SceneObject;
+  @input hotelStatic: SceneObject;
+  @input animationPlayer: AnimationPlayer; 
 
   @ui.separator
-  @input('boolean') alwaysFollowing: boolean = true;
-  @input('float') followDistance: number = 150;   
-  @input('float') followHeight:   number = -20;  
-  @input('float') followSmooth:   number = 5;     
+  @ui.group_start("Placement")
+  @input('float') placementHeight:   number = -20;  
+
+  @ui.separator
+  @input('boolean') alwaysFollowing: boolean = false;
+  @input('float') @showIf("alwaysFollowing") followDistance: number = 150;   
+  @input('float') @showIf("alwaysFollowing") followSmooth:   number = 5;    
+
+  @ui.separator
+
+  @input('boolean') isPlacementRelativeMarker: boolean = false;
+  @input('float') @showIf("isPlacementRelativeMarker") distMarker: number = 150;   
+  @ui.group_end   
 
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
   @input('float') fadeOutDuration: number = 1.0;
   @input('float') alphaMid: number = 0.2;     
-  @input('float') alphaMax: number = 0.95;     
+  @input('float') alphaMax: number = 0.95;
+
+  
 
   @ui.separator
   @input('Asset.Material[]') meshesMat: Material[];
@@ -31,6 +45,8 @@ export class HotelController extends BaseScriptComponent {
   private hotelParentTransform: Transform;
   private cameraTransform: Transform;
   private targetPosition: vec3;
+
+  private clip
 
   onAwake(): void {
     let eventUpdate = this.createEvent('UpdateEvent');
@@ -42,8 +58,11 @@ export class HotelController extends BaseScriptComponent {
 
     this.hotelParentTransform.setWorldPosition(this.targetPosition);
 
+    this.clip = this.animationPlayer.getClip("BaseLayer");
+
     // hotel not visible on start
-    this.setMeshesAlpha(0); //TO CHANGE
+    this.setMeshesAlpha(0); //TO CHANG
+    this.hotelStatic.enabled = false;
   }
 
   onUpdate(): void {
@@ -73,7 +92,7 @@ export class HotelController extends BaseScriptComponent {
 
     return new vec3(
       camPos.x + camForward.x * this.followDistance,
-      this.followHeight,
+      this.placementHeight,
       camPos.z + camForward.z * this.followDistance
     );
   }
@@ -141,6 +160,10 @@ export class HotelController extends BaseScriptComponent {
 
     //Fade In Everything
     this.fadeInMeshes();
+
+    //Play animation Show
+    print('SHOW')
+    this.playShowFBX();
   }
 
   playAnimationSecondPart(): void {
@@ -148,9 +171,35 @@ export class HotelController extends BaseScriptComponent {
   }
 
   playAnimationThirdPart(): void {
+
     //fade out all parts
-    this.fadePart(0, this.alphaMid, 0.0, this.fadeOutDuration);
-    this.fadePart(1, this.alphaMax, 0.0, this.fadeOutDuration);
+    //this.fadePart(0, this.alphaMid, 0.0, this.fadeOutDuration);
+    //this.fadePart(1, this.alphaMax, 0.0, this.fadeOutDuration);
+
+    //Play animation Hide
+    print('Hide')
+    this.playHideFBX();
+  }
+
+  playShowFBX(){
+    const durationClip = this.clip.end - 0.1;
+    this.clip.playbackSpeed = -1;
+    this.animationPlayer.playClipAt("BaseLayer", durationClip);
+
+
+    const delayVisibleStatic = new Delay({
+        duration: durationClip,
+        onComplete: () => {
+            this.hotelStatic.enabled = true;
+        }
+    }); 
+    delayVisibleStatic.play();
+  }
+
+  playHideFBX(){
+    this.hotelStatic.enabled = false;
+    this.clip.playbackSpeed = 1;
+    this.animationPlayer.playClipAt("BaseLayer", 0);
   }
 
   // ----------------------------------------------------------
