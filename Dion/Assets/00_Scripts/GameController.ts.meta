@@ -32,12 +32,15 @@
     compassController: false
     debug_skipMarkerButton: false
     debug_state: false
-    debug_trakingText: false
+    debug_trackingText: false
     delayCastle1: false
     delayCastle2: false
     delayCastle3: false
     delayCastle4: false
     delayCastle5: false
+    delayCastle6: false
+    delayCastle7: false
+    delayCastle8: false
     delayHotel: false
     delayHotel2: false
     delayHotel3: false
@@ -58,6 +61,7 @@
     img2Mat: false
     img3Mat: false
     imgIntroMat: false
+    infoController: false
     markerController: false
     textIntro: false
   ScriptTypesHidden:
@@ -70,7 +74,7 @@
     []
   DefaultScriptInputs:
     - debug_state: !<float> 0.000000
-      debug_trakingText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      debug_trackingText: !<reference.Text> 00000000-0000-0000-0000-000000000000
       activateSkipMarkerDebug: false
       debug_skipMarkerButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
@@ -79,6 +83,7 @@
       compassController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
       markerController: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
       audioController: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
+      infoController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
       textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
       imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
@@ -103,12 +108,15 @@
       delayCastle3: !<float> 0.000000
       delayCastle4: !<float> 0.000000
       delayCastle5: !<float> 0.000000
+      delayCastle6: !<float> 0.000000
+      delayCastle7: !<float> 0.000000
+      delayCastle8: !<float> 0.000000
   ScriptTypes:
     -
       {}
   InputLines:
     - // @input float debug_state
-    - // @input Component.Text debug_trakingText
+    - // @input Component.Text debug_trackingText
     - // @input bool activateSkipMarkerDebug
     - // @input SceneObject debug_skipMarkerButton
     - '// @ui {"widget":"separator"}'
@@ -118,6 +126,7 @@
     - // @input AssignableType_3 compassController
     - // @input AssignableType_4 markerController
     - // @input AssignableType_5 audioController
+    - // @input AssignableType_6 infoController
     - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
     - // @input Asset.Material imgIntroMat
@@ -145,7 +154,18 @@
     - // @input float delayHotel3
     - '// @ui {"widget":"separator"}'
     - // @input float delayCastle1
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'
     - // @input float delayCastle2
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Tower Castle Show</span>"}'
     - // @input float delayCastle3
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Hide</span>"}'
     - // @input float delayCastle4
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Show</span>"}'
     - // @input float delayCastle5
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Hide</span>"}'
+    - // @input float delayCastle6
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'
+    - // @input float delayCastle7
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Hide</span>"}'
+    - // @input float delayCastle8
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show compass</span>"}'

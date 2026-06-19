@@ -31,8 +31,8 @@
     markerObjs: false
     objectAttached: false
     parentToFollow: false
-    placementRelativeMarker2: false
     placementRelativeMarkerDebug: false
+    placementRelativeMarkers: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -48,7 +48,8 @@
       markerObjs: !<reference.SceneObject[]>
         []
       placementRelativeMarkerDebug: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      placementRelativeMarker2: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      placementRelativeMarkers: !<reference.SceneObject[]>
+        []
       followSmooth: !<float> 0.000000
   ScriptTypes:
     -
@@ -61,5 +62,5 @@
     - // @input SceneObject parentToFollow
     - "// @input SceneObject[] markerObjs"
     - // @input SceneObject placementRelativeMarkerDebug
-    - // @input SceneObject placementRelativeMarker2
+    - "// @input SceneObject[] placementRelativeMarkers"
     - // @input float followSmooth

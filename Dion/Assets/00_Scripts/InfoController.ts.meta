@@ -1,0 +1,55 @@
+- !<AssetImportMetadata/b7797b67-6e00-486f-9243-326d626050a1>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> ba964015-5fa7-4d06-b4e6-1a16c9c12cad
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> ba964015-5fa7-4d06-b4e6-1a16c9c12cad
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 60987a06-5d23-4c6f-85f4-dc21010dd76f
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/60987a06-5d23-4c6f-85f4-dc21010dd76f>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a803662d-167f-47b5-9db0-8da84039353b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    camera: false
+    fadeDuration: false
+    infoPlaneMats: false
+    infoPlanes: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      infoPlanes: !<reference.SceneObject[]>
+        []
+      infoPlaneMats: !<reference.Material[]>
+        []
+      fadeDuration: !<float> 1.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Component.Camera camera
+    - "// @input SceneObject[] infoPlanes"
+    - "// @input Asset.Material[] infoPlaneMats"
+    - // @input float fadeDuration = 1

@@ -79,6 +79,7 @@ export class CastleController extends BaseScriptComponent {
   // Placement
   // ----------------------------------------------------------
 
+  //FOLLOWING USER - depreciated
   private updateFollow(): void {
     this.targetPosition = this.getTargetPosition();
 
@@ -101,6 +102,7 @@ export class CastleController extends BaseScriptComponent {
     );
   }
 
+  //PLACED IN FRONT OF THE MARKER
   public updatePositionMarker(markerPos:vec3) : void{
     const camPos = this.cameraTransform.getWorldPosition();
     const direction = new vec3(
@@ -123,7 +125,7 @@ export class CastleController extends BaseScriptComponent {
   private updateRotationMarker(castlePos): void {
     const camPos    = this.cameraTransform.getWorldPosition();
 
-    // Direction from castle toward camera (flat)
+    // Direction from castle toward camera
     const dir = new vec3(
       camPos.x - castlePos.x,
       0,

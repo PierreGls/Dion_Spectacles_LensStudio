@@ -12,7 +12,7 @@ export class MarkerController extends BaseScriptComponent {
   @input markerObjs: SceneObject[];
 
   @input placementRelativeMarkerDebug: SceneObject;
-  @input placementRelativeMarker2: SceneObject;
+  @input placementRelativeMarkers: SceneObject[];
 
   @input followSmooth:number;
 
@@ -78,7 +78,7 @@ export class MarkerController extends BaseScriptComponent {
   public onMarkerFound_Intro() {
     this.parentToFollow.enabled = true;
     this.targetTr = this.markerObjs[1].getTransform();
-    this.nextMarkerPos = this.placementRelativeMarker2.getTransform().getWorldPosition();
+    this.nextMarkerPos = this.placementRelativeMarkers[0].getTransform().getWorldPosition(); //Dublin Castle
     this.gameController.onMarkerFound(1);
   }
 
@@ -92,10 +92,18 @@ export class MarkerController extends BaseScriptComponent {
   public onMarkerFound_DublinCastle() {
     this.parentToFollow.enabled = true;
     this.targetTr = this.markerObjs[2].getTransform();
+    this.nextMarkerPos = this.placementRelativeMarkers[1].getTransform().getWorldPosition(); //Christchurch
     this.gameController.onMarkerFound(2);
   }
 
   public onMarkerLost_DublinCastle() {
     this.gameController.onMarkerLost(2);
+  }
+
+  // ----------------------------------------------------------
+  // Christchurch
+  // ----------------------------------------------------------
+  public onMarkerFound_Christchurch() {
+    this.gameController.onMarkerFound(3);
   }
 }

@@ -33,6 +33,7 @@
     easingFade: false
     iconMat: false
     rotationSmooth: false
+    texturesMarkers: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -46,6 +47,8 @@
       arrowObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       iconMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       arrowMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      texturesMarkers: !<reference.Texture[]>
+        []
       rotationSmooth: !<float> 8.000000
       durationFade: !<float> 0.000000
       easingFade: 0
@@ -59,6 +62,8 @@
     - '// @ui {"widget":"separator"}'
     - // @input Asset.Material iconMat
     - // @input Asset.Material arrowMat
+    - '// @ui {"widget":"separator"}'
+    - "// @input Asset.Texture[] texturesMarkers"
     - '// @ui {"widget":"separator"}'
     - // @input float rotationSmooth = 8
     - // @input float durationFade

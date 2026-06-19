@@ -11,12 +11,13 @@ import { FrameInteractionDetector } from "./FrameInteractionDetector";
 import { AudioController } from "./AudioController";
 import { CompassController } from "./CompassController";
 import { MarkerController } from "./MarkerController";
+import { InfoController } from "./InfoController";
  
 @component
 export class GameController extends BaseScriptComponent {
 
     @input debug_state: number;
-    @input debug_trakingText: Text;
+    @input debug_trackingText: Text;
     @input activateSkipMarkerDebug: boolean;
     @input debug_skipMarkerButton: SceneObject;
 
@@ -28,6 +29,7 @@ export class GameController extends BaseScriptComponent {
     @input compassController: CompassController
     @input markerController: MarkerController
     @input audioController: AudioController
+    @input infoController: InfoController
 
     @ui.separator
 
@@ -114,10 +116,22 @@ export class GameController extends BaseScriptComponent {
     @ui.separator
 
     @input delayCastle1: number;
+    @ui.label('<span style="color: #60A5FA;">Modern Castle Show</span>')
     @input delayCastle2: number;
+    @ui.label('<span style="color: #60A5FA;">Tower Castle Show</span>')
     @input delayCastle3: number;
+    @ui.label('<span style="color: #60A5FA;">Modern Castle Hide</span>')
     @input delayCastle4: number;
+    @ui.label('<span style="color: #60A5FA;">Medieval Castle Show</span>')
     @input delayCastle5: number;
+    @ui.label('<span style="color: #60A5FA;">Medieval Castle Hide</span>')
+    @input delayCastle6: number;
+    @ui.label('<span style="color: #60A5FA;">Modern Castle Show</span>')
+    @input delayCastle7: number;
+    @ui.label('<span style="color: #60A5FA;">Modern Castle Hide</span>')
+    @input delayCastle8: number;
+    @ui.label('<span style="color: #60A5FA;">Show compass</span>')
+
 
     private state : number = 0;
     
@@ -163,7 +177,7 @@ export class GameController extends BaseScriptComponent {
             return;
         }
 
-        this.debug_trakingText.text = "" + Math.ceil(getTime());
+        //this.debug_trakingText.text = "" + Math.ceil(getTime());
     }
 
     // ----------------------------------------------------------
@@ -179,30 +193,34 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
 
     public onMarkerFound(id:number) {
-        print("onMarkerFound");
-        this.debug_trakingText.text = "Marker Status : found";
+        print("onMarkerFound : " + id);
+        this.debug_trackingText.text = "Marker Status : found";
 
+        //id 0 = debug id 1 = intro
         if((id == 0 || id == 1) && this.state === 0){
             this.onHideImgIntro();
+            //Update compass for next target : dublin castle
             const markerpos = this.markerController.nextMarkerPos;
             this.compassController.setTarget(markerpos);
         }
 
-        //castle
+        //id 0 = debug id 2 = castle
         if(id == 0 || id == 2){
+            //Update compass for next target : christchurch
+            const markerpos = this.markerController.nextMarkerPos;
+            this.compassController.setTarget(markerpos);
+            //Update castle placement
             const markerTr = this.markerController.targetTr;
             this.castleController.updatePositionMarker(markerTr.getWorldPosition());
-        }
-        
-        //id 0 = debug id 1 = good castle
-        if((id == 0 || id == 2) && this.state === 5){
-            this.onShowCastle();
+            if(this.state === 5){
+                this.onShowCastle();
+            }
         }
     }
 
     public onMarkerLost(id:number) {
         print("onMarkerLost");
-        this.debug_trakingText.text = "Marker Status : lost";
+        this.debug_trackingText.text = "Marker Status : lost";
     }
 
     // ----------------------------------------------------------
@@ -334,7 +352,7 @@ export class GameController extends BaseScriptComponent {
             },
             onComplete: () => {
                 print("Waiting for sticker")
-                this.debug_trakingText.text = "Marker Status : waiting for the sticker";
+                this.debug_trackingText.text = "Marker Status : waiting for the sticker";
                 if(this.activateSkipMarkerDebug){
                     this.debug_skipMarkerButton.enabled = true;
                 }
@@ -405,52 +423,93 @@ export class GameController extends BaseScriptComponent {
         const markerTr = this.markerController.targetTr;
         this.castleController.updatePositionMarker(markerTr.getWorldPosition());
         
-        //Show medieval Castle
         const delayCastle1 = new Delay({
             duration: this.delayCastle1,
             onComplete: () => {
-                this.castleController.fadeMedievalCastle(0,1,1);
+                this.castleController.playAnimationShow();
+
                 delayCastle2.play();
             },
         });
 
-        //Hide medieval Castle
+        //Show tower
         const delayCastle2 = new Delay({
             duration: this.delayCastle2,
             onComplete: () => {
-                this.castleController.fadeMedievalCastle(1,0,1);
+                //hide partly castle modern
+                const alphaMid = 0.6;
+                this.castleController.fadePart(0, 1, alphaMid, 1);
+
+                //show info plane
+                this.infoController.fadeInPlane(0,1);
+
                 delayCastle3.play();
-            },
+            }
         });
 
-        //Show Modern Castle
+        //Hide modern castle
         const delayCastle3 = new Delay({
             duration: this.delayCastle3,
             onComplete: () => {
-                this.castleController.playAnimationShow();
+                //hide info text
+                this.infoController.fadeOutPlane(0,1);
+                //hide castle modern
+                this.castleController.playAnimationHide();
+
                 delayCastle4.play();
             },
         });
 
+        //Show medieval Castle
         const delayCastle4 = new Delay({
             duration: this.delayCastle4,
             onComplete: () => {
-                //hide partly castle modern
-                const alphaMid = 0.6;
-                //this.castleController.fadePart(0, 1, alphaMid, 1);
-                //+ show information
+                this.castleController.fadeMedievalCastle(0,1,1);
+                this.infoController.fadeInPlane(1,1);
+
                 delayCastle5.play();
-            }
+            },
         });
 
-        //hide modern castle
+        //Hide medieval Castle
         const delayCastle5 = new Delay({
             duration: this.delayCastle5,
             onComplete: () => {
-                //hide castle modern
-                this.castleController.playAnimationHide();
+                this.castleController.fadeMedievalCastle(1,0,1);
+                this.infoController.fadeOutPlane(1,1);
+
+                delayCastle6.play();
             },
         });
+
+        //Show Modern Castle
+        const delayCastle6 = new Delay({
+            duration: this.delayCastle6,
+            onComplete: () => {
+                this.castleController.playAnimationShow();
+
+                delayCastle7.play();
+            },
+        });
+
+        //hide modern castle
+        const delayCastle7 = new Delay({
+            duration: this.delayCastle7,
+            onComplete: () => {
+                this.castleController.playAnimationHide();
+                delayCastle8.play();
+            },
+        });
+
+        //Show compass
+        const delayCastle8 = new Delay({
+            duration: this.delayCastle8,
+            onComplete: () => {
+                this.compassController.setTextureMarker(2);
+                this.compassController.onStart();
+            },
+        });
+        
 
         delayCastle1.play();
     }

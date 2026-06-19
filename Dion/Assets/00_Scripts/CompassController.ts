@@ -19,6 +19,10 @@ export class CompassController extends BaseScriptComponent {
 
   @ui.separator
 
+  @input('Asset.Texture[]') texturesMarkers: Texture[];
+
+  @ui.separator
+
   // Arrow rotation smoothing
   @input('float') rotationSmooth: number = 8;
 
@@ -141,6 +145,20 @@ export class CompassController extends BaseScriptComponent {
         onComplete: () => {}
     });
     animFadeOut.play();
+  }
+
+  // ----------------------------------------------------------
+  // Texture
+  // ----------------------------------------------------------
+  public setTextureMarker(id:number){
+    if(id < 0 || id>= this.texturesMarkers.length){
+      print("Wrong id : " + id);
+      return;
+    }
+
+    print("setTextureMarker " + id);
+
+    this.iconMat.mainPass.baseTex = this.texturesMarkers[id];
   }
 
   // ----------------------------------------------------------
