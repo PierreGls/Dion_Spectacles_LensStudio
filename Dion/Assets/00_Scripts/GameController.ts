@@ -35,14 +35,18 @@ export class GameController extends BaseScriptComponent {
 
     @input() textIntro: Text;
     @input() imgIntroMat: Material;
-    @input() img1Mat: Material;
-    @input() img2Mat: Material;
-    @input() img3Mat: Material;
-
+    @input() dublin360Mat: Material;
+    @input() seeDublinMat: Material;
+    @input() skylineMat: Material;
+    @input() topViewMap: Material;
+    @input() castleMarker: Material;
+    @input() bankInfo1: Material;
+    @input() bankInfo2: Material;
+    @input() topViewMapFinal: Material;
 
     @ui.separator
 
-    @input durationFadeIntro: number;
+    @input durationFadeImgs: number;
     @input('int')
     @widget(
         new ComboBoxWidget([
@@ -54,64 +58,32 @@ export class GameController extends BaseScriptComponent {
             new ComboBoxItem('easeOutCubic', 5), 
             new ComboBoxItem('easeInOutCubic', 6)])
     )
-    easing_intro: number = 0;
+    easingImgs: number = 0;
 
     @ui.separator
 
     @input delayImg1: number;
-    @input durationFadeImg1: number;
-    @input('int')
-    @widget(
-        new ComboBoxWidget([
-            new ComboBoxItem('linear', 0), 
-            new ComboBoxItem('easeInQuad', 1), 
-            new ComboBoxItem('easeOutQuad', 2), 
-            new ComboBoxItem('easeInOutQuad', 3), 
-            new ComboBoxItem('easeInCubic', 4), 
-            new ComboBoxItem('easeOutCubic', 5), 
-            new ComboBoxItem('easeInOutCubic', 6)])
-    )
-    easing_firstImg: number = 0;
-
-    @ui.separator
-
+    @ui.label('<span style="color: #60A5FA;">Show 360 dublin</span>')
     @input delayImg2: number;
-    @input durationFadeIn_img2: number;
-    @input('int')
-    @widget(
-        new ComboBoxWidget([
-            new ComboBoxItem('linear', 0), 
-            new ComboBoxItem('easeInQuad', 1), 
-            new ComboBoxItem('easeOutQuad', 2), 
-            new ComboBoxItem('easeInOutQuad', 3), 
-            new ComboBoxItem('easeInCubic', 4), 
-            new ComboBoxItem('easeOutCubic', 5), 
-            new ComboBoxItem('easeInOutCubic', 6)])
-    )
-    easing_img2: number = 0;
-
-    @ui.separator
-
+    @ui.label('<span style="color: #60A5FA;">Show See dublin</span>')
     @input delayImg3: number;
-    @input durationFadeIn_img3: number;
-    @input('int')
-    @widget(
-        new ComboBoxWidget([
-            new ComboBoxItem('linear', 0), 
-            new ComboBoxItem('easeInQuad', 1), 
-            new ComboBoxItem('easeOutQuad', 2), 
-            new ComboBoxItem('easeInOutQuad', 3), 
-            new ComboBoxItem('easeInCubic', 4), 
-            new ComboBoxItem('easeOutCubic', 5), 
-            new ComboBoxItem('easeInOutCubic', 6)])
-    )
-    easing_img3: number = 0;
+    @ui.label('<span style="color: #60A5FA;">Show Skyline</span>')
+    @input delayImg4: number;
+    @ui.label('<span style="color: #60A5FA;">Show Top view map</span>')
+    @input delayImg5: number;
+    @ui.label('<span style="color: #60A5FA;">Show Look for marker</span>')
+    @input delayImg5bis: number;
+    @ui.label('<span style="color: #60A5FA;">Wait</span>')
+    @input delayImg6: number;
+    @ui.label('<span style="color: #60A5FA;">Show bank infos 1</span>')
+    @input delayImg7: number;
+    @ui.label('<span style="color: #60A5FA;">Show bank infos 2</span>')
+    @input delayImg8: number;
+    @ui.label('<span style="color: #60A5FA;">Show top view final</span>')
 
     @ui.separator
     
     @input delayHotel: number;
-    @input delayHotel2: number;
-    @input delayHotel3: number;
 
     @ui.separator
 
@@ -143,9 +115,15 @@ export class GameController extends BaseScriptComponent {
         eventUpdate.bind(this.onUpdate.bind(this));
 
         //Init 
-        this.img1Mat.mainPass.baseColor = new vec4(1,1,1,0);
-        this.img2Mat.mainPass.baseColor = new vec4(1,1,1,0);
-        this.img3Mat.mainPass.baseColor = new vec4(1,1,1,0);
+        this.dublin360Mat.mainPass.baseColor = new vec4(1,1,1,0);
+        this.seeDublinMat.mainPass.baseColor = new vec4(1,1,1,0);
+        //this.skylineMat.mainPass.baseColor = new vec4(1,1,1,0);
+        this.skylineMat.mainPass.ratio = -0.1;
+        this.topViewMap.mainPass.baseColor = new vec4(1,1,1,0);
+        this.castleMarker.mainPass.baseColor = new vec4(1,1,1,0);
+        this.bankInfo1.mainPass.baseColor = new vec4(1,1,1,0);
+        this.bankInfo2.mainPass.baseColor = new vec4(1,1,1,0);
+        this.topViewMapFinal.mainPass.baseColor = new vec4(1,1,1,0);
 
         //Debug
         this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
@@ -163,13 +141,13 @@ export class GameController extends BaseScriptComponent {
                 this.onSetState(4);
                 this.compassController.onStart();
             }
-            else if(this.debug_state === 4){
-                this.onShowHotel();
+            else if(this.debug_state === 5){
+                this.onShowImg5();
             }
-            else if(this.debug_state === 6){
+            else if(this.debug_state === 8){
                 this.onShowCastle();
             }
-            else if(this.debug_state === 7){
+            else if(this.debug_state === 9){
                 this.castleController.playAnimationHide();
             }
 
@@ -212,7 +190,7 @@ export class GameController extends BaseScriptComponent {
             //Update castle placement
             const markerTr = this.markerController.targetTr;
             this.castleController.updatePositionMarker(markerTr.getWorldPosition());
-            if(this.state === 5){
+            if(this.state === 9){
                 this.onShowCastle();
             }
         }
@@ -232,24 +210,115 @@ export class GameController extends BaseScriptComponent {
     }
 
     // ----------------------------------------------------------
+    // Anims Utils 
+    // ----------------------------------------------------------
+
+    private onFadeInImg(mat:Material, onComplete?: () => void){
+        this.onFadeImg(mat, 0, 1, onComplete);
+    }
+
+    private onFadeOutImg(mat:Material, onComplete?: () => void){
+        this.onFadeImg(mat, 1, 0, onComplete);
+    }
+
+    private onFadeImg(mat:Material, from:number, to:number, onComplete?: () => void){
+        mat.mainPass.baseColor = new vec4(1,1,1,from);
+        const animFade = new Animation({
+            duration: this.durationFadeImgs,
+            easing: Easing.getEasing(this.easingImgs),
+            onUpdate: (progress) => {
+                const alpha = from + (to - from) * progress;
+                mat.mainPass.baseColor = new vec4(1,1,1,alpha);
+            },
+            onComplete
+        });
+        animFade.play();
+    }
+
+    /*Factorisation of 3 steps:
+        -fade in
+        -delay
+        -fade out
+    */
+    private onFadeInOutWithDelay(mat:Material, delayBetween:number, onComplete?: () => void){
+        this.onFadeInImg(
+            mat, 
+            () => {
+                delay.play();
+            }
+        );
+
+        const delay = new Delay({
+            duration: delayBetween,
+            onComplete: () => {
+                this.onFadeOutImg(mat, onComplete);
+            }
+        }); 
+    }
+
+    // ----------------------------------------------------------
+    // Anims Text 
+    // ----------------------------------------------------------
+    private onFadeInText(onComplete?: () => void){
+        this.onFadeText(0, 1, onComplete);
+    }
+
+    private onFadeOutText(onComplete?: () => void){
+        this.onFadeText(1, 0, onComplete);
+    }
+
+    private onFadeText(from:number, to:number, onComplete?: () => void){
+        this.setAlphaText(from);
+        const animFade = new Animation({
+            duration: this.durationFadeImgs,
+            easing: Easing.getEasing(this.easingImgs),
+            onUpdate: (progress) => {
+                const alpha = from + (to - from) * progress;
+                this.setAlphaText(alpha);
+            },
+            onComplete
+        });
+        animFade.play();
+    }
+
+    private setAlphaText(newAlpha:number){
+        this.textIntro.textFill.color = new vec4(1,1,1,newAlpha);
+        this.textIntro.outlineSettings.fill.color = new vec4(0,0,0,newAlpha);
+    }
+
+    /*Factorisation of 3 steps:
+        -fade in
+        -delay
+        -fade out
+    */
+    private onFadeInOutTextWithDelay(delayBetween:number, onComplete?: () => void){
+        this.onFadeInText(
+            () => {
+                delay.play();
+            }
+        );
+
+        const delay = new Delay({
+            duration: delayBetween,
+            onComplete: () => {
+                this.onFadeOutText(onComplete);
+            }
+        }); 
+    }
+
+    // ----------------------------------------------------------
     // Anims
     // ----------------------------------------------------------
     private onHideImgIntro(){
-        const animFade = new Animation({
-            duration: this.durationFadeIntro,
-            easing: Easing.getEasing(this.easing_intro),
-            onUpdate: (progress) => {
-                this.imgIntroMat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
-                this.textIntro.textFill.color = new vec4(1,1,1,1 - progress);
-                this.textIntro.outlineSettings.fill.color = new vec4(0,0,0,1 - progress);
-            },
-            onComplete: () => {
-                this.onShowImg1();
-            },
-        });
-
         this.debug_skipMarkerButton.enabled = false;
-        animFade.play();
+
+        this.onFadeOutText();
+        this.onFadeOutImg(
+            this.imgIntroMat, 
+            () => {
+                this.onShowImg1();
+            }
+        );
     }
 
     private onShowImg1(){
@@ -258,146 +327,191 @@ export class GameController extends BaseScriptComponent {
 
         //audio
         this.audioController.playAudio(0);
-        
 
-        const animFadeIn = new Animation({
-            duration: this.durationFadeImg1,
-            easing: Easing.getEasing(this.easing_firstImg),
-            onUpdate: (progress) => {
-                this.img1Mat.mainPass.baseColor = new vec4(1,1,1,progress);
-            },
-            onComplete: () => {
-                delayVisibleImg1.play();
-            },
-        });
-
-        const delayVisibleImg1 = new Delay({
-            duration: this.delayImg1,
-            onComplete: () => {
-                animFadeOutImg1.play();
-            }
-        }); 
-
-        const animFadeOutImg1 = new Animation({
-            duration: this.durationFadeImg1,
-            easing: Easing.getEasing(this.easing_firstImg),
-            onUpdate: (progress) => {
-                this.img1Mat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
-            },
-            onComplete: () => {
+        this.onFadeInOutWithDelay(
+            this.dublin360Mat, 
+            this.delayImg1,
+            () => {
                 this.onShowImg2();
-            },
-        });
-        animFadeIn.play();
+            }
+        );
     }
 
     private onShowImg2(){
-        const animFadeInImg2 = new Animation({
-            duration: this.durationFadeIn_img2,
-            easing: Easing.getEasing(this.easing_img2),
-            onUpdate: (progress) => {
-                this.img2Mat.mainPass.baseColor = new vec4(1,1,1, progress);
-            },
-            onComplete: () => {
-                delayImg2.play();
-            },
-        });
-
-        const delayImg2 = new Delay({
-            duration: this.delayImg2,
-            onComplete: () => {
-                animFadeOutImg2.play();
-            }
-        }); 
-
-        const animFadeOutImg2 = new Animation({
-            duration: this.durationFadeIn_img2,
-            easing: Easing.getEasing(this.easing_img2),
-            onUpdate: (progress) => {
-                this.img2Mat.mainPass.baseColor = new vec4(1,1,1, 1 - progress);
-            },
-            onComplete: () => {
-                this.onShowImg3();
-            },
-        });
-
         this.onSetState(2);
-        animFadeInImg2.play();
+
+        this.onFadeInOutWithDelay(
+            this.seeDublinMat, 
+            this.delayImg2,
+            () => {
+                this.onShowImg3();
+            }
+        );
     }
 
     private onShowImg3(){
-        const animFadeIn = new Animation({
-            duration: this.durationFadeIn_img3,
-            easing: Easing.getEasing(this.easing_img3),
+        this.onSetState(3);
+
+        //to avoid line pixel faded
+        const minRatio = -0.1;
+        const maxRatio = 1;
+
+        const fadeInSkyline = new Animation({
+            duration: this.durationFadeImgs,
+            easing: Easing.getEasing(this.easingImgs),
             onUpdate: (progress) => {
-                this.img3Mat.mainPass.baseColor = new vec4(1,1,1,progress);
+                const newRatio = (maxRatio - minRatio) * progress + minRatio;
+                this.skylineMat.mainPass.ratio = newRatio;
             },
             onComplete: () => {
-                delayVisible.play();
+                delaySkyline.play();
             },
         });
 
-        const delayVisible = new Delay({
+        const delaySkyline = new Delay({
             duration: this.delayImg3,
             onComplete: () => {
-                animFadeOut.play();
-            }
-        }); 
+                fadeOutSkyline.play();
+            },
+        });
 
-        const animFadeOut = new Animation({
-            duration: this.durationFadeIn_img3,
-            easing: Easing.getEasing(this.easing_img3),
+        const fadeOutSkyline = new Animation({
+            duration: this.durationFadeImgs,
+            easing: Easing.getEasing(this.easingImgs),
             onUpdate: (progress) => {
-                this.img3Mat.mainPass.baseColor = new vec4(1,1,1,1 - progress);
+                const newRatio = (maxRatio - minRatio) * (1 - progress) + minRatio;
+                this.skylineMat.mainPass.ratio = newRatio;
             },
             onComplete: () => {
-                print("Waiting for sticker")
+                this.onShowImg4();
+            },
+        });
+
+        fadeInSkyline.play();
+    }
+
+    private onShowImg4(){
+        this.onSetState(4);
+
+        this.onFadeInOutWithDelay(
+            this.topViewMap, 
+            this.delayImg4,
+            () => {
+                this.onShowImg5();
+            }
+        );
+    }
+
+    private onShowImg5(){
+        this.onSetState(5);
+
+        this.onFadeInOutTextWithDelay(this.delayImg5);
+        this.onFadeInOutWithDelay(
+            this.castleMarker, 
+            this.delayImg5,
+            () => {
+                delayBeforeShowHotel.play();
+            }
+        );
+
+        const delayBeforeShowHotel = new Delay({
+            duration: this.delayImg5bis,
+            onComplete: () => {
+                this.onSetState(6);
+                this.onShowImg6();
+
+                //In parallele, play hotel anim
+                this.onPlayHotelAnimation();
+            },
+        });
+    }
+
+    private onShowImg6(){
+        this.onSetState(7);
+
+        this.onFadeInOutWithDelay(
+            this.bankInfo1, 
+            this.delayImg6,
+            () => {
+                this.onShowImg7();
+            }
+        );
+    }
+
+    private onShowImg7(){
+        this.onSetState(8);
+
+        this.onFadeInOutWithDelay(
+            this.bankInfo2, 
+            this.delayImg7,
+            () => {
+                this.onShowImg8();
+            }
+        );
+    }
+
+    private onShowImg8(){
+        this.onSetState(9);
+
+        
+
+        this.onFadeInOutWithDelay(
+            this.topViewMapFinal, 
+            this.delayImg8,
+            () => {
+                print("Waiting for sticker : castle")
                 this.debug_trackingText.text = "Marker Status : waiting for the sticker";
                 if(this.activateSkipMarkerDebug){
                     this.debug_skipMarkerButton.enabled = true;
                 }
 
-                this.onShowHotel();
-            },
-        });
+                //Show compass
+                this.compassController.onStart();
 
-        this.onSetState(3);
-        animFadeIn.play();
+                //hide castle
+                this.hotelController.playAnimationHide();
+            }
+        );
     }
 
     // ----------------------------------------------------------
     // Anims Hotel
     // ----------------------------------------------------------
-    private onShowHotel(){
+    // fade in ==> fade out ==> fade in
+    private onPlayHotelAnimation(onComplete?: () => void){
         const delayHotel = new Delay({
             duration: this.delayHotel,
             onComplete: () => {
-                this.hotelController.playAnimationSecondPart();
-                delayHotel2.play();
-            }
-        }); 
+                this.hotelController.playAnimationShow(
+                    () => {
+                        delayHotel2.play();
+                    }
+                );
+            },
+        });
 
         const delayHotel2 = new Delay({
-            duration: this.delayHotel2,
+            duration: this.delayHotel,
             onComplete: () => {
-                this.hotelController.playAnimationThirdPart();
-                delayHotel3.play();
+                this.hotelController.playAnimationHide(
+                    () => {
+                        delayHotel3.play();
+                    }
+                );
             },
         });
 
         const delayHotel3 = new Delay({
-            duration: this.delayHotel3,
+            duration: this.delayHotel,
             onComplete: () => {
-                this.onSetState(5);
-                this.compassController.onStart();
+                this.hotelController.playAnimationShow(onComplete);
             },
         });
 
-        this.onSetState(4);
-        this.hotelController.playAnimation();
-
         delayHotel.play();
     }
+
+
 
     // ----------------------------------------------------------
     // Anims Castle
@@ -405,7 +519,7 @@ export class GameController extends BaseScriptComponent {
 
     private onShowCastle(){
         //set state
-        this.onSetState(6);
+        this.onSetState(10);
 
         //debug
         this.debug_skipMarkerButton.enabled = false;
@@ -423,6 +537,8 @@ export class GameController extends BaseScriptComponent {
         const markerTr = this.markerController.targetTr;
         this.castleController.updatePositionMarker(markerTr.getWorldPosition());
         
+
+
         const delayCastle1 = new Delay({
             duration: this.delayCastle1,
             onComplete: () => {
@@ -510,7 +626,6 @@ export class GameController extends BaseScriptComponent {
             },
         });
         
-
         delayCastle1.play();
     }
 }

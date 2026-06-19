@@ -27,7 +27,6 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     alphaMax: false
-    alphaMid: false
     alwaysFollowing: false
     animationPlayer: false
     camera: false
@@ -62,7 +61,6 @@
       distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
       fadeOutDuration: !<float> 1.000000
-      alphaMid: 0.200000
       alphaMax: 0.950000
       meshesMat: !<reference.Material[]>
         []
@@ -88,7 +86,6 @@
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float fadeOutDuration = 1
-    - // @input float alphaMid = 0.2
     - // @input float alphaMax = 0.95
     - '// @ui {"widget":"separator"}'
     - "// @input Asset.Material[] meshesMat"

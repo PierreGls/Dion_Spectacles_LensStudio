@@ -28,7 +28,10 @@
   ScriptInputsHidden:
     activateSkipMarkerDebug: false
     audioController: false
+    bankInfo1: false
+    bankInfo2: false
     castleController: false
+    castleMarker: false
     compassController: false
     debug_skipMarkerButton: false
     debug_state: false
@@ -42,28 +45,28 @@
     delayCastle7: false
     delayCastle8: false
     delayHotel: false
-    delayHotel2: false
-    delayHotel3: false
     delayImg1: false
     delayImg2: false
     delayImg3: false
-    durationFadeImg1: false
-    durationFadeIn_img2: false
-    durationFadeIn_img3: false
-    durationFadeIntro: false
-    easing_firstImg: false
-    easing_img2: false
-    easing_img3: false
-    easing_intro: false
+    delayImg4: false
+    delayImg5: false
+    delayImg5bis: false
+    delayImg6: false
+    delayImg7: false
+    delayImg8: false
+    dublin360Mat: false
+    durationFadeImgs: false
+    easingImgs: false
     frameController: false
     hotelController: false
-    img1Mat: false
-    img2Mat: false
-    img3Mat: false
     imgIntroMat: false
     infoController: false
     markerController: false
+    seeDublinMat: false
+    skylineMat: false
     textIntro: false
+    topViewMap: false
+    topViewMapFinal: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -86,23 +89,26 @@
       infoController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
       textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
       imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
-      img1Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
-      img2Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
-      img3Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
-      durationFadeIntro: !<float> 0.000000
-      easing_intro: 0
+      dublin360Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      seeDublinMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      skylineMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      topViewMap: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      castleMarker: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      bankInfo1: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      bankInfo2: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      topViewMapFinal: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      durationFadeImgs: !<float> 0.000000
+      easingImgs: 0
       delayImg1: !<float> 0.000000
-      durationFadeImg1: !<float> 0.000000
-      easing_firstImg: 1
       delayImg2: !<float> 0.000000
-      durationFadeIn_img2: !<float> 0.000000
-      easing_img2: 1
       delayImg3: !<float> 0.000000
-      durationFadeIn_img3: !<float> 0.000000
-      easing_img3: 0
+      delayImg4: !<float> 0.000000
+      delayImg5: !<float> 0.000000
+      delayImg5bis: !<float> 0.000000
+      delayImg6: !<float> 0.000000
+      delayImg7: !<float> 0.000000
+      delayImg8: !<float> 0.000000
       delayHotel: !<float> 0.000000
-      delayHotel2: !<float> 0.000000
-      delayHotel3: !<float> 0.000000
       delayCastle1: !<float> 0.000000
       delayCastle2: !<float> 0.000000
       delayCastle3: !<float> 0.000000
@@ -130,28 +136,38 @@
     - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
     - // @input Asset.Material imgIntroMat
-    - // @input Asset.Material img1Mat
-    - // @input Asset.Material img2Mat
-    - // @input Asset.Material img3Mat
+    - // @input Asset.Material dublin360Mat
+    - // @input Asset.Material seeDublinMat
+    - // @input Asset.Material skylineMat
+    - // @input Asset.Material topViewMap
+    - // @input Asset.Material castleMarker
+    - // @input Asset.Material bankInfo1
+    - // @input Asset.Material bankInfo2
+    - // @input Asset.Material topViewMapFinal
     - '// @ui {"widget":"separator"}'
-    - // @input float durationFadeIntro
-    - '// @input int easing_intro {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
+    - // @input float durationFadeImgs
+    - '// @input int easingImgs {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
     - '// @ui {"widget":"separator"}'
     - // @input float delayImg1
-    - // @input float durationFadeImg1
-    - '// @input int easing_firstImg {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
-    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show 360 dublin</span>"}'
     - // @input float delayImg2
-    - // @input float durationFadeIn_img2
-    - '// @input int easing_img2 {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
-    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show See dublin</span>"}'
     - // @input float delayImg3
-    - // @input float durationFadeIn_img3
-    - '// @input int easing_img3 {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Skyline</span>"}'
+    - // @input float delayImg4
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Top view map</span>"}'
+    - // @input float delayImg5
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Look for marker</span>"}'
+    - // @input float delayImg5bis
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Wait</span>"}'
+    - // @input float delayImg6
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show bank infos 1</span>"}'
+    - // @input float delayImg7
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show bank infos 2</span>"}'
+    - // @input float delayImg8
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show top view final</span>"}'
     - '// @ui {"widget":"separator"}'
     - // @input float delayHotel
-    - // @input float delayHotel2
-    - // @input float delayHotel3
     - '// @ui {"widget":"separator"}'
     - // @input float delayCastle1
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'

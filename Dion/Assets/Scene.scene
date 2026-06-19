@@ -2174,6 +2174,26 @@
   BlendNormals: false
   BlendShapes:
     {}
+- !<RenderMeshVisual/3ea572d3-c819-4b03-a069-3cabcb9d8036>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 482ccede-22f8-4429-bf90-f25fed7e84cd
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/3eaeb1de-da77-4362-9b38-abbddcde9fab>
   PrefabRemaps:
     []
@@ -2347,7 +2367,7 @@
 - !<SceneObject/4473aa57-0678-4f56-b30d-8e0916f68f3d>
   PrefabRemaps:
     []
-  Name: Img 2 - See Dublin
+  Name: See Dublin
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -2389,6 +2409,21 @@
     []
   Components:
     - !<own> 55be292f-0363-41f1-b55c-70fcb8e4dd25
+- !<SceneObject/4503bcb2-1049-4efb-8f08-acdb9a9feb55>
+  PrefabRemaps:
+    []
+  Name: Bank infos 2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 15.000000, y: 8.000000, z: 15.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> edcf1c2b-1fb5-41d8-86de-044214b5c006
 - !<AnimationPlayer/45b03e5e-fa02-4985-baf3-eb0477bf521a>
   PrefabRemaps:
     []
@@ -2993,6 +3028,26 @@
     []
   Components:
     - !<own> 1a235f17-f235-4098-b968-285b98f60670
+- !<RenderMeshVisual/5963a0c7-330a-4095-96ef-2cdea56ca626>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> eab03f1d-339b-45a3-bc6c-40cd6442dd9d
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/5a2ca1a2-f292-4079-aebb-f491bb9f5bf5>
   PrefabRemaps:
     []
@@ -3366,6 +3421,26 @@
     - !<own> 01932644-c733-4460-9e00-ded61cd4bb0e
   Components:
     []
+- !<RenderMeshVisual/646cd452-eeb3-400e-a05d-06fba09991fb>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 9a66dbfe-b22f-4091-bba0-3420ce2fca4a
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<RenderMeshVisual/656adf87-2e7a-483e-b6fe-a70a40c8b7c5>
   PrefabRemaps:
     []
@@ -3496,6 +3571,21 @@
     - !<own> ec5cf781-7365-4db2-83df-e3d10556ffd3
   Components:
     []
+- !<SceneObject/67eb8b7f-1216-4fb5-a90a-586097f1df41>
+  PrefabRemaps:
+    []
+  Name: Skyline
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 15.000000, y: 8.000000, z: 15.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 3ea572d3-c819-4b03-a069-3cabcb9d8036
 - !<RenderMeshVisual/68e5558c-23f9-4640-b91d-b55c7adc4259>
   PrefabRemaps:
     []
@@ -3889,6 +3979,21 @@
     []
   Components:
     - !<own> bf2c1ad0-e7ba-4c2b-8c76-1234a07b9bbe
+- !<SceneObject/7ae080ef-0def-4409-a136-4c69cfe0c84a>
+  PrefabRemaps:
+    []
+  Name: iconMarkerCastle
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 8.000000, y: 8.288362, z: 10.360452}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> db23b9c0-21af-442e-a7a3-7f9128bf50c8
 - !<RenderMeshVisual/7b538d4e-43ba-4af0-89c5-ad63d5079ef7>
   PrefabRemaps:
     []
@@ -4318,6 +4423,21 @@
     []
   Components:
     - !<own> a78b884b-bcbc-4335-bacd-db3dbccd3e0b
+- !<SceneObject/8697b960-5303-44d2-a05c-cd1bb9f94168>
+  PrefabRemaps:
+    []
+  Name: Top view map - final frames
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 15.000000, y: 10.000000, z: 15.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> d5651708-b4ec-48b0-b82d-8e8a38098477
 - !<RenderMeshVisual/86ef8405-862c-49ba-b120-8dc04dd45be4>
   PrefabRemaps:
     []
@@ -6097,6 +6217,21 @@
     - !<own> 9c6bdaf8-6f75-4c15-8f87-51a47efb49e9
   Components:
     []
+- !<SceneObject/af73ff35-7324-40b0-9e80-76bdc89e07d5>
+  PrefabRemaps:
+    []
+  Name: Top view map + infos
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 15.000000, y: 12.000000, z: 15.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 646cd452-eeb3-400e-a05d-06fba09991fb
 - !<SceneObject/b1f8254d-7ff0-4786-bdb0-5811371eac87>
   PrefabRemaps:
     []
@@ -6340,34 +6475,13 @@
       distMarker: !<float> -50.000000
       fadeInDuration: 1.500000
       fadeOutDuration: !<float> 1.000000
-      alphaMid: 0.400000
-      alphaMax: 0.900000
+      alphaMax: !<float> 1.000000
       meshesMat: !<reference.Material[]>
         - !<reference> f0890172-24c3-4b1a-8f9a-94edf1e90b6d
         - !<reference> 45180061-bed7-40a2-9f11-38afa68fa458
   ScriptTypes:
     "":
       {}
-- !<RenderMeshVisual/b640f42b-e2fa-4a37-b23a-dc478947b68b>
-  PrefabRemaps:
-    []
-  Name: Render Mesh Visual
-  Enabled: true
-  RenderOrder: 2
-  StretchMode: Stretch
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> d51c6ef3-5c5a-4bb9-a4f0-19702da25ff0
-  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
-  Skin: !<reference> 00000000-0000-0000-0000-000000000000
-  BlendShapesEnabled: true
-  BlendNormals: false
-  BlendShapes:
-    {}
 - !<SceneObject/b6967747-d54d-4fdf-b8cc-652d7e6080ba>
   PrefabRemaps:
     []
@@ -6518,21 +6632,6 @@
     []
   Components:
     - !<own> 300a2e7f-3c37-4f56-882f-4f90643b6ec1
-- !<SceneObject/bceae40f-17d8-4e21-944d-4f6a70fed599>
-  PrefabRemaps:
-    []
-  Name: Img 3 - Top view map
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 12.000000, y: 18.000000, z: 18.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> b640f42b-e2fa-4a37-b23a-dc478947b68b
 - !<SceneObject/bd16e9de-9fdb-4336-8fc5-4c47c3f86642>
   PrefabRemaps:
     []
@@ -6548,6 +6647,21 @@
     - !<own> 5706f705-612c-471c-9554-08280439c0e7
   Components:
     []
+- !<SceneObject/bd35b9b6-3077-4db2-9d95-b1bdefa79d2d>
+  PrefabRemaps:
+    []
+  Name: Bank infos
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 15.000000, y: 10.000000, z: 15.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 5963a0c7-330a-4095-96ef-2cdea56ca626
 - !<RenderMeshVisual/bdd6f2a7-a91b-4ff0-bffb-c5c6c921998f>
   PrefabRemaps:
     []
@@ -6654,7 +6768,12 @@
     - !<own> 5c99b5be-5a17-45b2-b6bd-0ea3bce2db9e
     - !<own> c1fab79a-f356-4663-b915-23e405623ac8
     - !<own> 4473aa57-0678-4f56-b30d-8e0916f68f3d
-    - !<own> bceae40f-17d8-4e21-944d-4f6a70fed599
+    - !<own> 67eb8b7f-1216-4fb5-a90a-586097f1df41
+    - !<own> af73ff35-7324-40b0-9e80-76bdc89e07d5
+    - !<own> 7ae080ef-0def-4409-a136-4c69cfe0c84a
+    - !<own> bd35b9b6-3077-4db2-9d95-b1bdefa79d2d
+    - !<own> 4503bcb2-1049-4efb-8f08-acdb9a9feb55
+    - !<own> 8697b960-5303-44d2-a05c-cd1bb9f94168
   Components:
     []
 - !<SceneObject/c0cbaa09-1863-4480-9fb7-a4866737ba49>
@@ -6710,7 +6829,7 @@
 - !<SceneObject/c1fab79a-f356-4663-b915-23e405623ac8>
   PrefabRemaps:
     []
-  Name: Img 1 - 360 Dublin
+  Name: 360 Dublin
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -7384,7 +7503,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> ae53e7be-57d9-4442-ae0f-9201c058f0b2
+  AudioTrack: !<reference> 22e4e256-489b-43b3-97b5-35d28be85fdf
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
@@ -7396,6 +7515,26 @@
   MaxDistance: 100.000000
   EnableDirectivityEffect: false
   EnablePositionEffect: false
+- !<RenderMeshVisual/d5651708-b4ec-48b0-b82d-8e8a38098477>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 3e9214d7-e4a7-4020-be00-f6c968d772bc
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/d5778675-1ab2-48f2-8a57-82b87e00614c>
   PrefabRemaps:
     []
@@ -7718,6 +7857,26 @@
     - !<own> 1036d690-6737-4314-a693-b98c84acb3d3
   Components:
     []
+- !<RenderMeshVisual/db23b9c0-21af-442e-a7a3-7f9128bf50c8>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ef728667-a005-46a9-b4d5-e158e09918d4
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/db7c16b1-6ad7-4d98-b99f-57506174701f>
   PrefabRemaps:
     []
@@ -8384,6 +8543,26 @@
     - !<own> 80613e75-e919-4a7a-aab7-96b9fdd0568f
   Components:
     []
+- !<RenderMeshVisual/edcf1c2b-1fb5-41d8-86de-044214b5c006>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 2
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 373a5887-1513-4fb4-a823-d13e7b9ded04
+  Mesh: !<reference> 177459c0-51d4-4374-9e15-6cbda2f0631a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/ee71522f-5714-423c-a099-28e16f79bf2f>
   PrefabRemaps:
     []
@@ -8652,7 +8831,7 @@
     {}
   ScriptInputs:
     "":
-      debug_state: !<float> -1.000000
+      debug_state: -0.990000
       debug_trackingText: !<reference.Text> d9af125c-eba3-4288-bb56-8b14113c1f30
       activateSkipMarkerDebug: false
       debug_skipMarkerButton: !<reference.SceneObject> 847ee943-442e-4293-907f-6045016a4612
@@ -8665,23 +8844,26 @@
       infoController: !<MappingBased.AssignableType_6> 090816c1-585b-49c6-92b5-079cfdec70e9
       textIntro: !<reference.Text> 300a2e7f-3c37-4f56-882f-4f90643b6ec1
       imgIntroMat: !<reference.Material> 01ea6b2c-7a0f-46d2-a553-21a1a6eea788
-      img1Mat: !<reference.Material> 612b3895-aa8b-409a-9026-1944570be847
-      img2Mat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
-      img3Mat: !<reference.Material> d51c6ef3-5c5a-4bb9-a4f0-19702da25ff0
-      durationFadeIntro: !<float> 1.000000
-      easing_intro: 3
-      delayImg1: !<float> 5.000000
-      durationFadeImg1: !<float> 1.000000
-      easing_firstImg: 3
-      delayImg2: !<float> 55.000000
-      durationFadeIn_img2: !<float> 1.000000
-      easing_img2: 3
-      delayImg3: !<float> 42.000000
-      durationFadeIn_img3: 1.010000
-      easing_img3: 3
-      delayHotel: !<float> 67.000000
-      delayHotel2: !<float> 5.000000
-      delayHotel3: !<float> 15.000000
+      dublin360Mat: !<reference.Material> 612b3895-aa8b-409a-9026-1944570be847
+      seeDublinMat: !<reference.Material> a38edb6c-944c-4ab9-a30f-50a8eba6c258
+      skylineMat: !<reference.Material> 482ccede-22f8-4429-bf90-f25fed7e84cd
+      topViewMap: !<reference.Material> 9a66dbfe-b22f-4091-bba0-3420ce2fca4a
+      castleMarker: !<reference.Material> ef728667-a005-46a9-b4d5-e158e09918d4
+      bankInfo1: !<reference.Material> eab03f1d-339b-45a3-bc6c-40cd6442dd9d
+      bankInfo2: !<reference.Material> 373a5887-1513-4fb4-a823-d13e7b9ded04
+      topViewMapFinal: !<reference.Material> 3e9214d7-e4a7-4020-be00-f6c968d772bc
+      durationFadeImgs: !<float> 2.000000
+      easingImgs: 2
+      delayImg1: 0.500000
+      delayImg2: !<float> 5.000000
+      delayImg3: !<float> 6.000000
+      delayImg4: !<float> 9.000000
+      delayImg5: !<float> 14.000000
+      delayImg5bis: !<float> 22.000000
+      delayImg6: !<float> 20.000000
+      delayImg7: !<float> 25.000000
+      delayImg8: !<float> 15.000000
+      delayHotel: !<float> 1.000000
       delayCastle1: !<float> 5.000000
       delayCastle2: !<float> 40.000000
       delayCastle3: !<float> 15.000000

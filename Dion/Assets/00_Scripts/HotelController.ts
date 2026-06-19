@@ -31,8 +31,7 @@ export class HotelController extends BaseScriptComponent {
 
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
-  @input('float') fadeOutDuration: number = 1.0;
-  @input('float') alphaMid: number = 0.2;     
+  @input('float') fadeOutDuration: number = 1.0; 
   @input('float') alphaMax: number = 0.95;
 
   
@@ -117,9 +116,7 @@ export class HotelController extends BaseScriptComponent {
     });
   }
 
-  fadeOutMeshes(onComplete?: () => void): void {
-    let completedCount = 0;
-
+  fadeOutMeshes(): void {
     this.meshesMat.forEach((mat) => {
       if (!mat) return;
 
@@ -130,28 +127,16 @@ export class HotelController extends BaseScriptComponent {
           mat.mainPass.baseColor = new vec4(1, 1, 1, (1 - progress) * this.alphaMax);
         },
         onComplete: () => {
-          completedCount++;
-          if (completedCount === this.meshesMat.length) {
-            onComplete?.();
-          }
         },
       }).play();
     });
-  }
-
-  fadeMidMeshes(from : number, idExclude?: number): void {
-    for(let i = 0; i < this.meshesMat.length; i++){
-        if(i != idExclude){
-            this.fadePart(i, from, this.alphaMid, this.fadeInDuration);
-        }
-    }
   }
 
   // ----------------------------------------------------------
   // Animation FBX 
   // ----------------------------------------------------------
 
-  playAnimation(): void {
+  playAnimationShow(onComplete?: () => void): void {
     //if do not follow user, place it in front just once is played 
     if(!this.alwaysFollowing){
       this.followSmooth = 1000;
@@ -162,42 +147,49 @@ export class HotelController extends BaseScriptComponent {
     this.fadeInMeshes();
 
     //Play animation Show
-    print('SHOW')
-    this.playShowFBX();
+    print('Show hotel')
+    this.playShowFBX(onComplete);
   }
 
-  playAnimationSecondPart(): void {
-    this.fadeMidMeshes(this.alphaMax, 1.0);
-  }
-
-  playAnimationThirdPart(): void {
-    //fade in again for the hide animation
-    this.fadePart(0, this.alphaMid, this.alphaMax, this.fadeOutDuration);
+  playAnimationHide(onComplete?: () => void): void {
+    //this.fadeOutMeshes();
 
     //Play animation Hide
-    print('Hide')
-    this.playHideFBX();
+    print('Hide hotel')
+    this.playHideFBX(onComplete);
   }
 
-  playShowFBX(){
+  private playShowFBX(onComplete?: () => void){
     const durationClip = this.clip.end - 0.1;
     this.clip.playbackSpeed = -1;
     this.animationPlayer.playClipAt("BaseLayer", durationClip);
 
 
-    const delayVisibleStatic = new Delay({
+    const delayOnComplete = new Delay({
         duration: durationClip,
         onComplete: () => {
             this.hotelStatic.enabled = true;
+            onComplete?.();
         }
     }); 
-    delayVisibleStatic.play();
+    delayOnComplete.play();
   }
 
-  playHideFBX(){
+  private playHideFBX(onComplete?: () => void){
     this.hotelStatic.enabled = false;
     this.clip.playbackSpeed = 1;
     this.animationPlayer.playClipAt("BaseLayer", 0);
+
+    const durationClip = this.clip.end - 0.1;
+    const delayOnComplete = new Delay({
+        duration: durationClip,
+        onComplete: () => {
+          if(onComplete){
+            onComplete();
+          }
+        }
+    }); 
+    delayOnComplete.play();
   }
 
   // ----------------------------------------------------------
