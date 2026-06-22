@@ -34,9 +34,12 @@
     castleParent: false
     distMarker: false
     fadeInDuration: false
+    flagIreland: false
+    flagLGBT: false
     followDistance: false
     followSmooth: false
     isPlacementRelativeMarker: false
+    maxSizeFlags: false
     meshMatMedievalCastle: false
     meshesMat: false
     placementHeight: false
@@ -55,6 +58,8 @@
       castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       towerAnimated: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       towerStatic: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      flagIreland: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      flagLGBT: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       placementHeight: !<float> -20.000000
       alwaysFollowing: true
       followDistance: !<float> 150.000000
@@ -68,6 +73,7 @@
       meshesMat: !<reference.Material[]>
         []
       meshMatMedievalCastle: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      maxSizeFlags: !<float> 0.000000
   ScriptTypes:
     -
       {}
@@ -76,6 +82,8 @@
     - // @input SceneObject castleParent
     - // @input SceneObject towerAnimated
     - // @input SceneObject towerStatic
+    - // @input SceneObject flagIreland
+    - // @input SceneObject flagLGBT
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Placement"}'
     - // @input float placementHeight = -20
@@ -95,3 +103,5 @@
     - '// @input vec3 baseColor = "{1,1,1}" {"widget":"color"}'
     - "// @input Asset.Material[] meshesMat"
     - // @input Asset.Material meshMatMedievalCastle
+    - '// @ui {"widget":"separator"}'
+    - // @input float maxSizeFlags

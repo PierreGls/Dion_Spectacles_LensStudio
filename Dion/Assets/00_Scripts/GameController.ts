@@ -665,7 +665,7 @@ export class GameController extends BaseScriptComponent {
         const delayCastle10 = new Delay({
             duration: this.delayCastle10,
             onComplete: () => {
-                //TODO
+                this.castleController.animFlagIreland(0,1,2);
                 delayCastle11.play();
             }
         });
@@ -674,6 +674,7 @@ export class GameController extends BaseScriptComponent {
         const delayCastle11 = new Delay({
             duration: this.delayCastle11,
             onComplete: () => {
+                this.castleController.animFlagLGBT(0,1,2);
                 this.onShowImgCastle(4, this.delayCastleImg5);
                 delayCastle12.play();
             }
@@ -686,6 +687,8 @@ export class GameController extends BaseScriptComponent {
             onComplete: () => {
                 this.onSetState(16);
                 this.castleController.playAnimationHide(true);
+                this.castleController.animFlagIreland(1,0,2);
+                this.castleController.animFlagLGBT(1,0,2);
                 delayCastle13.play();
             },
         });

@@ -13,6 +13,8 @@ export class CastleController extends BaseScriptComponent {
   @input castleParent: SceneObject;
   @input towerAnimated: SceneObject;
   @input towerStatic: SceneObject;
+  @input flagIreland: SceneObject;
+  @input flagLGBT: SceneObject;
 
   @ui.separator
   @ui.group_start("Placement")
@@ -41,11 +43,18 @@ export class CastleController extends BaseScriptComponent {
   baseColor: vec3;
 
   @input('Asset.Material[]') meshesMat: Material[];
+
   //0 : castle modern
   //1 : castle modern tower
 
   //castle medieval
   @input('Asset.Material') meshMatMedievalCastle: Material;
+
+  @ui.separator
+
+  @input('float') maxSizeFlags
+
+
 
   // --- Private ---
 
@@ -70,6 +79,12 @@ export class CastleController extends BaseScriptComponent {
     this.towerStatic.enabled = false; //towerStatic
     this.setMeshesAlpha(0); //modern castle
     this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0); //medieval castle
+  
+    //flag invisibles
+    this.flagIreland.getTransform().setLocalScale(new vec3(0, 0, 0));
+    this.flagLGBT.getTransform().setLocalScale(new vec3(0, 0, 0));
+
+  
   }
 
   onUpdate(): void {
@@ -175,8 +190,8 @@ export class CastleController extends BaseScriptComponent {
       return;
     }
 
-    this.towerAnimated.enabled = withTower;
-    this.towerStatic.enabled = !withTower;
+    this.towerAnimated.enabled = !withTower;
+    this.towerStatic.enabled = withTower;
 
     const durationClip = this.clip.end - this.clip.begin;
 
@@ -292,6 +307,37 @@ export class CastleController extends BaseScriptComponent {
         }
       }
             
+    }).play();
+  }
+
+  // ----------------------------------------------------------
+  // Flags
+  // ----------------------------------------------------------
+  public animFlagIreland(from: number,to: number,duration: number,onComplete?: () => void){
+    this.flagIreland.getTransform().setLocalScale(new vec3(from, from, from));
+
+    new Animation({
+      duration,
+      easing: Easing.easeInOutQuad,
+      onUpdate: (progress) => {
+        const alpha = (from + (to - from) * progress) * this.maxSizeFlags;
+        this.flagIreland.getTransform().setLocalScale(new vec3(alpha, alpha, alpha));
+      },
+      onComplete,
+    }).play();
+  }
+
+  public animFlagLGBT(from: number,to: number,duration: number,onComplete?: () => void){
+    this.flagLGBT.getTransform().setLocalScale(new vec3(from, from, from));
+
+    new Animation({
+      duration,
+      easing: Easing.easeInOutQuad,
+      onUpdate: (progress) => {
+        const alpha = (from + (to - from) * progress) * this.maxSizeFlags;
+        this.flagLGBT.getTransform().setLocalScale(new vec3(alpha, alpha, alpha));
+      },
+      onComplete,
     }).play();
   }
 
