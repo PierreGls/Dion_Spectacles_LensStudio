@@ -37,12 +37,12 @@
     flagIreland: false
     flagLGBT: false
     followDistance: false
-    followSmooth: false
     isPlacementRelativeMarker: false
     maxSizeFlags: false
     meshMatMedievalCastle: false
     meshesMat: false
     placementHeight: false
+    smoothPositionFactor: false
     towerAnimated: false
     towerStatic: false
   ScriptTypesHidden:
@@ -63,7 +63,7 @@
       placementHeight: !<float> -20.000000
       alwaysFollowing: true
       followDistance: !<float> 150.000000
-      followSmooth: !<float> 5.000000
+      smoothPositionFactor: !<float> 5.000000
       isPlacementRelativeMarker: false
       distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
@@ -90,7 +90,7 @@
     - '// @ui {"widget":"separator"}'
     - // @input boolean alwaysFollowing
     - '// @input float followDistance = 150 {"showIf":"alwaysFollowing"}'
-    - '// @input float followSmooth = 5 {"showIf":"alwaysFollowing"}'
+    - // @input float smoothPositionFactor = 5
     - '// @ui {"widget":"separator"}'
     - // @input boolean isPlacementRelativeMarker
     - '// @input float distMarker = 150 {"showIf":"isPlacementRelativeMarker"}'

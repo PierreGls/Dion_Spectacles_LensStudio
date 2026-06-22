@@ -7,7 +7,7 @@
     []
   DepthWrite: true
   DepthTest: true
-  DepthFunction: LessEqual
+  DepthFunction: Less
   TwoSided: false
   ColorMask: {x: true, y: true, z: true, w: true}
   CullMode: Back
@@ -17,7 +17,7 @@
   InstanceCount: 1
   Defines:
     []
-  BlendMode: AlphaToCoverage
+  BlendMode: PremultipliedAlphaAuto
   Properties:
     Port_AO_N006:
       typeIdx: 4

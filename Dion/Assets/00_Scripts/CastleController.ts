@@ -23,7 +23,8 @@ export class CastleController extends BaseScriptComponent {
   @ui.separator
   @input('boolean') alwaysFollowing: boolean = false;
   @input('float') @showIf("alwaysFollowing") followDistance: number = 150;   
-  @input('float') @showIf("alwaysFollowing") followSmooth:   number = 5;    
+  
+  @input('float') smoothPositionFactor: number = 5;    
 
   @ui.separator
 
@@ -71,13 +72,14 @@ export class CastleController extends BaseScriptComponent {
     this.castleParentTransform = this.castleParent.getTransform();
     this.cameraTransform = this.camera.getTransform();
 
-    this.targetPosition = this.getTargetPosition();
+    this.targetPosition = this.getPosFrontUser();
 
     this.clip = this.animationPlayer.getClip("BaseLayer");
 
     // castles invisibles on start
     this.towerStatic.enabled = false; //towerStatic
-    this.setMeshesAlpha(0); //modern castle
+    this.meshesMat[1].mainPass.baseColor = new vec4(1,1,1,1);
+    this.meshesMat[0].mainPass.baseColor = new vec4(1,1,1,1);//modern castle
     this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0); //medieval castle
   
     //flag invisibles
@@ -89,8 +91,10 @@ export class CastleController extends BaseScriptComponent {
 
   onUpdate(): void {
     if(this.alwaysFollowing){
-      this.updateFollow();
+      this.targetPosition = this.getPosFrontUser();
     }
+
+    this.updateFollow();
   }
 
   // ----------------------------------------------------------
@@ -99,17 +103,15 @@ export class CastleController extends BaseScriptComponent {
 
   //FOLLOWING USER 
   private updateFollow(): void {
-    this.targetPosition = this.getTargetPosition();
-
     const current = this.castleParentTransform.getWorldPosition();
     const deltaTime = getDeltaTime();
-    const lerpFactor = Math.min(this.followSmooth * deltaTime, 1);
+    const lerpFactor = Math.min(this.smoothPositionFactor * deltaTime, 1);
 
     const smoothed = vec3.lerp(current, this.targetPosition, lerpFactor);
     this.castleParentTransform.setWorldPosition(smoothed);
   }
 
-  private getTargetPosition(): vec3 {
+  private getPosFrontUser(): vec3 {
     const camPos     = this.cameraTransform.getWorldPosition();
     const camForward = this.cameraTransform.forward;
 
@@ -121,13 +123,20 @@ export class CastleController extends BaseScriptComponent {
   }
 
   //PLACED IN FRONT OF THE MARKER
-  public updatePositionMarker(markerPos:vec3) : void{
-    const camPos = this.cameraTransform.getWorldPosition();
+  public updatePositionMarker(markerTr:Transform) : void{
+    //if we want between user and marker
+    /*const camPos = this.cameraTransform.getWorldPosition();
     const direction = new vec3(
       markerPos.x - camPos.x,
       0,
       markerPos.z - camPos.z
-    ).normalize();
+    ).normalize(); */
+
+    //If we want only in front of marker
+    const direction = markerTr.forward
+    direction.y = 0;
+    direction.normalize();
+    const markerPos = markerTr.getWorldPosition();
     
     const targetPos = new vec3(
       markerPos.x + direction.x * this.distMarker,
@@ -135,7 +144,8 @@ export class CastleController extends BaseScriptComponent {
       markerPos.z + direction.z * this.distMarker
     );
 
-    this.castleParentTransform.setWorldPosition(targetPos);
+    //this.castleParentTransform.setWorldPosition(targetPos);
+    this.targetPosition = targetPos;
 
     this.updateRotationMarker(targetPos);
   }
@@ -175,12 +185,6 @@ export class CastleController extends BaseScriptComponent {
 
     //play anim
     this.animationPlayer.playClip("BaseLayer");
-
-    //if do not follow user, place it in front just once is played 
-    if(!this.alwaysFollowing){
-      this.followSmooth = 1000;
-      //this.updateFollow();
-    }
   }
 
   public playAnimationHide(withTower:boolean): void {
@@ -190,8 +194,10 @@ export class CastleController extends BaseScriptComponent {
       return;
     }
 
-    this.towerAnimated.enabled = !withTower;
-    this.towerStatic.enabled = withTower;
+    this.towerAnimated.enabled = withTower;
+    this.towerStatic.enabled = !withTower;
+
+    print("HIDE CASTLE  :" + this.towerStatic.enabled);
 
     const durationClip = this.clip.end - this.clip.begin;
 
@@ -346,14 +352,10 @@ export class CastleController extends BaseScriptComponent {
   // ----------------------------------------------------------
 
   private setMeshesAlpha(alpha: number): void {
-    this.meshesMat.forEach((mat) => {
-      if (mat) {
-        mat.mainPass.baseColor = new vec4(
-          this.baseColor.x, 
-          this.baseColor.y,
-          this.baseColor.z, 
-          alpha);
-          }
-    });
+    this.meshesMat[0].mainPass.baseColor = new vec4(
+      this.baseColor.x, 
+      this.baseColor.y,
+      this.baseColor.z, 
+      alpha);
   }
 }

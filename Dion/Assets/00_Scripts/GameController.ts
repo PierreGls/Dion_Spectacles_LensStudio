@@ -218,7 +218,7 @@ export class GameController extends BaseScriptComponent {
             this.compassController.setTarget(markerpos);
             //Update castle placement
             const markerTr = this.markerController.targetTr;
-            this.castleController.updatePositionMarker(markerTr.getWorldPosition());
+            this.castleController.updatePositionMarker(markerTr);
             if(this.state === 9){
                 this.onShowCastle();
             }
@@ -569,7 +569,7 @@ export class GameController extends BaseScriptComponent {
 
         //place castle
         const markerTr = this.markerController.targetTr;
-        this.castleController.updatePositionMarker(markerTr.getWorldPosition());
+        this.castleController.updatePositionMarker(markerTr);
         
         const delayCastle1 = new Delay({
             duration: this.delayCastle1,
@@ -599,7 +599,6 @@ export class GameController extends BaseScriptComponent {
             onComplete: () => {
                 this.onSetState(12);
                 this.castleController.playAnimationHide(false);
-                print("playAnimationHideWithoutTower");
                 delayCastle4.play();
             }
         });
