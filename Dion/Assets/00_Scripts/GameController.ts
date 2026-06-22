@@ -48,6 +48,11 @@ export class GameController extends BaseScriptComponent {
 
     @ui.separator
 
+    @input castleMat: Material[];
+
+    @ui.separator
+
+    @input durationFadeMedievalCastle: number;
     @input durationFadeImgs: number;
     @input('int')
     @widget(
@@ -92,19 +97,35 @@ export class GameController extends BaseScriptComponent {
     @input delayCastle1: number;
     @ui.label('<span style="color: #60A5FA;">Modern Castle Show</span>')
     @input delayCastle2: number;
-    @ui.label('<span style="color: #60A5FA;">Tower Castle Show</span>')
+    @ui.label('<span style="color: #60A5FA;">Show img castle 1</span>')
     @input delayCastle3: number;
-    @ui.label('<span style="color: #60A5FA;">Modern Castle Hide</span>')
+    @ui.label('<span style="color: #60A5FA;">Hide Modern Castle Except Tower</span>')
     @input delayCastle4: number;
     @ui.label('<span style="color: #60A5FA;">Medieval Castle Show</span>')
     @input delayCastle5: number;
-    @ui.label('<span style="color: #60A5FA;">Medieval Castle Hide</span>')
+    @ui.label('<span style="color: #60A5FA;">Show img castle 2</span>')
     @input delayCastle6: number;
-    @ui.label('<span style="color: #60A5FA;">Modern Castle Show</span>')
+    @ui.label('<span style="color: #60A5FA;">Medieval Castle Hide</span>')
     @input delayCastle7: number;
-    @ui.label('<span style="color: #60A5FA;">Modern Castle Hide</span>')
+    @ui.label('<span style="color: #60A5FA;">Modern Castle Show</span>')
     @input delayCastle8: number;
+    @ui.label('<span style="color: #60A5FA;">Show img castle 3</span>')
+    @input delayCastle9: number;
+    @ui.label('<span style="color: #60A5FA;">Show img castle 4</span>')
+    @input delayCastle10: number;
+    @ui.label('<span style="color: #60A5FA;">Show Flags</span>')
+    @input delayCastle11: number;
+    @ui.label('<span style="color: #60A5FA;">Show img castle 5</span>')
+    @input delayCastle12: number;
+    @ui.label('<span style="color: #60A5FA;">Hide all</span>')
+    @input delayCastle13: number;
     @ui.label('<span style="color: #60A5FA;">Show compass</span>')
+    
+    @input delayCastleImg1: number;
+    @input delayCastleImg2: number;
+    @input delayCastleImg3: number;
+    @input delayCastleImg4: number;
+    @input delayCastleImg5: number;
 
 
     private state : number = 0;
@@ -125,6 +146,10 @@ export class GameController extends BaseScriptComponent {
         this.bankInfo1.mainPass.baseColor = new vec4(1,1,1,0);
         this.bankInfo2.mainPass.baseColor = new vec4(1,1,1,0);
         this.topViewMapFinal.mainPass.baseColor = new vec4(1,1,1,0);
+
+        this.castleMat.forEach((mat) => {
+            mat.mainPass.baseColor = new vec4(1,1,1,0);
+        });
 
         //Debug
         this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
@@ -152,7 +177,7 @@ export class GameController extends BaseScriptComponent {
                 this.onShowCastle();
             }
             else if(this.debug_state === 9){
-                this.castleController.playAnimationHide();
+                this.castleController.playAnimationHide(true);
             }
 
             this.debug_state = -1;
@@ -546,95 +571,146 @@ export class GameController extends BaseScriptComponent {
         const markerTr = this.markerController.targetTr;
         this.castleController.updatePositionMarker(markerTr.getWorldPosition());
         
-
-
         const delayCastle1 = new Delay({
             duration: this.delayCastle1,
             onComplete: () => {
+                //Set State
+                this.onSetState(11);
+                //Play show animation modern castle
                 this.castleController.playAnimationShow();
-
+                //Delay for the following steps 
                 delayCastle2.play();
             },
         });
+        delayCastle1.play();
 
-        //Show tower
+        //Show img 1
         const delayCastle2 = new Delay({
             duration: this.delayCastle2,
             onComplete: () => {
-                //hide partly castle modern
-                const alphaMid = 0.6;
-                this.castleController.fadePart(0, 1, alphaMid, 1);
-
-                //show info plane
-                this.infoController.fadeInPlane(0,1);
-
+                this.onShowImgCastle(0,this.delayCastleImg1);
                 delayCastle3.play();
             }
         });
 
-        //Hide modern castle
+        //Show tower
         const delayCastle3 = new Delay({
             duration: this.delayCastle3,
             onComplete: () => {
-                //hide info text
-                this.infoController.fadeOutPlane(0,1);
-                //hide castle modern
-                this.castleController.playAnimationHide();
-
+                this.onSetState(12);
+                this.castleController.playAnimationHide(false);
+                print("playAnimationHideWithoutTower");
                 delayCastle4.play();
-            },
+            }
         });
 
         //Show medieval Castle
         const delayCastle4 = new Delay({
             duration: this.delayCastle4,
             onComplete: () => {
-                this.castleController.fadeMedievalCastle(0,1,1);
-                this.infoController.fadeInPlane(1,1);
-
+                this.onSetState(13);
+                this.castleController.fadeMedievalCastle(0,1,this.durationFadeMedievalCastle);
                 delayCastle5.play();
             },
         });
 
-        //Hide medieval Castle
+        //Show img 2
         const delayCastle5 = new Delay({
             duration: this.delayCastle5,
             onComplete: () => {
-                this.castleController.fadeMedievalCastle(1,0,1);
-                this.infoController.fadeOutPlane(1,1);
-
+                this.onShowImgCastle(1, this.delayCastleImg2);
                 delayCastle6.play();
-            },
+            }
         });
 
-        //Show Modern Castle
+        //Hide medieval Castle
         const delayCastle6 = new Delay({
             duration: this.delayCastle6,
             onComplete: () => {
-                this.castleController.playAnimationShow();
-
+                this.onSetState(14);
+                this.castleController.fadeMedievalCastle(1,0,this.durationFadeMedievalCastle);
                 delayCastle7.play();
             },
         });
 
-        //hide modern castle
+        //Show Modern Castle
         const delayCastle7 = new Delay({
             duration: this.delayCastle7,
             onComplete: () => {
-                this.castleController.playAnimationHide();
+                this.onSetState(15);
+                this.castleController.playAnimationShow();
                 delayCastle8.play();
             },
         });
 
-        //Show compass
+        //Show img 3
         const delayCastle8 = new Delay({
             duration: this.delayCastle8,
             onComplete: () => {
+                this.onShowImgCastle(2, this.delayCastleImg3);
+                delayCastle9.play();
+            }
+        });
+
+        //Show img 4
+        const delayCastle9 = new Delay({
+            duration: this.delayCastle9,
+            onComplete: () => {
+                this.onShowImgCastle(3, this.delayCastleImg4);
+                delayCastle10.play();
+            }
+        });
+
+        //Show flags
+        const delayCastle10 = new Delay({
+            duration: this.delayCastle10,
+            onComplete: () => {
+                //TODO
+                delayCastle11.play();
+            }
+        });
+
+        //Show img 5
+        const delayCastle11 = new Delay({
+            duration: this.delayCastle11,
+            onComplete: () => {
+                this.onShowImgCastle(4, this.delayCastleImg5);
+                delayCastle12.play();
+            }
+        });
+
+
+        //Hide Modern Castle
+        const delayCastle12 = new Delay({
+            duration: this.delayCastle12,
+            onComplete: () => {
+                this.onSetState(16);
+                this.castleController.playAnimationHide(true);
+                delayCastle13.play();
+            },
+        });
+
+        //Show compass
+        const delayCastle13 = new Delay({
+            duration: this.delayCastle13,
+            onComplete: () => {
+                this.onSetState(17);
                 this.compassController.setTextureMarker(2);
                 this.compassController.onStart();
             },
         });
-        
-        delayCastle1.play();
+    }
+
+    private onShowImgCastle(id, delayImgShown){
+        if(id < 0 || id >= this.castleMat.length){
+            print("Wrong id : " + id);
+            return;
+        }
+
+        this.onFadeInOutWithDelay(
+            this.castleMat[id], 
+            delayImgShown,
+            () => {}
+        );
     }
 }

@@ -40,6 +40,8 @@
     meshMatMedievalCastle: false
     meshesMat: false
     placementHeight: false
+    towerAnimated: false
+    towerStatic: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -51,6 +53,8 @@
   DefaultScriptInputs:
     - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
       castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      towerAnimated: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      towerStatic: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       placementHeight: !<float> -20.000000
       alwaysFollowing: true
       followDistance: !<float> 150.000000
@@ -70,6 +74,8 @@
   InputLines:
     - // @input Component.Camera camera
     - // @input SceneObject castleParent
+    - // @input SceneObject towerAnimated
+    - // @input SceneObject towerStatic
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Placement"}'
     - // @input float placementHeight = -20

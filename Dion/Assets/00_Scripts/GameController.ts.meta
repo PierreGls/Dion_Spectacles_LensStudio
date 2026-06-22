@@ -32,11 +32,16 @@
     bankInfo2: false
     castleController: false
     castleMarker: false
+    castleMat: false
     compassController: false
     debug_skipMarkerButton: false
     debug_state: false
     debug_trackingText: false
     delayCastle1: false
+    delayCastle10: false
+    delayCastle11: false
+    delayCastle12: false
+    delayCastle13: false
     delayCastle2: false
     delayCastle3: false
     delayCastle4: false
@@ -44,6 +49,12 @@
     delayCastle6: false
     delayCastle7: false
     delayCastle8: false
+    delayCastle9: false
+    delayCastleImg1: false
+    delayCastleImg2: false
+    delayCastleImg3: false
+    delayCastleImg4: false
+    delayCastleImg5: false
     delayHotel: false
     delayImg1: false
     delayImg2: false
@@ -56,6 +67,7 @@
     delayImg8: false
     dublin360Mat: false
     durationFadeImgs: false
+    durationFadeMedievalCastle: false
     easingImgs: false
     frameController: false
     hotelController: false
@@ -99,6 +111,9 @@
       bankInfo1: !<reference.Material> 00000000-0000-0000-0000-000000000000
       bankInfo2: !<reference.Material> 00000000-0000-0000-0000-000000000000
       topViewMapFinal: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      castleMat: !<reference.Material[]>
+        []
+      durationFadeMedievalCastle: !<float> 0.000000
       durationFadeImgs: !<float> 0.000000
       easingImgs: 0
       delayImg1: !<float> 0.000000
@@ -119,6 +134,16 @@
       delayCastle6: !<float> 0.000000
       delayCastle7: !<float> 0.000000
       delayCastle8: !<float> 0.000000
+      delayCastle9: !<float> 0.000000
+      delayCastle10: !<float> 0.000000
+      delayCastle11: !<float> 0.000000
+      delayCastle12: !<float> 0.000000
+      delayCastle13: !<float> 0.000000
+      delayCastleImg1: !<float> 0.000000
+      delayCastleImg2: !<float> 0.000000
+      delayCastleImg3: !<float> 0.000000
+      delayCastleImg4: !<float> 0.000000
+      delayCastleImg5: !<float> 0.000000
   ScriptTypes:
     -
       {}
@@ -148,6 +173,9 @@
     - // @input Asset.Material bankInfo2
     - // @input Asset.Material topViewMapFinal
     - '// @ui {"widget":"separator"}'
+    - "// @input Asset.Material[] castleMat"
+    - '// @ui {"widget":"separator"}'
+    - // @input float durationFadeMedievalCastle
     - // @input float durationFadeImgs
     - '// @input int easingImgs {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
     - '// @ui {"widget":"separator"}'
@@ -175,16 +203,31 @@
     - // @input float delayCastle1
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'
     - // @input float delayCastle2
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Tower Castle Show</span>"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 1</span>"}'
     - // @input float delayCastle3
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Hide</span>"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Hide Modern Castle Except Tower</span>"}'
     - // @input float delayCastle4
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Show</span>"}'
     - // @input float delayCastle5
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Hide</span>"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 2</span>"}'
     - // @input float delayCastle6
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Hide</span>"}'
     - // @input float delayCastle7
-    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Hide</span>"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Modern Castle Show</span>"}'
     - // @input float delayCastle8
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 3</span>"}'
+    - // @input float delayCastle9
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 4</span>"}'
+    - // @input float delayCastle10
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Flags</span>"}'
+    - // @input float delayCastle11
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 5</span>"}'
+    - // @input float delayCastle12
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Hide all</span>"}'
+    - // @input float delayCastle13
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show compass</span>"}'
+    - // @input float delayCastleImg1
+    - // @input float delayCastleImg2
+    - // @input float delayCastleImg3
+    - // @input float delayCastleImg4
+    - // @input float delayCastleImg5

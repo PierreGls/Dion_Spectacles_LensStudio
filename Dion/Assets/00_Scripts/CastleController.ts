@@ -11,6 +11,8 @@ export class CastleController extends BaseScriptComponent {
 
   @input camera: Camera;
   @input castleParent: SceneObject;
+  @input towerAnimated: SceneObject;
+  @input towerStatic: SceneObject;
 
   @ui.separator
   @ui.group_start("Placement")
@@ -64,9 +66,10 @@ export class CastleController extends BaseScriptComponent {
 
     this.clip = this.animationPlayer.getClip("BaseLayer");
 
-    // castle visibles on start
-    this.setMeshesAlpha(0);
-    this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0);
+    // castles invisibles on start
+    this.towerStatic.enabled = false; //towerStatic
+    this.setMeshesAlpha(0); //modern castle
+    this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0); //medieval castle
   }
 
   onUpdate(): void {
@@ -79,7 +82,7 @@ export class CastleController extends BaseScriptComponent {
   // Placement
   // ----------------------------------------------------------
 
-  //FOLLOWING USER - depreciated
+  //FOLLOWING USER 
   private updateFollow(): void {
     this.targetPosition = this.getTargetPosition();
 
@@ -150,6 +153,8 @@ export class CastleController extends BaseScriptComponent {
       return;
     }
 
+    print("SHOW CASTLE");
+
     //fade in castle
     this.fadeModernCastle(0,1,1,() => {})
 
@@ -159,28 +164,34 @@ export class CastleController extends BaseScriptComponent {
     //if do not follow user, place it in front just once is played 
     if(!this.alwaysFollowing){
       this.followSmooth = 1000;
-      this.updateFollow();
+      //this.updateFollow();
     }
   }
 
-  public playAnimationHide(): void {
-    print("HIDE");
+  public playAnimationHide(withTower:boolean): void {
+    print("HIDE CASTLE");
     if (!this.animationPlayer) {
       print("[CastleController] Aucun AnimationPlayer assigné !");
       return;
     }
+
+    this.towerAnimated.enabled = withTower;
+    this.towerStatic.enabled = !withTower;
 
     const durationClip = this.clip.end - this.clip.begin;
 
     this.clip.playbackSpeed = -1;
     this.animationPlayer.playClipAt("BaseLayer", durationClip);
 
-    //fade out according to the hide animation
+    //fade out materials according to the hide animation
     const delayFadeOut = new Delay({
         duration: durationClip - 1,
         onComplete: () => {
-            this.fadePart(1, 1, 0, 1);
-            this.fadePart(0, this.alphaMid, 0, 1);
+            this.fadePart(0, 1, 0, 1);
+            if(withTower){
+              this.fadePart(1, 1, 0, 1);
+            }
+            
         }
     });
     delayFadeOut.play();
@@ -226,26 +237,22 @@ export class CastleController extends BaseScriptComponent {
   }
 
   public fadeModernCastle(from: number,to: number,duration: number,onComplete?: () => void){
-    for(let i = 0; i < this.meshesMat.length; i++){
-      this.meshesMat[i].mainPass.baseColor = new vec4(
+    this.meshesMat[0].mainPass.baseColor = new vec4(
         this.baseColor.x, 
         this.baseColor.y,
         this.baseColor.z, 
         from);
-    }
 
     new Animation({
       duration,
       easing: Easing.easeInOutQuad,
       onUpdate: (progress) => {
         const alpha = from + (to - from) * progress;
-        for(let i = 0; i < this.meshesMat.length; i++){
-          this.meshesMat[i].mainPass.baseColor = new vec4(
-            this.baseColor.x, 
-            this.baseColor.y,
-            this.baseColor.z, 
-            alpha);
-        }
+        this.meshesMat[0].mainPass.baseColor = new vec4(
+          this.baseColor.x, 
+          this.baseColor.y,
+          this.baseColor.z, 
+          alpha);
       },
       onComplete,
     }).play();
@@ -259,6 +266,11 @@ export class CastleController extends BaseScriptComponent {
       this.baseColor.z, 
       from);
 
+    //show static tower if medieval castle fade out
+    if(from === 1){
+      this.towerStatic.enabled = true;
+    }
+
     new Animation({
       duration,
       easing: Easing.easeInOutQuad,
@@ -270,7 +282,16 @@ export class CastleController extends BaseScriptComponent {
           this.baseColor.z, 
           alpha);
       },
-      onComplete,
+      onComplete: () => {
+        //hide static tower if medieval castle fade in
+        if(to === 1){
+          this.towerStatic.enabled = false;
+        }
+        if(onComplete){
+          onComplete();
+        }
+      }
+            
     }).play();
   }
 
