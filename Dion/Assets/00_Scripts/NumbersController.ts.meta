@@ -1,0 +1,66 @@
+- !<AssetImportMetadata/00af6f2c-68be-43e7-abda-4f71efc44897>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> e3f8627e-4b11-46fe-ae48-d4e341d0105e
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> e3f8627e-4b11-46fe-ae48-d4e341d0105e
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 3fff7c44-02c9-45bd-b027-e1523110a6c0
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/3fff7c44-02c9-45bd-b027-e1523110a6c0>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 4be579fb-4df4-4d9b-9e1b-f6a9e3d9ddf5
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    camera: false
+    delayBetween: false
+    easingFade: false
+    fadeDuration: false
+    followSmooth: false
+    numbersParent: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      numbersParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      followSmooth: !<float> 5.000000
+      fadeDuration: 0.500000
+      delayBetween: 0.200000
+      easingFade: 0
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Obj"}'
+    - // @input Component.Camera camera
+    - // @input SceneObject numbersParent
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Placement"}'
+    - // @input float followSmooth = 5
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Animation"}'
+    - // @input float fadeDuration = 0.5
+    - // @input float delayBetween = 0.2
+    - '// @input int easingFade {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'
+    - '// @ui {"widget":"group_end"}'

@@ -62,6 +62,7 @@
     imgIntroMat: false
     infoController: false
     markerController: false
+    numbersController: false
     seeDublinMat: false
     skylineMat: false
     textIntro: false
@@ -87,6 +88,7 @@
       markerController: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
       audioController: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
       infoController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
+      numbersController: !<MappingBased.AssignableType_7> 00000000-0000-0000-0000-000000000000
       textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
       imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       dublin360Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
@@ -133,6 +135,7 @@
     - // @input AssignableType_4 markerController
     - // @input AssignableType_5 audioController
     - // @input AssignableType_6 infoController
+    - // @input AssignableType_7 numbersController
     - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
     - // @input Asset.Material imgIntroMat

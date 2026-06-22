@@ -12,6 +12,7 @@ import { AudioController } from "./AudioController";
 import { CompassController } from "./CompassController";
 import { MarkerController } from "./MarkerController";
 import { InfoController } from "./InfoController";
+import { NumbersController } from "./NumbersController";
  
 @component
 export class GameController extends BaseScriptComponent {
@@ -30,6 +31,7 @@ export class GameController extends BaseScriptComponent {
     @input markerController: MarkerController
     @input audioController: AudioController
     @input infoController: InfoController
+    @input numbersController: NumbersController
 
     @ui.separator
 
@@ -117,7 +119,6 @@ export class GameController extends BaseScriptComponent {
         //Init 
         this.dublin360Mat.mainPass.baseColor = new vec4(1,1,1,0);
         this.seeDublinMat.mainPass.baseColor = new vec4(1,1,1,0);
-        //this.skylineMat.mainPass.baseColor = new vec4(1,1,1,0);
         this.skylineMat.mainPass.ratio = -0.1;
         this.topViewMap.mainPass.baseColor = new vec4(1,1,1,0);
         this.castleMarker.mainPass.baseColor = new vec4(1,1,1,0);
@@ -143,6 +144,9 @@ export class GameController extends BaseScriptComponent {
             }
             else if(this.debug_state === 5){
                 this.onShowImg5();
+            }
+            else if(this.debug_state === 7){
+                this.onShowImg8();
             }
             else if(this.debug_state === 8){
                 this.onShowCastle();
@@ -453,8 +457,10 @@ export class GameController extends BaseScriptComponent {
     private onShowImg8(){
         this.onSetState(9);
 
-        
+        //show numbers in hotel
+        this.numbersController.showNumbers();
 
+        //show img end 
         this.onFadeInOutWithDelay(
             this.topViewMapFinal, 
             this.delayImg8,
@@ -470,6 +476,9 @@ export class GameController extends BaseScriptComponent {
 
                 //hide castle
                 this.hotelController.playAnimationHide();
+
+                //hide numbers
+                this.numbersController.hideNumbers();
             }
         );
     }
