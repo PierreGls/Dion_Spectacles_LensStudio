@@ -2643,7 +2643,7 @@
 - !<SceneObject/4427fe4a-a793-4022-af8b-2627200bc084>
   PrefabRemaps:
     []
-  Name: DublinCastle
+  Name: 2 - DublinCastle
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -3713,7 +3713,7 @@
   PrefabRemaps:
     []
   Name: Img 0 - LookFor intro
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -6179,7 +6179,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> 35b70558-4428-488d-8109-ac09314b8ddb
+  AudioTrack: !<reference> 83640419-e081-47ff-8a87-441535f20896
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
@@ -7448,7 +7448,7 @@
   PrefabRemaps:
     []
   Name: Txt0 - Look for intro
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 6.665078, z: -0.577766}
@@ -8374,7 +8374,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> 22e4e256-489b-43b3-97b5-35d28be85fdf
+  AudioTrack: !<reference> 98855bfd-f395-4084-99a0-a915d5682f2a
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
@@ -9345,7 +9345,7 @@
 - !<SceneObject/e8f0a031-0b43-4090-9994-1faa6caff152>
   PrefabRemaps:
     []
-  Name: Intro
+  Name: 1 - Intro
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -9858,7 +9858,7 @@
     {}
   ScriptInputs:
     "":
-      debug_state: !<float> 8.000000
+      debug_state: !<float> -1.000000
       debug_trackingText: !<reference.Text> d9af125c-eba3-4288-bb56-8b14113c1f30
       activateSkipMarkerDebug: false
       debug_skipMarkerButton: !<reference.SceneObject> 847ee943-442e-4293-907f-6045016a4612
@@ -9890,14 +9890,15 @@
       durationFadeImgs: !<float> 2.000000
       easingImgs: 2
       delayImg1: 0.500000
-      delayImg2: !<float> 5.000000
-      delayImg3: !<float> 6.000000
-      delayImg4: !<float> 9.000000
-      delayImg5: !<float> 14.000000
-      delayImg5bis: !<float> 22.000000
-      delayImg6: !<float> 20.000000
-      delayImg7: !<float> 25.000000
-      delayImg8: !<float> 15.000000
+      delayImg2: 5.500000
+      delayImg3: 4.500000
+      delayImg4: !<float> 8.000000
+      delayImg4bis: !<float> 3.000000
+      delayImg5: !<float> 22.000000
+      delayImg5bis: !<float> 13.000000
+      delayImg6: !<float> 21.000000
+      delayImg7: !<float> 29.000000
+      delayImg8: !<float> 11.000000
       delayHotel: !<float> 1.000000
       delayCastle1: 0.500000
       delayCastle2: !<float> 24.000000

@@ -79,7 +79,7 @@ export class CastleController extends BaseScriptComponent {
     // castles invisibles on start
     this.towerStatic.enabled = false; //towerStatic
     this.meshesMat[1].mainPass.baseColor = new vec4(1,1,1,1);
-    this.meshesMat[0].mainPass.baseColor = new vec4(1,1,1,1);//modern castle
+    this.meshesMat[0].mainPass.baseColor = new vec4(1,1,1,0);//modern castle
     this.meshMatMedievalCastle.mainPass.baseColor = new vec4(1, 1, 1, 0); //medieval castle
   
     //flag invisibles

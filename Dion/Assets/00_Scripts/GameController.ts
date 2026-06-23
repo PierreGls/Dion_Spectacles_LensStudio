@@ -77,6 +77,8 @@ export class GameController extends BaseScriptComponent {
     @ui.label('<span style="color: #60A5FA;">Show Skyline</span>')
     @input delayImg4: number;
     @ui.label('<span style="color: #60A5FA;">Show Top view map</span>')
+    @input delayImg4bis: number;
+    @ui.label('<span style="color: #60A5FA;">Wait</span>')
     @input delayImg5: number;
     @ui.label('<span style="color: #60A5FA;">Show Look for marker</span>')
     @input delayImg5bis: number;
@@ -436,19 +438,27 @@ export class GameController extends BaseScriptComponent {
     private onShowImg5(){
         this.onSetState(5);
 
-        this.onFadeInOutTextWithDelay(this.delayImg5);
-        this.onFadeInOutWithDelay(
-            this.castleMarker, 
-            this.delayImg5,
-            () => {
-                delayBeforeShowHotel.play();
-            }
-        );
+        const delayBeforeShowMarker = new Delay({
+            duration: this.delayImg4bis,
+            onComplete: () => {
+                this.onFadeInOutTextWithDelay(this.delayImg5);
+                this.onFadeInOutWithDelay(
+                    this.castleMarker, 
+                    this.delayImg5,
+                    () => {
+                        this.onSetState(6);
+                        delayBeforeShowHotel.play();
+                    }
+                );
+            },
+        });
+        delayBeforeShowMarker.play()
+        
+
 
         const delayBeforeShowHotel = new Delay({
             duration: this.delayImg5bis,
             onComplete: () => {
-                this.onSetState(6);
                 this.onShowImg6();
 
                 //In parallele, play hotel anim

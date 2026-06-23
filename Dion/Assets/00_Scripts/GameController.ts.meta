@@ -61,6 +61,7 @@
     delayImg2: false
     delayImg3: false
     delayImg4: false
+    delayImg4bis: false
     delayImg5: false
     delayImg5bis: false
     delayImg6: false
@@ -121,6 +122,7 @@
       delayImg2: !<float> 0.000000
       delayImg3: !<float> 0.000000
       delayImg4: !<float> 0.000000
+      delayImg4bis: !<float> 0.000000
       delayImg5: !<float> 0.000000
       delayImg5bis: !<float> 0.000000
       delayImg6: !<float> 0.000000
@@ -189,6 +191,8 @@
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Skyline</span>"}'
     - // @input float delayImg4
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Top view map</span>"}'
+    - // @input float delayImg4bis
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Wait</span>"}'
     - // @input float delayImg5
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show Look for marker</span>"}'
     - // @input float delayImg5bis
