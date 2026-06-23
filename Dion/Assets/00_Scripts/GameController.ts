@@ -99,6 +99,8 @@ export class GameController extends BaseScriptComponent {
     @input delayCastle2: number;
     @ui.label('<span style="color: #60A5FA;">Show img castle 1</span>')
     @input delayCastle3: number;
+    @ui.label('<span style="color: #60A5FA;">Show img info 1</span>')
+    @input delayCastle3bis: number;
     @ui.label('<span style="color: #60A5FA;">Hide Modern Castle Except Tower</span>')
     @input delayCastle4: number;
     @ui.label('<span style="color: #60A5FA;">Medieval Castle Show</span>')
@@ -598,9 +600,19 @@ export class GameController extends BaseScriptComponent {
             duration: this.delayCastle3,
             onComplete: () => {
                 this.onSetState(12);
+                //hide modern castle expect tower 
                 this.castleController.playAnimationHide(false);
-                delayCastle4.play();
+                delayCastle3bis.play();
             }
+        });
+
+        //show info plane 1
+        const delayCastle3bis = new Delay({
+            duration: this.delayCastle3bis,
+            onComplete: () => {
+                this.infoController.fadeInPlane(0,1);
+                delayCastle4.play();
+            },
         });
 
         //Show medieval Castle
@@ -608,7 +620,12 @@ export class GameController extends BaseScriptComponent {
             duration: this.delayCastle4,
             onComplete: () => {
                 this.onSetState(13);
+                //medieval castle
                 this.castleController.fadeMedievalCastle(0,1,this.durationFadeMedievalCastle);
+                //hide info plane 1
+                this.infoController.fadeOutPlane(0,1);
+                //show indo plane 2
+                this.infoController.fadeInPlane(1,1);
                 delayCastle5.play();
             },
         });
@@ -628,6 +645,8 @@ export class GameController extends BaseScriptComponent {
             onComplete: () => {
                 this.onSetState(14);
                 this.castleController.fadeMedievalCastle(1,0,this.durationFadeMedievalCastle);
+                //hide info plane 2
+                this.infoController.fadeOutPlane(1,1);
                 delayCastle7.play();
             },
         });

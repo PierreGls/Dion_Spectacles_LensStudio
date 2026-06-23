@@ -44,6 +44,7 @@
     delayCastle13: false
     delayCastle2: false
     delayCastle3: false
+    delayCastle3bis: false
     delayCastle4: false
     delayCastle5: false
     delayCastle6: false
@@ -129,6 +130,7 @@
       delayCastle1: !<float> 0.000000
       delayCastle2: !<float> 0.000000
       delayCastle3: !<float> 0.000000
+      delayCastle3bis: !<float> 0.000000
       delayCastle4: !<float> 0.000000
       delayCastle5: !<float> 0.000000
       delayCastle6: !<float> 0.000000
@@ -205,6 +207,8 @@
     - // @input float delayCastle2
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img castle 1</span>"}'
     - // @input float delayCastle3
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Show img info 1</span>"}'
+    - // @input float delayCastle3bis
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Hide Modern Castle Except Tower</span>"}'
     - // @input float delayCastle4
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Medieval Castle Show</span>"}'
