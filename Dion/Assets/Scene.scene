@@ -994,9 +994,9 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -0.642700, z: -2.478197}
+    Position: {x: 0.000000, y: -0.642700, z: -3.723561}
     Rotation: {x: 90.000000, y: -0.000000, z: 0.000000}
-    Scale: {x: 0.250000, y: 0.250000, z: 0.250000}
+    Scale: {x: 0.500000, y: 0.500000, z: 0.500000}
     HasSegmentScaleCompensation: false
   Children:
     - !<own> 267fb2ea-b56a-4073-8d7b-10cda930368d
@@ -2544,7 +2544,6 @@
   ScriptInputsDefault:
     placementHeight: true
     smoothPositionFactor: true
-    distMarker: true
     alwaysFollowing: true
     followDistance: true
   ScriptTypesDefault:
@@ -2555,7 +2554,7 @@
       objsParent: !<reference.SceneObject> a4bdd9dc-ff5c-4bb5-8b99-429a42119763
       placementHeight: !<float> -20.000000
       smoothPositionFactor: !<float> 5.000000
-      distMarker: !<float> 20.000000
+      distMarker: !<float> -30.000000
       alwaysFollowing: false
       followDistance: !<float> 150.000000
   ScriptTypes:
@@ -5119,7 +5118,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> 09caa3a5-05e2-401a-a018-98224e2727f5
+  AudioTrack: !<reference> 150a20ef-8f81-43b0-8fb7-8bd59bfd550e
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
@@ -6358,7 +6357,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> ff357462-b384-4a1e-a5dd-e5096585e6e6
+  AudioTrack: !<reference> 1fc1d6bc-4164-4837-ac78-55b9fc0459ee
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
@@ -6604,7 +6603,7 @@
     []
   Name: Render Mesh Visual
   Enabled: true
-  RenderOrder: 0
+  RenderOrder: 100
   StretchMode: Stretch
   VerticalAlignment: Center
   HorizontalAlignment: Center
@@ -8423,7 +8422,7 @@
     []
   Name: Render Mesh Visual
   Enabled: true
-  RenderOrder: 0
+  RenderOrder: 100
   StretchMode: Stretch
   VerticalAlignment: Center
   HorizontalAlignment: Center
@@ -8508,7 +8507,7 @@
     []
   Name: Audio
   Enabled: true
-  AudioTrack: !<reference> a3d1a892-0532-4560-9b54-a3617e68541b
+  AudioTrack: !<reference> 1afe025e-01c6-4662-9a88-f2be204556db
   EnableAutoplayLoop: false
   Volume: 1.000000
   EnableMixToSnap: false
