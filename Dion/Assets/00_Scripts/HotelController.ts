@@ -8,93 +8,34 @@ import { Easing } from "./Easing";
 
 @component
 export class HotelController extends BaseScriptComponent {
-
-  @input camera: Camera;
+  
   @input hotelParent: SceneObject;
   @input hotelStatic: SceneObject;
-  @input animationPlayer: AnimationPlayer; 
-
-  @ui.separator
-  @ui.group_start("Placement")
-  @input('float') placementHeight:   number = -20;  
-
-  @ui.separator
-  @input('boolean') alwaysFollowing: boolean = false;
-  @input('float') @showIf("alwaysFollowing") followDistance: number = 150;   
-  @input('float') @showIf("alwaysFollowing") followSmooth:   number = 5;    
-
-  @ui.separator
-
-  @input('boolean') isPlacementRelativeMarker: boolean = false;
-  @input('float') @showIf("isPlacementRelativeMarker") distMarker: number = 150;   
-  @ui.group_end   
+  @input animationPlayer: AnimationPlayer;   
 
   @ui.separator
   @input('float') fadeInDuration: number = 1.5;
   @input('float') fadeOutDuration: number = 1.0; 
   @input('float') alphaMax: number = 0.95;
 
-  
-
   @ui.separator
   @input('Asset.Material[]') meshesMat: Material[];
 
   // --- Private ---
 
-  private hotelParentTransform: Transform;
-  private cameraTransform: Transform;
-  private targetPosition: vec3;
-
   private clip : AnimationClip;
 
   onAwake(): void {
-    let eventUpdate = this.createEvent('UpdateEvent');
-    eventUpdate.bind(this.onUpdate.bind(this));
-
-    this.hotelParentTransform = this.hotelParent.getTransform();
-    this.cameraTransform = this.camera.getTransform();
-    this.targetPosition = this.getTargetPosition();
-
-    this.hotelParentTransform.setWorldPosition(this.targetPosition);
-
     this.clip = this.animationPlayer.getClip("BaseLayer");
 
     // hotel not visible on start
-    this.setMeshesAlpha(0); //TO CHANG
+    this.setMeshesAlpha(0); 
     this.hotelStatic.enabled = false;
   }
 
   onUpdate(): void {
-    if(this.alwaysFollowing){
-      this.updateFollow();
-    }
   }
 
-  // ----------------------------------------------------------
-  // Follow camera
-  // ----------------------------------------------------------
-
-  private updateFollow(): void {
-    this.targetPosition = this.getTargetPosition();
-
-    const current = this.hotelParentTransform.getWorldPosition();
-    const deltaTime = getDeltaTime();
-    const lerpFactor = Math.min(this.followSmooth * deltaTime, 1);
-
-    const smoothed = vec3.lerp(current, this.targetPosition, lerpFactor);
-    this.hotelParentTransform.setWorldPosition(smoothed);
-  }
-
-  private getTargetPosition(): vec3 {
-    const camPos     = this.cameraTransform.getWorldPosition();
-    const camForward = this.cameraTransform.forward;
-
-    return new vec3(
-      camPos.x + camForward.x * this.followDistance,
-      this.placementHeight,
-      camPos.z + camForward.z * this.followDistance
-    );
-  }
 
   // ----------------------------------------------------------
   // Fade all meshs
@@ -137,12 +78,6 @@ export class HotelController extends BaseScriptComponent {
   // ----------------------------------------------------------
 
   playAnimationShow(onComplete?: () => void): void {
-    //if do not follow user, place it in front just once is played 
-    if(!this.alwaysFollowing){
-      this.followSmooth = 1000;
-      this.updateFollow();
-    }
-
     //Fade In Everything
     this.fadeInMeshes();
 

@@ -29,8 +29,6 @@
     followSmooth: false
     gameController: false
     markerObjs: false
-    objectAttached: false
-    parentToFollow: false
     placementRelativeMarkerDebug: false
     placementRelativeMarkers: false
   ScriptTypesHidden:
@@ -43,8 +41,6 @@
     []
   DefaultScriptInputs:
     - gameController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
-      objectAttached: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      parentToFollow: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       markerObjs: !<reference.SceneObject[]>
         []
       placementRelativeMarkerDebug: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
@@ -58,8 +54,6 @@
     - // @input AssignableType gameController
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Attached object</span>"}'
-    - // @input SceneObject objectAttached
-    - // @input SceneObject parentToFollow
     - "// @input SceneObject[] markerObjs"
     - // @input SceneObject placementRelativeMarkerDebug
     - "// @input SceneObject[] placementRelativeMarkers"

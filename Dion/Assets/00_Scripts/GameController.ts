@@ -7,12 +7,12 @@ import { Delay } from "./Animation";
 import { Easing } from "./Easing";    
 import { HotelController } from "./HotelController";
 import { CastleController } from "./CastleController";
-import { FrameInteractionDetector } from "./FrameInteractionDetector";
 import { AudioController } from "./AudioController";
 import { CompassController } from "./CompassController";
 import { MarkerController } from "./MarkerController";
 import { InfoController } from "./InfoController";
 import { NumbersController } from "./NumbersController";
+import { PlacementController } from "./PlacementController";
  
 @component
 export class GameController extends BaseScriptComponent {
@@ -26,12 +26,12 @@ export class GameController extends BaseScriptComponent {
 
     @input hotelController: HotelController
     @input castleController: CastleController
-    @input frameController: FrameInteractionDetector
     @input compassController: CompassController
     @input markerController: MarkerController
     @input audioController: AudioController
     @input infoController: InfoController
     @input numbersController: NumbersController
+    @input placementController: PlacementController
 
     @ui.separator
 
@@ -41,6 +41,7 @@ export class GameController extends BaseScriptComponent {
     @input() seeDublinMat: Material;
     @input() skylineMat: Material;
     @input() topViewMap: Material;
+    @input() topViewMapWithMarker: Material;
     @input() castleMarker: Material;
     @input() bankInfo1: Material;
     @input() bankInfo2: Material;
@@ -146,6 +147,7 @@ export class GameController extends BaseScriptComponent {
         this.seeDublinMat.mainPass.baseColor = new vec4(1,1,1,0);
         this.skylineMat.mainPass.ratio = -0.1;
         this.topViewMap.mainPass.baseColor = new vec4(1,1,1,0);
+        this.topViewMapWithMarker.mainPass.baseColor = new vec4(1,1,1,0);
         this.castleMarker.mainPass.baseColor = new vec4(1,1,1,0);
         this.bankInfo1.mainPass.baseColor = new vec4(1,1,1,0);
         this.bankInfo2.mainPass.baseColor = new vec4(1,1,1,0);
@@ -154,6 +156,9 @@ export class GameController extends BaseScriptComponent {
         this.castleMat.forEach((mat) => {
             mat.mainPass.baseColor = new vec4(1,1,1,0);
         });
+
+        //Start
+        this.onShowIntro();
 
         //Debug
         this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
@@ -192,14 +197,6 @@ export class GameController extends BaseScriptComponent {
     }
 
     // ----------------------------------------------------------
-    // Clicks
-    // ----------------------------------------------------------
-
-    public onClickOnFrame(){
-        print("OnClickOnFrame");
-    }
-
-    // ----------------------------------------------------------
     // Marker
     // ----------------------------------------------------------
 
@@ -207,25 +204,24 @@ export class GameController extends BaseScriptComponent {
         print("onMarkerFound : " + id);
         this.debug_trackingText.text = "Marker Status : found";
 
+        const markerpos = this.markerController.nextMarkerPos;
+        this.compassController.setTarget(markerpos);
+
+        const markerTr = this.markerController.targetTr;
+        this.placementController.updatePositionMarker(markerTr);
+
+        //Stop 1
         //id 0 = debug id 1 = intro
-        if((id == 0 || id == 1) && this.state === 0){
-            this.onHideImgIntro();
-            //Update compass for next target : dublin castle
-            const markerpos = this.markerController.nextMarkerPos;
-            this.compassController.setTarget(markerpos);
+        //if((id == 0 || id == 1) && this.state === 0){
+        if(this.state === 5){
+            this.onShowHotel();
         }
 
+        //Stop 2
         //id 0 = debug id 2 = castle
-        if(id == 0 || id == 2){
-            //Update compass for next target : christchurch
-            const markerpos = this.markerController.nextMarkerPos;
-            this.compassController.setTarget(markerpos);
-            //Update castle placement
-            const markerTr = this.markerController.targetTr;
-            this.castleController.updatePositionMarker(markerTr);
-            if(this.state === 9){
-                this.onShowCastle();
-            }
+        //if((id == 0 || id == 2) && this.state === 9){
+        else if(this.state === 9){
+            this.onShowCastle();
         }
     }
 
@@ -342,6 +338,16 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
     // Anims
     // ----------------------------------------------------------
+    private onShowIntro(){
+        const delay = new Delay({
+            duration: 0.5,
+            onComplete: () => {
+                this.onShowImg1();
+            },
+        });
+        delay.play();
+    }
+
     private onHideImgIntro(){
         this.debug_skipMarkerButton.enabled = false;
 
@@ -436,30 +442,50 @@ export class GameController extends BaseScriptComponent {
     }
 
     private onShowImg5(){
-        this.onSetState(5);
-
-        const delayBeforeShowMarker = new Delay({
-            duration: this.delayImg4bis,
-            onComplete: () => {
-                this.onFadeInOutTextWithDelay(this.delayImg5);
-                this.onFadeInOutWithDelay(
-                    this.castleMarker, 
-                    this.delayImg5,
-                    () => {
-                        this.onSetState(6);
-                        delayBeforeShowHotel.play();
-                    }
-                );
-            },
-        });
-        delayBeforeShowMarker.play()
         
+
+        /*
+        this.onFadeInOutWithDelay(
+            this.topViewMapWithMarker, 
+            this.delayImg5,
+            () => {
+                //delayBeforeShowHotel.play();
+            }
+        );
+        */
+
+        this.onFadeImg(
+            this.topViewMapWithMarker, 
+            0,
+            1,
+            () => {
+                this.onSetState(5);
+            }
+        );
+    }
+
+
+
+
+        
+    private onShowHotel(){
+        this.onSetState(6);
+        this.onFadeImg(
+            this.topViewMapWithMarker, 
+            1,
+            0,
+            () => {
+                delayBeforeShowHotel.play();
+            }
+        );
 
 
         const delayBeforeShowHotel = new Delay({
             duration: this.delayImg5bis,
             onComplete: () => {
                 this.onShowImg6();
+
+                this.audioController.playAudio(1);
 
                 //In parallele, play hotel anim
                 this.onPlayHotelAnimation();
@@ -492,8 +518,6 @@ export class GameController extends BaseScriptComponent {
     }
 
     private onShowImg8(){
-        this.onSetState(9);
-
         //show numbers in hotel
         this.numbersController.showNumbers();
 
@@ -502,6 +526,8 @@ export class GameController extends BaseScriptComponent {
             this.topViewMapFinal, 
             this.delayImg8,
             () => {
+                this.onSetState(9);
+
                 print("Waiting for sticker : castle")
                 this.debug_trackingText.text = "Marker Status : waiting for the sticker";
                 if(this.activateSkipMarkerDebug){
@@ -571,17 +597,14 @@ export class GameController extends BaseScriptComponent {
         this.debug_skipMarkerButton.enabled = false;
 
         //play new audio
-        this.audioController.playAudio(1);
+        this.audioController.playAudio(2);
         
         //hide compass
         this.compassController.onStop();
 
-        //Hide frame
-        this.frameController.onHideFrame();
-
         //place castle
         const markerTr = this.markerController.targetTr;
-        this.castleController.updatePositionMarker(markerTr);
+        this.placementController.updatePositionMarker(markerTr);
         
         const delayCastle1 = new Delay({
             duration: this.delayCastle1,
@@ -721,13 +744,14 @@ export class GameController extends BaseScriptComponent {
             },
         });
 
-        //Show compass
+        //Show outro
         const delayCastle13 = new Delay({
             duration: this.delayCastle13,
             onComplete: () => {
                 this.onSetState(17);
-                this.compassController.setTextureMarker(2);
-                this.compassController.onStart();
+                //this.compassController.setTextureMarker(2);
+                //this.compassController.onStart();
+                this.onFadeImg(this.castleMat[5], 0, 1);
             },
         });
     }

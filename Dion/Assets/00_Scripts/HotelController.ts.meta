@@ -27,19 +27,12 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     alphaMax: false
-    alwaysFollowing: false
     animationPlayer: false
-    camera: false
-    distMarker: false
     fadeInDuration: false
     fadeOutDuration: false
-    followDistance: false
-    followSmooth: false
     hotelParent: false
     hotelStatic: false
-    isPlacementRelativeMarker: false
     meshesMat: false
-    placementHeight: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -49,16 +42,9 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
-      hotelParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+    - hotelParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       hotelStatic: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
-      placementHeight: !<float> -20.000000
-      alwaysFollowing: true
-      followDistance: !<float> 150.000000
-      followSmooth: !<float> 5.000000
-      isPlacementRelativeMarker: false
-      distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
       fadeOutDuration: !<float> 1.000000
       alphaMax: 0.950000
@@ -68,21 +54,9 @@
     -
       {}
   InputLines:
-    - // @input Component.Camera camera
     - // @input SceneObject hotelParent
     - // @input SceneObject hotelStatic
     - // @input Component.AnimationPlayer animationPlayer
-    - '// @ui {"widget":"separator"}'
-    - '// @ui {"widget":"group_start", "label":"Placement"}'
-    - // @input float placementHeight = -20
-    - '// @ui {"widget":"separator"}'
-    - // @input boolean alwaysFollowing
-    - '// @input float followDistance = 150 {"showIf":"alwaysFollowing"}'
-    - '// @input float followSmooth = 5 {"showIf":"alwaysFollowing"}'
-    - '// @ui {"widget":"separator"}'
-    - // @input boolean isPlacementRelativeMarker
-    - '// @input float distMarker = 150 {"showIf":"isPlacementRelativeMarker"}'
-    - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float fadeOutDuration = 1

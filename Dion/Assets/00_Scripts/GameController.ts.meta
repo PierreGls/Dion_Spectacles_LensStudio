@@ -71,17 +71,18 @@
     durationFadeImgs: false
     durationFadeMedievalCastle: false
     easingImgs: false
-    frameController: false
     hotelController: false
     imgIntroMat: false
     infoController: false
     markerController: false
     numbersController: false
+    placementController: false
     seeDublinMat: false
     skylineMat: false
     textIntro: false
     topViewMap: false
     topViewMapFinal: false
+    topViewMapWithMarker: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -97,18 +98,19 @@
       debug_skipMarkerButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       hotelController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       castleController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
-      frameController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
-      compassController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
-      markerController: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
-      audioController: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
-      infoController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
-      numbersController: !<MappingBased.AssignableType_7> 00000000-0000-0000-0000-000000000000
+      compassController: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      markerController: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      audioController: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
+      infoController: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
+      numbersController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
+      placementController: !<MappingBased.AssignableType_7> 00000000-0000-0000-0000-000000000000
       textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
       imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       dublin360Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       seeDublinMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       skylineMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       topViewMap: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      topViewMapWithMarker: !<reference.Material> 00000000-0000-0000-0000-000000000000
       castleMarker: !<reference.Material> 00000000-0000-0000-0000-000000000000
       bankInfo1: !<reference.Material> 00000000-0000-0000-0000-000000000000
       bankInfo2: !<reference.Material> 00000000-0000-0000-0000-000000000000
@@ -159,12 +161,12 @@
     - '// @ui {"widget":"separator"}'
     - // @input AssignableType hotelController
     - // @input AssignableType_1 castleController
-    - // @input AssignableType_2 frameController
-    - // @input AssignableType_3 compassController
-    - // @input AssignableType_4 markerController
-    - // @input AssignableType_5 audioController
-    - // @input AssignableType_6 infoController
-    - // @input AssignableType_7 numbersController
+    - // @input AssignableType_2 compassController
+    - // @input AssignableType_3 markerController
+    - // @input AssignableType_4 audioController
+    - // @input AssignableType_5 infoController
+    - // @input AssignableType_6 numbersController
+    - // @input AssignableType_7 placementController
     - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
     - // @input Asset.Material imgIntroMat
@@ -172,6 +174,7 @@
     - // @input Asset.Material seeDublinMat
     - // @input Asset.Material skylineMat
     - // @input Asset.Material topViewMap
+    - // @input Asset.Material topViewMapWithMarker
     - // @input Asset.Material castleMarker
     - // @input Asset.Material bankInfo1
     - // @input Asset.Material bankInfo2

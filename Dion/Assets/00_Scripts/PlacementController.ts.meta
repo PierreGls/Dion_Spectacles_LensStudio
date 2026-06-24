@@ -1,0 +1,63 @@
+- !<AssetImportMetadata/285ce206-70c5-4dca-9520-e8a03284887b>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 02b72d04-404c-4fa0-8f14-d415533ce681
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 02b72d04-404c-4fa0-8f14-d415533ce681
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 79f51fe5-746a-4e1f-b4f7-87191adbebc7
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/79f51fe5-746a-4e1f-b4f7-87191adbebc7>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 8bfbb92d-4d6b-4592-8752-ac27db833ea8
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    alwaysFollowing: false
+    camera: false
+    distMarker: false
+    followDistance: false
+    objsParent: false
+    placementHeight: false
+    smoothPositionFactor: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      objsParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      placementHeight: !<float> -20.000000
+      smoothPositionFactor: !<float> 5.000000
+      distMarker: !<float> 20.000000
+      alwaysFollowing: false
+      followDistance: !<float> 150.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input Component.Camera camera
+    - // @input SceneObject objsParent
+    - '// @ui {"widget":"separator"}'
+    - // @input float placementHeight = -20
+    - // @input float smoothPositionFactor = 5
+    - // @input float distMarker = 20
+    - // @input boolean alwaysFollowing
+    - '// @input float followDistance = 150 {"showIf":"alwaysFollowing"}'

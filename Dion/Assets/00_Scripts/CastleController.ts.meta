@@ -27,22 +27,15 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     alphaMid: false
-    alwaysFollowing: false
     animationPlayer: false
     baseColor: false
-    camera: false
     castleParent: false
-    distMarker: false
     fadeInDuration: false
     flagIreland: false
     flagLGBT: false
-    followDistance: false
-    isPlacementRelativeMarker: false
     maxSizeFlags: false
     meshMatMedievalCastle: false
     meshesMat: false
-    placementHeight: false
-    smoothPositionFactor: false
     towerAnimated: false
     towerStatic: false
   ScriptTypesHidden:
@@ -54,18 +47,11 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
-      castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+    - castleParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       towerAnimated: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       towerStatic: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       flagIreland: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       flagLGBT: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
-      placementHeight: !<float> -20.000000
-      alwaysFollowing: true
-      followDistance: !<float> 150.000000
-      smoothPositionFactor: !<float> 5.000000
-      isPlacementRelativeMarker: false
-      distMarker: !<float> 150.000000
       fadeInDuration: 1.500000
       alphaMid: 0.200000
       animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
@@ -78,23 +64,11 @@
     -
       {}
   InputLines:
-    - // @input Component.Camera camera
     - // @input SceneObject castleParent
     - // @input SceneObject towerAnimated
     - // @input SceneObject towerStatic
     - // @input SceneObject flagIreland
     - // @input SceneObject flagLGBT
-    - '// @ui {"widget":"separator"}'
-    - '// @ui {"widget":"group_start", "label":"Placement"}'
-    - // @input float placementHeight = -20
-    - '// @ui {"widget":"separator"}'
-    - // @input boolean alwaysFollowing
-    - '// @input float followDistance = 150 {"showIf":"alwaysFollowing"}'
-    - // @input float smoothPositionFactor = 5
-    - '// @ui {"widget":"separator"}'
-    - // @input boolean isPlacementRelativeMarker
-    - '// @input float distMarker = 150 {"showIf":"isPlacementRelativeMarker"}'
-    - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - // @input float fadeInDuration = 1.5
     - // @input float alphaMid = 0.2

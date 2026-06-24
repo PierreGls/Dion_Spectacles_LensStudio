@@ -43,7 +43,7 @@ export class FrameInteractionDetector extends BaseScriptComponent {
         // Define the desired callback logic for the relevant Interactable event.
         let onTriggerStartCallback = (event: InteractorEvent) => {
             //print( `The Interactable has been triggered by an Interactor with input type: ${event.interactor.inputType} at position: ${event.interactor.targetHitInfo.hit.position}`);
-            this.gameController.onClickOnFrame();
+            //this.gameController.onClickOnFrame();
         };
 
         interactable.onInteractorTriggerStart(onTriggerStartCallback);
