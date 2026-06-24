@@ -71,8 +71,8 @@
     durationFadeImgs: false
     durationFadeMedievalCastle: false
     easingImgs: false
+    holdingScreenIntro: false
     hotelController: false
-    imgIntroMat: false
     infoController: false
     markerController: false
     numbersController: false
@@ -105,7 +105,7 @@
       numbersController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
       placementController: !<MappingBased.AssignableType_7> 00000000-0000-0000-0000-000000000000
       textIntro: !<reference.Text> 00000000-0000-0000-0000-000000000000
-      imgIntroMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      holdingScreenIntro: !<reference.Material> 00000000-0000-0000-0000-000000000000
       dublin360Mat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       seeDublinMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       skylineMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
@@ -169,7 +169,7 @@
     - // @input AssignableType_7 placementController
     - '// @ui {"widget":"separator"}'
     - // @input Component.Text textIntro
-    - // @input Asset.Material imgIntroMat
+    - // @input Asset.Material holdingScreenIntro
     - // @input Asset.Material dublin360Mat
     - // @input Asset.Material seeDublinMat
     - // @input Asset.Material skylineMat

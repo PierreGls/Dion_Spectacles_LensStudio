@@ -36,7 +36,7 @@ export class GameController extends BaseScriptComponent {
     @ui.separator
 
     @input() textIntro: Text;
-    @input() imgIntroMat: Material;
+    @input() holdingScreenIntro: Material;
     @input() dublin360Mat: Material;
     @input() seeDublinMat: Material;
     @input() skylineMat: Material;
@@ -158,7 +158,7 @@ export class GameController extends BaseScriptComponent {
         });
 
         //Start
-        this.onShowIntro();
+        //this.onShowIntro();
 
         //Debug
         this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
@@ -208,13 +208,13 @@ export class GameController extends BaseScriptComponent {
         this.compassController.setTarget(markerpos);
 
         const markerTr = this.markerController.targetTr;
-        this.placementController.updatePositionMarker(markerTr);
-
+        
         //Stop 1
         //id 0 = debug id 1 = intro
         //if((id == 0 || id == 1) && this.state === 0){
-        if(this.state === 5){
-            this.onShowHotel();
+        if(this.state === 0){
+            this.onHideImgIntro();
+            this.placementController.updatePositionMarker(markerTr);
         }
 
         //Stop 2
@@ -222,6 +222,7 @@ export class GameController extends BaseScriptComponent {
         //if((id == 0 || id == 2) && this.state === 9){
         else if(this.state === 9){
             this.onShowCastle();
+            this.placementController.updatePositionMarker(markerTr);
         }
     }
 
@@ -338,6 +339,7 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
     // Anims
     // ----------------------------------------------------------
+    //Depreciated
     private onShowIntro(){
         const delay = new Delay({
             duration: 0.5,
@@ -353,7 +355,7 @@ export class GameController extends BaseScriptComponent {
 
         this.onFadeOutText();
         this.onFadeOutImg(
-            this.imgIntroMat, 
+            this.holdingScreenIntro, 
             () => {
                 this.onShowImg1();
             }
@@ -444,16 +446,17 @@ export class GameController extends BaseScriptComponent {
     private onShowImg5(){
         
 
-        /*
+        
         this.onFadeInOutWithDelay(
             this.topViewMapWithMarker, 
             this.delayImg5,
             () => {
                 //delayBeforeShowHotel.play();
+                this.onShowHotel();
             }
         );
-        */
-
+        
+        /*
         this.onFadeImg(
             this.topViewMapWithMarker, 
             0,
@@ -462,6 +465,7 @@ export class GameController extends BaseScriptComponent {
                 this.onSetState(5);
             }
         );
+        */
     }
 
 
@@ -470,27 +474,17 @@ export class GameController extends BaseScriptComponent {
         
     private onShowHotel(){
         this.onSetState(6);
-        this.onFadeImg(
-            this.topViewMapWithMarker, 
-            1,
-            0,
-            () => {
-                delayBeforeShowHotel.play();
-            }
-        );
-
 
         const delayBeforeShowHotel = new Delay({
             duration: this.delayImg5bis,
             onComplete: () => {
                 this.onShowImg6();
 
-                this.audioController.playAudio(1);
-
                 //In parallele, play hotel anim
                 this.onPlayHotelAnimation();
             },
         });
+        delayBeforeShowHotel.play();
     }
 
     private onShowImg6(){
@@ -597,7 +591,7 @@ export class GameController extends BaseScriptComponent {
         this.debug_skipMarkerButton.enabled = false;
 
         //play new audio
-        this.audioController.playAudio(2);
+        this.audioController.playAudio(1);
         
         //hide compass
         this.compassController.onStop();

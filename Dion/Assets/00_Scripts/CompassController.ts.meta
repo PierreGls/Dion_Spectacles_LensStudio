@@ -27,8 +27,10 @@
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     arrowMat: false
-    arrowObject: false
+    arrowObj: false
     camera: false
+    compassObj: false
+    distanceFromCam: false
     durationFade: false
     easingFade: false
     iconMat: false
@@ -44,11 +46,13 @@
     []
   DefaultScriptInputs:
     - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
-      arrowObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      arrowObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      compassObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       iconMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       arrowMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
       texturesMarkers: !<reference.Texture[]>
         []
+      distanceFromCam: !<float> 2.000000
       rotationSmooth: !<float> 8.000000
       durationFade: !<float> 0.000000
       easingFade: 0
@@ -58,13 +62,15 @@
   InputLines:
     - // @input Component.Camera camera
     - '// @ui {"widget":"separator"}'
-    - // @input SceneObject arrowObject
+    - // @input SceneObject arrowObj
+    - // @input SceneObject compassObj
     - '// @ui {"widget":"separator"}'
     - // @input Asset.Material iconMat
     - // @input Asset.Material arrowMat
     - '// @ui {"widget":"separator"}'
     - "// @input Asset.Texture[] texturesMarkers"
     - '// @ui {"widget":"separator"}'
+    - // @input float distanceFromCam = 2
     - // @input float rotationSmooth = 8
     - // @input float durationFade
     - '// @input int easingFade {"widget":"combobox", "values":[{"label":"linear", "value":0}, {"label":"easeInQuad", "value":1}, {"label":"easeOutQuad", "value":2}, {"label":"easeInOutQuad", "value":3}, {"label":"easeInCubic", "value":4}, {"label":"easeOutCubic", "value":5}, {"label":"easeInOutCubic", "value":6}]}'

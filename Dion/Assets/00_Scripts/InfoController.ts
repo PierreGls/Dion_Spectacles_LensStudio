@@ -13,8 +13,6 @@ export class InfoController extends BaseScriptComponent {
 
   // --- Inspector ---
 
-  @input camera: Camera;
-
   @input('SceneObject[]') infoPlanes: SceneObject[];
   @input('Asset.Material[]') infoPlaneMats: Material[];
 
@@ -22,56 +20,13 @@ export class InfoController extends BaseScriptComponent {
 
   // --- Private ---
 
-  private cameraTransform: Transform;
-  private planeTransforms: Transform[] = [];
-
   onAwake(): void {
-    let eventUpdate = this.createEvent('UpdateEvent');
-      eventUpdate.bind(this.onUpdate.bind(this));
-
-    this.cameraTransform = this.camera.getTransform();
-
-    //store tr
-    this.infoPlanes.forEach((plane) => {
-      this.planeTransforms.push(plane.getTransform());
-    });
-    
     //Start Opacity
     this.infoPlaneMats.forEach((mat) => {
       mat.mainPass.baseColor = new vec4(1, 1, 1, 0);
     });
   }
 
-  onUpdate(): void {
-    this.updateBillboards();
-  }
-
-  // ----------------------------------------------------------
-  // Billboard — make every plane face the camera (Y axis only)
-  // ----------------------------------------------------------
-
-  private updateBillboards(): void {
-    const camPos = this.cameraTransform.getWorldPosition();
-
-    this.planeTransforms.forEach((planeTransform) => {
-      const planePos = planeTransform.getWorldPosition();
-
-      // Flat direction toward camera (ignore Y)
-      const dir = new vec3(
-        camPos.x - planePos.x,
-        0,
-        camPos.z - planePos.z
-      );
-
-      if (dir.length < 0.001) return; // Avoid NaN if overlapping
-
-      const angle = Math.atan2(dir.x, dir.z);
-
-      planeTransform.setWorldRotation(
-        quat.fromEulerAngles(0, angle, 0)
-      );
-    });
-  }
 
   // ----------------------------------------------------------
   // Fade — single plane (by index)

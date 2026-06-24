@@ -9,8 +9,8 @@ export class CompassController extends BaseScriptComponent {
 
   @ui.separator
 
-  // The arrow plane (child of compass plane)
-  @input arrowObject: SceneObject;
+  @input arrowObj: SceneObject;
+  @input compassObj: SceneObject;
 
   @ui.separator
 
@@ -23,7 +23,7 @@ export class CompassController extends BaseScriptComponent {
 
   @ui.separator
 
-  // Arrow rotation smoothing
+  @input('float') distanceFromCam = 2;
   @input('float') rotationSmooth: number = 8;
 
   @input durationFade: number;
@@ -42,6 +42,7 @@ export class CompassController extends BaseScriptComponent {
 
   // --- Private ---
 
+  private compassTransform: Transform;
   private arrowTransform: Transform;
   private cameraTransform: Transform;
   private targetPos: vec3;
@@ -50,7 +51,8 @@ export class CompassController extends BaseScriptComponent {
     let eventUpdate = this.createEvent('UpdateEvent');
     eventUpdate.bind(this.onUpdate.bind(this));
 
-    this.arrowTransform   = this.arrowObject.getTransform();
+    this.compassTransform = this.compassObj.getTransform();
+    this.arrowTransform = this.arrowObj.getTransform();
     this.cameraTransform  = this.camera.getTransform();
 
     //start hided
@@ -59,7 +61,18 @@ export class CompassController extends BaseScriptComponent {
   }
 
   onUpdate(): void {
+    this.updatePosCompass();
     this.updateArrowRotation();
+  }
+
+  private updatePosCompass(){
+    const camPos = this.cameraTransform.getWorldPosition();
+    const camDir = this.cameraTransform.forward;
+    const newPos = camPos.add(camDir.mult(new vec3(this.distanceFromCam, this.distanceFromCam, this.distanceFromCam)))
+    this.compassTransform.setWorldPosition(newPos);
+
+    const newRot = quat.lookAt(this.cameraTransform.forward, this.cameraTransform.up);
+    this.compassTransform.setWorldRotation(newRot);
   }
 
   // ----------------------------------------------------------

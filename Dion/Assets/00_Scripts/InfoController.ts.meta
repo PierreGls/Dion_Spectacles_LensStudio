@@ -26,7 +26,6 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    camera: false
     fadeDuration: false
     infoPlaneMats: false
     infoPlanes: false
@@ -39,8 +38,7 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
-      infoPlanes: !<reference.SceneObject[]>
+    - infoPlanes: !<reference.SceneObject[]>
         []
       infoPlaneMats: !<reference.Material[]>
         []
@@ -49,7 +47,6 @@
     -
       {}
   InputLines:
-    - // @input Component.Camera camera
     - "// @input SceneObject[] infoPlanes"
     - "// @input Asset.Material[] infoPlaneMats"
     - // @input float fadeDuration = 1
