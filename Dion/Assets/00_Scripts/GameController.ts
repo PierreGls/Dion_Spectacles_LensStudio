@@ -157,9 +157,6 @@ export class GameController extends BaseScriptComponent {
             mat.mainPass.baseColor = new vec4(1,1,1,0);
         });
 
-        //Start
-        //this.onShowIntro();
-
         //Debug
         this.debug_skipMarkerButton.enabled = this.activateSkipMarkerDebug;
     }
@@ -192,8 +189,6 @@ export class GameController extends BaseScriptComponent {
             this.debug_state = -1;
             return;
         }
-
-        //this.debug_trakingText.text = "" + Math.ceil(getTime());
     }
 
     // ----------------------------------------------------------
@@ -339,17 +334,6 @@ export class GameController extends BaseScriptComponent {
     // ----------------------------------------------------------
     // Anims
     // ----------------------------------------------------------
-    //Depreciated
-    private onShowIntro(){
-        const delay = new Delay({
-            duration: 0.5,
-            onComplete: () => {
-                this.onShowImg1();
-            },
-        });
-        delay.play();
-    }
-
     private onHideImgIntro(){
         this.debug_skipMarkerButton.enabled = false;
 
@@ -444,9 +428,6 @@ export class GameController extends BaseScriptComponent {
     }
 
     private onShowImg5(){
-        
-
-        
         this.onFadeInOutWithDelay(
             this.topViewMapWithMarker, 
             this.delayImg5,
@@ -455,21 +436,7 @@ export class GameController extends BaseScriptComponent {
                 this.onShowHotel();
             }
         );
-        
-        /*
-        this.onFadeImg(
-            this.topViewMapWithMarker, 
-            0,
-            1,
-            () => {
-                this.onSetState(5);
-            }
-        );
-        */
     }
-
-
-
 
         
     private onShowHotel(){

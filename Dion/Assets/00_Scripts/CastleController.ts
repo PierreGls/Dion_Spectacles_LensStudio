@@ -242,16 +242,4 @@ export class CastleController extends BaseScriptComponent {
       onComplete,
     }).play();
   }
-
-  // ----------------------------------------------------------
-  // Utils
-  // ----------------------------------------------------------
-
-  private setMeshesAlpha(alpha: number): void {
-    this.meshesMat[0].mainPass.baseColor = new vec4(
-      this.baseColor.x, 
-      this.baseColor.y,
-      this.baseColor.z, 
-      alpha);
-  }
 }
